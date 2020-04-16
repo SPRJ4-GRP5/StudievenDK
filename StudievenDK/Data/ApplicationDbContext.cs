@@ -90,10 +90,10 @@ namespace StudievenDK.Data
 
             //Course
             modelBuilder.Entity<Course>().HasData(
-                new Course { CourseName = "GUI", TermYear = 4, Faculty = "Natural Sciences" },
-                new Course { CourseName = "DAB", TermYear = 4, Faculty = "Natural Sciences" },
-                new Course { CourseName = "ISU", TermYear = 3, Faculty = "Natural Sciences" },
-                new Course { CourseName = "DOA", TermYear = 3, Faculty = "Natural Sciences" }
+                new Course { CourseName = "GUI", TermYear = 4, Faculty = "Technical Sciences" },
+                new Course { CourseName = "DAB", TermYear = 4, Faculty = "Technical Sciences" },
+                new Course { CourseName = "ISU", TermYear = 3, Faculty = "Technical Sciences" },
+                new Course { CourseName = "DOA", TermYear = 3, Faculty = "Technical Sciences" }
             );
 
             //Course
