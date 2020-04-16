@@ -24,14 +24,18 @@ namespace StudievenDK.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // 1-N relation - Case/UserHelper
+            // 1-N relation - Case/User
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserHelper)
                 .WithMany(user => user.Cases);
-            // 1-N relation - Case/UserHelper
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserSeeker)
                 .WithMany(user => user.Cases);
+
+            // 1-N relation - Case/Courses
+            modelBuilder.Entity<Case>()
+                .HasOne<Course>(c => c.Course)
+                .WithMany(course => course.Cases);
 
             // 1-N relation - Course/Faculty
             modelBuilder.Entity<Course>()
@@ -41,9 +45,9 @@ namespace StudievenDK.Data
             // 1-N relation - Course/Term
             modelBuilder.Entity<Course>()
                 .HasOne<Term>(course => course.Term)
-                .WithMany(t => t.courses);
+                .WithMany(t => t.Courses);
 
-            
+
 
 
 
