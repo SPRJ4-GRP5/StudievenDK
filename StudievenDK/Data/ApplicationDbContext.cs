@@ -27,10 +27,12 @@ namespace StudievenDK.Data
             // 1-N relation - Case/User
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserHelper)
-                .WithMany(user => user.Cases);
+                .WithMany(user => user.Cases)
+                .HasForeignKey(c => c.UserHelper_fk);
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserSeeker)
-                .WithMany(user => user.Cases);
+                .WithMany(user => user.Cases)
+                .HasForeignKey(c => c.UserSeeker_fk);
 
             // 1-N relation - Case/Courses
             modelBuilder.Entity<Case>()
@@ -48,12 +50,30 @@ namespace StudievenDK.Data
                 .WithMany(t => t.Courses);
 
 
+            // N-N relation Course/Programme -Using shadow table
+            modelBuilder.Entity<CourseProgramme>()
+                .HasKey(cp => new { cp.CourseName, cp.ProgrammeName });
+            modelBuilder.Entity<CourseProgramme>()
+                .HasOne(cp => cp.Course)
+                .WithMany(c => c.CourseProgrammes)
+                .HasForeignKey(cp => cp.CourseName);
+            modelBuilder.Entity<CourseProgramme>()
+                .HasOne(cp => cp.Programme)
+                .WithMany(p => p.CourseProgrammes)
+                .HasForeignKey(p => p.ProgrammeName);
 
 
+            //*********************DATA SEEDING***********************
 
+            //User
+            modelBuilder.Entity<User>().HasData(
+                new User { }
+            );
 
-
-
+            //Course
+            modelBuilder.Entity<Course>().HasData(
+                new Course { }
+            );
 
 
 
