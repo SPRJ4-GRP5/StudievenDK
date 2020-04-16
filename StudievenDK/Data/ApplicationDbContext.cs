@@ -84,8 +84,10 @@ namespace StudievenDK.Data
             );
             //Course
             modelBuilder.Entity<Case>().HasData(
-                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander"}
+                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander", CourseName_fk = "MAT"}
             );
+
+            
 
 
             modelBuilder.Entity<Faculty>().HasData(
