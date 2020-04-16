@@ -22,8 +22,8 @@ namespace StudievenDK.Controllers
         // GET: Cases
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cases.Include(@ => @.UserHelper).Include(@ => @.UserSeeker);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.Cases.Include(@ => @.UserHelper).Include(@ => @.UserSeeker);
+            return View(await _context.Cases.ToListAsync());
         }
 
         // GET: Cases/Details/5
@@ -35,8 +35,8 @@ namespace StudievenDK.Controllers
             }
 
             var @case = await _context.Cases
-                .Include(@ => @.UserHelper)
-                .Include(@ => @.UserSeeker)
+                //.Include(@ => @.UserHelper)
+                //.Include(@ => @.UserSeeker)
                 .FirstOrDefaultAsync(m => m.CaseId == id);
             if (@case == null)
             {
@@ -136,8 +136,8 @@ namespace StudievenDK.Controllers
             }
 
             var @case = await _context.Cases
-                .Include(@ => @.UserHelper)
-                .Include(@ => @.UserSeeker)
+                //.Include(@ => @.UserHelper)
+                //.Include(@ => @.UserSeeker)
                 .FirstOrDefaultAsync(m => m.CaseId == id);
             if (@case == null)
             {
