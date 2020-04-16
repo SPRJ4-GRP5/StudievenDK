@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StudievenDK.Models;
 
 namespace StudievenDK.Data
 {
@@ -15,30 +16,9 @@ namespace StudievenDK.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<StudievenDK.Models.Case> Case { get; set; }
     }
 }
