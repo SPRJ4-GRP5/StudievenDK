@@ -100,7 +100,12 @@ namespace StudievenDK.Data
 
             //Programme
             modelBuilder.Entity<Programme>().HasData(
-                new Programme { ProgrammeName = "IKT" }
+                new Programme { ProgrammeName = "IKT"},
+                new Programme { ProgrammeName = "E" },
+                new Programme { ProgrammeName = "ST" },
+                new Programme { ProgrammeName = "EE" },
+                new Programme { ProgrammeName = "Datalogi" },
+                new Programme { ProgrammeName = "Medievidenskab" }
             );
 
             //CourseProgramme Shaddowtable
@@ -120,7 +125,11 @@ namespace StudievenDK.Data
 
             //Case
             modelBuilder.Entity<Case>().HasData(
-                new Case {CaseId = 1, Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh@Studieven.dk", UserHelper_fk = "Alexander@Studieven.dk", CourseName_fk = "GUI"}
+                new Case {CaseId = 1, Text = "Jeg har brug for hjaelp", Subject = "Hjaelp?", UserSeeker_fk = "Thanh@Studieven.dk", UserHelper_fk = "Alexander@Studieven.dk", CourseName_fk = "GUI"},
+                new Case { CaseId = 2, Text = "Jeg skal bruge hjaelp til DAB", Subject = "EF core", UserSeeker_fk = "Alexander@Studieven.dk", UserHelper_fk = "Thanh@Studieven.dk", CourseName_fk = "DAB" },
+                new Case { CaseId = 3, Text = "hvordan opretter man en traad?", Subject = "threads", UserSeeker_fk = "Jonas@Studieven.dk", UserHelper_fk = "Trang@Studieven.dk", CourseName_fk = "ISU" },
+                new Case { CaseId = 4, Text = "observer pattern - forklar lige det paa en knap", Subject = "user interface", UserSeeker_fk = "Nikolaj@Studieven.dk", UserHelper_fk = "Randi@Studieven.dk", CourseName_fk = "GUI" },
+                new Case { CaseId = 5, Text = "hvordan laver jeg farven gul paa en knap", Subject = "fare paa knap", UserSeeker_fk = "Mads@Studieven.dk", UserHelper_fk = "Nikolaj@Studieven.dk", CourseName_fk = "GUI" }
             );
 
             //FacultyName

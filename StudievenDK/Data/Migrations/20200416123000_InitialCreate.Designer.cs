@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200416115617_alexander")]
-    partial class alexander
+    [Migration("20200416123000_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
