@@ -10,7 +10,9 @@ namespace StudievenDK.Data.Migrations
                 name: "Faculties",
                 columns: table => new
                 {
-                    FacultyId = table.Column<string>(nullable: false)
+                    FacultyId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FacultyName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,7 +34,8 @@ namespace StudievenDK.Data.Migrations
                 name: "Terms",
                 columns: table => new
                 {
-                    TermYear = table.Column<string>(nullable: false)
+                    TermYear = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -57,9 +60,9 @@ namespace StudievenDK.Data.Migrations
                 columns: table => new
                 {
                     CourseName = table.Column<string>(nullable: false),
-                    Faculty = table.Column<string>(nullable: true),
-                    TermYear = table.Column<string>(nullable: true),
-                    FacultiesFacultyId = table.Column<string>(nullable: true)
+                    FacultyName_fk = table.Column<string>(nullable: true),
+                    TermYear_fk = table.Column<int>(nullable: false),
+                    FacultiesFacultyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,11 +74,11 @@ namespace StudievenDK.Data.Migrations
                         principalColumn: "FacultyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Course_Terms_TermYear",
-                        column: x => x.TermYear,
+                        name: "FK_Course_Terms_TermYear_fk",
+                        column: x => x.TermYear_fk,
                         principalTable: "Terms",
-                        principalColumn: "TermYear_fk",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "TermYear",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,17 +91,17 @@ namespace StudievenDK.Data.Migrations
                     Subject = table.Column<string>(nullable: true),
                     UserHelper_fk = table.Column<string>(nullable: true),
                     UserSeeker_fk = table.Column<string>(nullable: true),
-                    CourseName = table.Column<string>(nullable: true),
+                    CourseName_fk = table.Column<string>(nullable: true),
                     PictureName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cases", x => x.CaseId);
                     table.ForeignKey(
-                        name: "FK_Cases_Course_CourseName",
-                        column: x => x.CourseName,
+                        name: "FK_Cases_Course_CourseName_fk",
+                        column: x => x.CourseName_fk,
                         principalTable: "Course",
-                        principalColumn: "CourseName_fk",
+                        principalColumn: "CourseName",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cases_Users_UserHelper_fk",
@@ -118,28 +121,94 @@ namespace StudievenDK.Data.Migrations
                 name: "CourseProgramme",
                 columns: table => new
                 {
-                    CourseName = table.Column<string>(nullable: false),
-                    ProgrammeName = table.Column<string>(nullable: false)
+                    CourseName_fk = table.Column<string>(nullable: false),
+                    ProgrammeName_fk = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseProgramme", x => new { x.CourseName, x.ProgrammeName });
+                    table.PrimaryKey("PK_CourseProgramme", x => new { x.CourseName_fk, x.ProgrammeName_fk });
                     table.ForeignKey(
-                        name: "FK_CourseProgramme_Course_CourseName",
-                        column: x => x.CourseName,
+                        name: "FK_CourseProgramme_Course_CourseName_fk",
+                        column: x => x.CourseName_fk,
                         principalTable: "Course",
-                        principalColumn: "CourseName_fk",
+                        principalColumn: "CourseName",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseProgramme_Programmes_ProgrammeName",
-                        column: x => x.ProgrammeName,
+                        name: "FK_CourseProgramme_Programmes_ProgrammeName_fk",
+                        column: x => x.ProgrammeName_fk,
                         principalTable: "Programmes",
-                        principalColumn: "ProgrammeName_fk",
+                        principalColumn: "ProgrammeName",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "FacultyId", "FacultyName" },
+                values: new object[,]
+                {
+                    { 1, "Natural Sciences" },
+                    { 2, "Technical Sciences" },
+                    { 3, "Health" },
+                    { 4, "Aarhus BSS" },
+                    { 5, "Arts" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Programmes",
+                column: "ProgrammeName",
+                value: "IKT");
+
+            migrationBuilder.InsertData(
+                table: "Terms",
+                column: "TermYear",
+                values: new object[]
+                {
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Email", "ImageName", "Password" },
+                values: new object[,]
+                {
+                    { "Alexander@Studieven.dk", null, "admin" },
+                    { "Thanh@Studieven.dk", null, "admin" },
+                    { "Mads@Studieven.dk", null, "admin" },
+                    { "Trang@Studieven.dk", null, "admin" },
+                    { "Nikolaj@Studieven.dk", null, "admin" },
+                    { "Randi@Studieven.dk", null, "admin" },
+                    { "Jonas@Studieven.dk", null, "admin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Course",
+                columns: new[] { "CourseName", "FacultiesFacultyId", "FacultyName_fk", "TermYear_fk" },
+                values: new object[,]
+                {
+                    { "ISU", null, "Technical Sciences", 3 },
+                    { "DOA", null, "Technical Sciences", 3 },
+                    { "GUI", null, "Technical Sciences", 4 },
+                    { "DAB", null, "Technical Sciences", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cases",
+                columns: new[] { "CaseId", "CourseName_fk", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
+                values: new object[] { 1, "GUI", null, "Hjælp?", "Jeg har brug for hjælp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" });
+
+            migrationBuilder.InsertData(
+                table: "CourseProgramme",
+                columns: new[] { "CourseName_fk", "ProgrammeName_fk" },
+                values: new object[] { "GUI", "IKT" });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Cases_CourseName",
+                name: "IX_Cases_CourseName_fk",
                 table: "Cases",
                 column: "CourseName_fk");
 
@@ -159,12 +228,12 @@ namespace StudievenDK.Data.Migrations
                 column: "FacultiesFacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_TermYear",
+                name: "IX_Course_TermYear_fk",
                 table: "Course",
                 column: "TermYear_fk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseProgramme_ProgrammeName",
+                name: "IX_CourseProgramme_ProgrammeName_fk",
                 table: "CourseProgramme",
                 column: "ProgrammeName_fk");
         }
