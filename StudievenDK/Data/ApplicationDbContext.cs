@@ -27,11 +27,11 @@ namespace StudievenDK.Data
             // 1-N relation - Case/User
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserHelper)
-                .WithMany(user => user.Cases)
+                .WithMany(u => u.Cases)
                 .HasForeignKey(c => c.UserHelper_fk);
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserSeeker)
-                .WithMany(user => user.Cases)
+                .WithMany(u => u.Cases)
                 .HasForeignKey(c => c.UserSeeker_fk);
 
             // 1-N relation - Case/Courses
