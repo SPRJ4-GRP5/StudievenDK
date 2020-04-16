@@ -11,5 +11,7 @@ namespace StudievenDK.Models
     {
         [Key] public string CourseName { get; set; }
         [ForeignKey("Faculty")] public string Faculty { get; set; }
+        [ForeignKey("Term")] public string Term { get; set; }
+        public List<CourseProgramme> CourseProgrammes { get; set; }
     }
 }
