@@ -93,17 +93,24 @@ namespace StudievenDK.Data
                 new Course { CourseName = "GUI", TermYear_fk = 4, FacultyName_fk = "Technical Sciences" },
                 new Course { CourseName = "DAB", TermYear_fk = 4, FacultyName_fk = "Technical Sciences" },
                 new Course { CourseName = "ISU", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" },
-                new Course { CourseName = "DOA", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" }
+                new Course { CourseName = "DOA", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" },
+                new Course { CourseName = "SWT", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" },
+                new Course { CourseName = "DSB", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" }
             );
 
             //Programme
             modelBuilder.Entity<Programme>().HasData(
-                new Programme { ProgrammeName = "IKT"}
+                new Programme { ProgrammeName = "IKT" }
             );
 
             //CourseProgramme Shaddowtable
             modelBuilder.Entity<CourseProgramme>().HasData(
-                new CourseProgramme {CourseName_fk = "GUI", ProgrammeName_fk = "IKT"}
+                new CourseProgramme { CourseName_fk = "GUI", ProgrammeName_fk = "IKT" },
+                new CourseProgramme { CourseName_fk = "DAB", ProgrammeName_fk = "IKT" },
+                new CourseProgramme { CourseName_fk = "ISU", ProgrammeName_fk = "IKT" },
+                new CourseProgramme { CourseName_fk = "DSB", ProgrammeName_fk = "IKT" },
+                new CourseProgramme { CourseName_fk = "SWT", ProgrammeName_fk = "ST" },
+                new CourseProgramme { CourseName_fk = "SWT", ProgrammeName_fk = "IKT" }
             );
 
             //Case
@@ -119,20 +126,6 @@ namespace StudievenDK.Data
             new Faculty { FacultyId = 4, FacultyName = "Aarhus BSS" },
             new Faculty { FacultyId = 5, FacultyName = "Arts" }
             );
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
