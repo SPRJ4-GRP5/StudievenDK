@@ -19,6 +19,7 @@ namespace StudievenDK.Models
 
         public User UserHelper { get; set; }
         public User UserSeeker { get; set; }
+        public Course Course { get; set; }
 
         [NotMapped]
         [DisplayName("Upload file")]

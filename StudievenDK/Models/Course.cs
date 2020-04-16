@@ -14,5 +14,6 @@ namespace StudievenDK.Models
         [ForeignKey("Term")] public string TermYear { get; set; }
         public Term Term { get; set; }
         public Faculty Faculties { get; set; }
+        public List<Case> Cases { get; set; }
     }
 }
