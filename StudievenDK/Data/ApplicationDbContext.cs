@@ -24,14 +24,15 @@ namespace StudievenDK.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             // 1-N relation - Case/User
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserHelper)
-                .WithMany(u => u.Cases)
+                .WithMany(user => user.Cases)
                 .HasForeignKey(c => c.UserHelper_fk);
             modelBuilder.Entity<Case>()
                 .HasOne<User>(c => c.UserSeeker)
-                .WithMany(u => u.Cases)
+                .WithMany(user => user.CasesSeeker)
                 .HasForeignKey(c => c.UserSeeker_fk);
 
             // 1-N relation - Case/Courses
@@ -66,14 +67,14 @@ namespace StudievenDK.Data
             //*********************DATA SEEDING***********************
 
             //User
-            modelBuilder.Entity<User>().HasData(
-                new User { }
-            );
+            //modelBuilder.Entity<User>().HasData(
+            //    new User { }
+            //);
 
-            //Course
-            modelBuilder.Entity<Course>().HasData(
-                new Course { }
-            );
+            ////Course
+            //modelBuilder.Entity<Course>().HasData(
+            //    new Course { }
+            //);
 
 
 
