@@ -108,7 +108,7 @@ namespace StudievenDK.Data
 
             //Case
             modelBuilder.Entity<Case>().HasData(
-                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh@Studieven.dk", UserHelper_fk = "Alexander@Studieven.dk", CourseName_fk = "GUI"}
+                new Case {CaseId = 1, Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh@Studieven.dk", UserHelper_fk = "Alexander@Studieven.dk", CourseName_fk = "GUI"}
             );
 
             //FacultyName
