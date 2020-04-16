@@ -9,5 +9,6 @@ namespace StudievenDK.Models
     public class Programme
     {
         [Key] public string ProgrammeName { get; set; }
+        public List<CourseProgramme> CourseProgrammes { get; set; }
     }
 }

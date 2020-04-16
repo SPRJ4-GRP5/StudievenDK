@@ -57,7 +57,7 @@ namespace StudievenDK.Data
                 .HasForeignKey(cp => cp.CourseName);
             modelBuilder.Entity<CourseProgramme>()
                 .HasOne(cp => cp.Programme)
-                .WithMany(c => c.CourseProgrammes)
+                .WithMany(p => p.CourseProgrammes)
                 .HasForeignKey(p => p.ProgrammeName);
 
 
