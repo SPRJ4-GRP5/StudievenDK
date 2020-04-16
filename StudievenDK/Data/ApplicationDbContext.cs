@@ -88,7 +88,13 @@ namespace StudievenDK.Data
             );
 
 
-
+            modelBuilder.Entity<Faculty>().HasData(
+            new Faculty { FacultyId = 1, FacultyName = "Natural Sciences"},
+            new Faculty { FacultyId = 2, FacultyName = "Technical Sciences"},
+            new Faculty { FacultyId = 3, FacultyName = "Health"},
+            new Faculty { FacultyId = 4, FacultyName = "Aarhus BSS" },
+            new Faculty { FacultyId = 5, FacultyName = "Arts" }
+            );
 
 
 
