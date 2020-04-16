@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200416123000_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200416131048_Alexa")]
+    partial class Alexa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -261,10 +261,46 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 1,
                             CourseName_fk = "GUI",
-                            Subject = "Hjælp?",
-                            Text = "Jeg har brug for hjælp",
+                            Subject = "Hjaelp?",
+                            Text = "Jeg har brug for hjaelp",
                             UserHelper_fk = "Alexander@Studieven.dk",
                             UserSeeker_fk = "Thanh@Studieven.dk"
+                        },
+                        new
+                        {
+                            CaseId = 2,
+                            CourseName_fk = "DAB",
+                            Subject = "EF core",
+                            Text = "Jeg skal bruge hjaelp til DAB",
+                            UserHelper_fk = "Thanh@Studieven.dk",
+                            UserSeeker_fk = "Alexander@Studieven.dk"
+                        },
+                        new
+                        {
+                            CaseId = 3,
+                            CourseName_fk = "ISU",
+                            Subject = "threads",
+                            Text = "hvordan opretter man en traad?",
+                            UserHelper_fk = "Trang@Studieven.dk",
+                            UserSeeker_fk = "Jonas@Studieven.dk"
+                        },
+                        new
+                        {
+                            CaseId = 4,
+                            CourseName_fk = "GUI",
+                            Subject = "user interface",
+                            Text = "observer pattern - forklar lige det paa en knap",
+                            UserHelper_fk = "Randi@Studieven.dk",
+                            UserSeeker_fk = "Nikolaj@Studieven.dk"
+                        },
+                        new
+                        {
+                            CaseId = 5,
+                            CourseName_fk = "GUI",
+                            Subject = "fare paa knap",
+                            Text = "hvordan laver jeg farven gul paa en knap",
+                            UserHelper_fk = "Nikolaj@Studieven.dk",
+                            UserSeeker_fk = "Mads@Studieven.dk"
                         });
                 });
 
@@ -273,8 +309,8 @@ namespace StudievenDK.Data.Migrations
                     b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("FacultiesFacultyId")
-                        .HasColumnType("int");
+                    b.Property<string>("FacultiesFacultyName")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FacultyName_fk")
                         .HasColumnType("nvarchar(max)");
@@ -284,7 +320,7 @@ namespace StudievenDK.Data.Migrations
 
                     b.HasKey("CourseName");
 
-                    b.HasIndex("FacultiesFacultyId");
+                    b.HasIndex("FacultiesFacultyName");
 
                     b.HasIndex("TermYear_fk");
 
@@ -314,6 +350,18 @@ namespace StudievenDK.Data.Migrations
                             CourseName = "DOA",
                             FacultyName_fk = "Technical Sciences",
                             TermYear_fk = 3
+                        },
+                        new
+                        {
+                            CourseName = "SWT",
+                            FacultyName_fk = "Technical Sciences",
+                            TermYear_fk = 3
+                        },
+                        new
+                        {
+                            CourseName = "DSB",
+                            FacultyName_fk = "Technical Sciences",
+                            TermYear_fk = 3
                         });
                 });
 
@@ -336,47 +384,67 @@ namespace StudievenDK.Data.Migrations
                         {
                             CourseName_fk = "GUI",
                             ProgrammeName_fk = "IKT"
+                        },
+                        new
+                        {
+                            CourseName_fk = "DAB",
+                            ProgrammeName_fk = "IKT"
+                        },
+                        new
+                        {
+                            CourseName_fk = "ISU",
+                            ProgrammeName_fk = "IKT"
+                        },
+                        new
+                        {
+                            CourseName_fk = "DSB",
+                            ProgrammeName_fk = "E"
+                        },
+                        new
+                        {
+                            CourseName_fk = "DSB",
+                            ProgrammeName_fk = "IKT"
+                        },
+                        new
+                        {
+                            CourseName_fk = "SWT",
+                            ProgrammeName_fk = "ST"
+                        },
+                        new
+                        {
+                            CourseName_fk = "SWT",
+                            ProgrammeName_fk = "IKT"
                         });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Faculty", b =>
                 {
-                    b.Property<int>("FacultyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("FacultyName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("FacultyId");
+                    b.HasKey("FacultyName");
 
                     b.ToTable("Faculties");
 
                     b.HasData(
                         new
                         {
-                            FacultyId = 1,
                             FacultyName = "Natural Sciences"
                         },
                         new
                         {
-                            FacultyId = 2,
                             FacultyName = "Technical Sciences"
                         },
                         new
                         {
-                            FacultyId = 3,
                             FacultyName = "Health"
                         },
                         new
                         {
-                            FacultyId = 4,
                             FacultyName = "Aarhus BSS"
                         },
                         new
                         {
-                            FacultyId = 5,
                             FacultyName = "Arts"
                         });
                 });
@@ -394,6 +462,26 @@ namespace StudievenDK.Data.Migrations
                         new
                         {
                             ProgrammeName = "IKT"
+                        },
+                        new
+                        {
+                            ProgrammeName = "E"
+                        },
+                        new
+                        {
+                            ProgrammeName = "ST"
+                        },
+                        new
+                        {
+                            ProgrammeName = "EE"
+                        },
+                        new
+                        {
+                            ProgrammeName = "Datalogi"
+                        },
+                        new
+                        {
+                            ProgrammeName = "Medievidenskab"
                         });
                 });
 
@@ -562,7 +650,7 @@ namespace StudievenDK.Data.Migrations
                 {
                     b.HasOne("StudievenDK.Models.Faculty", "Faculties")
                         .WithMany("Courses")
-                        .HasForeignKey("FacultiesFacultyId");
+                        .HasForeignKey("FacultiesFacultyName");
 
                     b.HasOne("StudievenDK.Models.Term", "Term")
                         .WithMany("Courses")

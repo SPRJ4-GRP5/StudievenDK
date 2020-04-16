@@ -2,7 +2,7 @@
 
 namespace StudievenDK.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Alex : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,13 +10,11 @@ namespace StudievenDK.Data.Migrations
                 name: "Faculties",
                 columns: table => new
                 {
-                    FacultyId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FacultyName = table.Column<string>(nullable: true)
+                    FacultyName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faculties", x => x.FacultyId);
+                    table.PrimaryKey("PK_Faculties", x => x.FacultyName);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,16 +60,16 @@ namespace StudievenDK.Data.Migrations
                     CourseName = table.Column<string>(nullable: false),
                     FacultyName_fk = table.Column<string>(nullable: true),
                     TermYear_fk = table.Column<int>(nullable: false),
-                    FacultiesFacultyId = table.Column<int>(nullable: true)
+                    FacultiesFacultyName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Course", x => x.CourseName);
                     table.ForeignKey(
-                        name: "FK_Course_Faculties_FacultiesFacultyId",
-                        column: x => x.FacultiesFacultyId,
+                        name: "FK_Course_Faculties_FacultiesFacultyName",
+                        column: x => x.FacultiesFacultyName,
                         principalTable: "Faculties",
-                        principalColumn: "FacultyId",
+                        principalColumn: "FacultyName",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Course_Terms_TermYear_fk",
@@ -143,20 +141,28 @@ namespace StudievenDK.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Faculties",
-                columns: new[] { "FacultyId", "FacultyName" },
-                values: new object[,]
+                column: "FacultyName",
+                values: new object[]
                 {
-                    { 1, "Natural Sciences" },
-                    { 2, "Technical Sciences" },
-                    { 3, "Health" },
-                    { 4, "Aarhus BSS" },
-                    { 5, "Arts" }
+                    "Natural Sciences",
+                    "Technical Sciences",
+                    "Health",
+                    "Aarhus BSS",
+                    "Arts"
                 });
 
             migrationBuilder.InsertData(
                 table: "Programmes",
                 column: "ProgrammeName",
-                value: "IKT");
+                values: new object[]
+                {
+                    "IKT",
+                    "E",
+                    "ST",
+                    "EE",
+                    "Datalogi",
+                    "Medievidenskab"
+                });
 
             migrationBuilder.InsertData(
                 table: "Terms",
@@ -166,10 +172,10 @@ namespace StudievenDK.Data.Migrations
                     7,
                     6,
                     5,
-                    4,
-                    3,
                     2,
-                    1
+                    3,
+                    1,
+                    4
                 });
 
             migrationBuilder.InsertData(
@@ -177,22 +183,24 @@ namespace StudievenDK.Data.Migrations
                 columns: new[] { "Email", "ImageName", "Password" },
                 values: new object[,]
                 {
+                    { "Randi@Studieven.dk", null, "admin" },
                     { "Alexander@Studieven.dk", null, "admin" },
                     { "Thanh@Studieven.dk", null, "admin" },
                     { "Mads@Studieven.dk", null, "admin" },
                     { "Trang@Studieven.dk", null, "admin" },
                     { "Nikolaj@Studieven.dk", null, "admin" },
-                    { "Randi@Studieven.dk", null, "admin" },
                     { "Jonas@Studieven.dk", null, "admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Course",
-                columns: new[] { "CourseName", "FacultiesFacultyId", "FacultyName_fk", "TermYear_fk" },
+                columns: new[] { "CourseName", "FacultiesFacultyName", "FacultyName_fk", "TermYear_fk" },
                 values: new object[,]
                 {
                     { "ISU", null, "Technical Sciences", 3 },
                     { "DOA", null, "Technical Sciences", 3 },
+                    { "SWT", null, "Technical Sciences", 3 },
+                    { "DSB", null, "Technical Sciences", 3 },
                     { "GUI", null, "Technical Sciences", 4 },
                     { "DAB", null, "Technical Sciences", 4 }
                 });
@@ -200,12 +208,28 @@ namespace StudievenDK.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Cases",
                 columns: new[] { "CaseId", "CourseName_fk", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
-                values: new object[] { 1, "GUI", null, "Hjælp?", "Jeg har brug for hjælp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" });
+                values: new object[,]
+                {
+                    { 3, "ISU", null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                });
 
             migrationBuilder.InsertData(
                 table: "CourseProgramme",
                 columns: new[] { "CourseName_fk", "ProgrammeName_fk" },
-                values: new object[] { "GUI", "IKT" });
+                values: new object[,]
+                {
+                    { "ISU", "IKT" },
+                    { "SWT", "ST" },
+                    { "SWT", "IKT" },
+                    { "DSB", "E" },
+                    { "DSB", "IKT" },
+                    { "GUI", "IKT" },
+                    { "DAB", "IKT" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cases_CourseName_fk",
@@ -223,9 +247,9 @@ namespace StudievenDK.Data.Migrations
                 column: "UserSeeker_fk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_FacultiesFacultyId",
+                name: "IX_Course_FacultiesFacultyName",
                 table: "Course",
-                column: "FacultiesFacultyId");
+                column: "FacultiesFacultyName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Course_TermYear_fk",

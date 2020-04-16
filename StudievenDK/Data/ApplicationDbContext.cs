@@ -21,7 +21,6 @@ namespace StudievenDK.Data
         public DbSet<Term> Terms { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -49,8 +48,7 @@ namespace StudievenDK.Data
             // 1-N relation - Course/Term
             modelBuilder.Entity<Course>()
                 .HasOne<Term>(course => course.Term)
-                .WithMany(t => t.Courses);
-
+                .WithMany(term => term.Courses);
 
             // N-N relation Course/Programme -Using shadow table
             modelBuilder.Entity<CourseProgramme>()
@@ -64,9 +62,7 @@ namespace StudievenDK.Data
                 .WithMany(p => p.CourseProgrammes)
                 .HasForeignKey(p => p.ProgrammeName_fk);
 
-
             //*********************DATA SEEDING***********************
-
             //User
             modelBuilder.Entity<User>().HasData(
                 new User { Email = "Alexander@Studieven.dk", Password = "admin"},
@@ -77,6 +73,7 @@ namespace StudievenDK.Data
                 new User { Email = "Randi@Studieven.dk", Password = "admin" },
                 new User { Email = "Jonas@Studieven.dk", Password = "admin" }
             );
+
             // Term
             modelBuilder.Entity<Term>().HasData(
                 new Term { TermYear = 1 },
@@ -113,6 +110,7 @@ namespace StudievenDK.Data
                 new CourseProgramme { CourseName_fk = "GUI", ProgrammeName_fk = "IKT" },
                 new CourseProgramme { CourseName_fk = "DAB", ProgrammeName_fk = "IKT" },
                 new CourseProgramme { CourseName_fk = "ISU", ProgrammeName_fk = "IKT" },
+                new CourseProgramme { CourseName_fk = "DSB", ProgrammeName_fk = "E" },
                 new CourseProgramme { CourseName_fk = "DSB", ProgrammeName_fk = "IKT" },
                 new CourseProgramme { CourseName_fk = "SWT", ProgrammeName_fk = "ST" },
                 new CourseProgramme { CourseName_fk = "SWT", ProgrammeName_fk = "IKT" }
@@ -134,11 +132,11 @@ namespace StudievenDK.Data
 
             //FacultyName
             modelBuilder.Entity<Faculty>().HasData(
-            new Faculty { FacultyId = 1, FacultyName = "Natural Sciences"},
-            new Faculty { FacultyId = 2, FacultyName = "Technical Sciences"},
-            new Faculty { FacultyId = 3, FacultyName = "Health"},
-            new Faculty { FacultyId = 4, FacultyName = "Aarhus BSS" },
-            new Faculty { FacultyId = 5, FacultyName = "Arts" }
+            new Faculty { FacultyName = "Natural Sciences"},
+            new Faculty { FacultyName = "Technical Sciences"},
+            new Faculty { FacultyName = "Health"},
+            new Faculty { FacultyName = "Aarhus BSS" },
+            new Faculty { FacultyName = "Arts" }
             );
         }
     }
