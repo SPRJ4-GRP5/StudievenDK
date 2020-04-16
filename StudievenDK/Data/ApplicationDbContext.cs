@@ -38,7 +38,8 @@ namespace StudievenDK.Data
             // 1-N relation - Case/Courses
             modelBuilder.Entity<Case>()
                 .HasOne<Course>(c => c.Course)
-                .WithMany(course => course.Cases);
+                .WithMany(course => course.Cases)
+                .HasForeignKey(c => c.CourseName_fk);
 
             // 1-N relation - Course/Faculty
             modelBuilder.Entity<Course>()
@@ -71,10 +72,10 @@ namespace StudievenDK.Data
             //    new User { }
             //);
 
-            ////Course
-            //modelBuilder.Entity<Course>().HasData(
-            //    new Course { }
-            //);
+            //Course
+            modelBuilder.Entity<Case>().HasData(
+                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander"}
+            );
 
 
 
