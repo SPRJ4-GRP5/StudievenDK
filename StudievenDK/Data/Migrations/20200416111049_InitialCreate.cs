@@ -74,7 +74,7 @@ namespace StudievenDK.Data.Migrations
                         name: "FK_Course_Terms_TermYear",
                         column: x => x.TermYear,
                         principalTable: "Terms",
-                        principalColumn: "TermYear",
+                        principalColumn: "TermYear_fk",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -98,7 +98,7 @@ namespace StudievenDK.Data.Migrations
                         name: "FK_Cases_Course_CourseName",
                         column: x => x.CourseName,
                         principalTable: "Course",
-                        principalColumn: "CourseName",
+                        principalColumn: "CourseName_fk",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cases_Users_UserHelper_fk",
@@ -128,20 +128,20 @@ namespace StudievenDK.Data.Migrations
                         name: "FK_CourseProgramme_Course_CourseName",
                         column: x => x.CourseName,
                         principalTable: "Course",
-                        principalColumn: "CourseName",
+                        principalColumn: "CourseName_fk",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CourseProgramme_Programmes_ProgrammeName",
                         column: x => x.ProgrammeName,
                         principalTable: "Programmes",
-                        principalColumn: "ProgrammeName",
+                        principalColumn: "ProgrammeName_fk",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cases_CourseName",
                 table: "Cases",
-                column: "CourseName");
+                column: "CourseName_fk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cases_UserHelper_fk",
@@ -161,12 +161,12 @@ namespace StudievenDK.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Course_TermYear",
                 table: "Course",
-                column: "TermYear");
+                column: "TermYear_fk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseProgramme_ProgrammeName",
                 table: "CourseProgramme",
-                column: "ProgrammeName");
+                column: "ProgrammeName_fk");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
