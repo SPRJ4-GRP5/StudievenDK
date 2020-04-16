@@ -17,5 +17,7 @@ namespace StudievenDK.Models
         public string Password { get; set; } //Snak med Nikolaj og Jonas om hvordan denne bliver seedet
         public IFormFile Image { get; set; }
         public string ImageName { get; set; }
+
+        public List<Case> Cases { get; set; }
     }
 }

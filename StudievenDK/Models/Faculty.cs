@@ -10,5 +10,7 @@ namespace StudievenDK.Models
     {
         [Key]
         public string FacultyId { get; set; }
+
+        public List<Course> Courses { get; set; }
     }
 }
