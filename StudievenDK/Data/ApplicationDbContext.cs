@@ -77,14 +77,28 @@ namespace StudievenDK.Data
                 new User { Email = "Randi@Studieven.dk", Password = "admin" },
                 new User { Email = "Jonas@Studieven.dk", Password = "admin" }
             );
+            // Term
+            modelBuilder.Entity<Term>().HasData(
+                new Term { TermYear = 1 },
+                new Term { TermYear = 2 },
+                new Term { TermYear = 3 },
+                new Term { TermYear = 4 },
+                new Term { TermYear = 5 },
+                new Term { TermYear = 6 },
+                new Term { TermYear = 7 }
+            );
 
             //Course
             modelBuilder.Entity<Course>().HasData(
-                new Course {CourseName = "GUI", }
+                new Course { CourseName = "GUI", TermYear = 4 },
+                new Course { CourseName = "DAB", TermYear = 4 },
+                new Course { CourseName = "ISU", TermYear = 3 },
+                new Course { CourseName = "DOA", TermYear = 3 }
             );
+
             //Course
             modelBuilder.Entity<Case>().HasData(
-                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander", CourseName_fk = "MAT"}
+                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander", CourseName_fk = "GUI"}
             );
 
             
