@@ -20,10 +20,10 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hovedliste</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Hovedliste</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cases" asp-action="Index">Sager</a>
+                            <a class="nav-link" asp-area="" asp-controller="Cases" asp-action="Index">Sager</a>
                         </li>
                     </ul>
                 </div>
@@ -36,7 +36,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer">
         <div class="container">
             &copy; 2020 - StudievenDK - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -47,3 +47,11 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+@*<li class="subnav">
+    <button class="subnavbtn text-dark" asp-area="" asp-controller="Sags" asp-action="Index">Sager</button>
+    <sub class="subnav-content">
+        <a asp-controller="Sags" asp-action="Index">Egne sager</a>
+        <a asp-controller="Sags" asp-action="Index">Tilknyttede sager</a>
+    </sub>
+</li>*@

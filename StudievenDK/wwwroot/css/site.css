@@ -9,25 +9,85 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #64BDA1;
+    /*color: #ffffff;*/
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: #1861ac;
   border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
+  color: #ffffff;
+  background-color: #278cca;
   border-color: #1861ac;
 }
 
-header {
-
+.navbar-light .navbar-brand {
+    color: rgba(255,255,255,.9);
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9);
+}
+
+/*menu bar */
+header {
+    background-color: #278cca;
+}
+
+/*Drop down menubar*/
+/*The subnavigation menu*/
+.subnav {
+    float: left;
+    overflow: hidden;
+}
+
+/*Subnav button*/
+.subnav .subnavbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+/*Add a red background color to navigation links on hover*/
+.navbar a:hover, .subnav:hover .subnavbtn {
+    background-color: #eee;
+}
+
+/*Style the subnav content - positioned absolute*/
+.subnav-content {
+    display: none;
+    position: relative;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    z-index: 1;
+}
+
+/*Style the subnav links*/
+.subnav-content a {
+    float: left;
+    color: #808080;
+    text-decoration: none;
+}
+
+/*Add a grey background color on hover*/
+.subnav-content a:hover {
+    background-color: #eee;
+    color: black;
+}
+
+/*When you move the mouse over the subnav container, open the subnav content*/
+.subnav:hover .subnav-content {
+    display: block;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -73,4 +133,11 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+  background-color: #278cca;
+  color: #ffffff;
+
 }
+
+    footer a {
+        color: #ffffff;
+    }
