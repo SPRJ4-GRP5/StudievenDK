@@ -25,6 +25,13 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Cases" asp-action="Index">Sager</a>
                         </li>
+                        <li class="subnav">
+                            <button class="nav-link subnavbtn" asp-area="" asp-controller="Cases">Sager</button>
+                            <sub class="subnav-content">
+                                <a asp-controller="Cases" asp-action="Index">Egne sager</a>
+                                <a asp-controller="Cases" asp-action="Index">Tilknyttede sager</a>
+                            </sub>
+                        </li>
                     </ul>
                 </div>
             </div>
