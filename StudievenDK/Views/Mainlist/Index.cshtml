@@ -1,55 +1,66 @@
-﻿@model IEnumerable<StudievenDK.Models.Case>
+﻿@model StudievenDK.Controllers.MainlistViewModel
+    <div class="navbar">
+        <form asp-controller="Mainlist" asp-action="Index">
+            <input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;
+            <div class="dropdown">
+                @*<button class="dropbtn">Dropdown
+                <i class="fa fa-caret-down"></i>
+            </button>*@
+                <div class="dropdown-content">
+                    <div class="header">
+                        <h2>Mega Menu</h2>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <h3>Category 1</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Category 2</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Category 3</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            &nbsp;&nbsp<input type="submit" value="Filter" />&nbsp;&nbsp;
+        </form>
+    </div>
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Text)
+                Alle sager
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PictureName)
-            </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Cases)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    <a>1</a>
+                    <a>2</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-</body>
-</html>
+
