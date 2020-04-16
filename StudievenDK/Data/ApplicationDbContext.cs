@@ -50,10 +50,17 @@ namespace StudievenDK.Data
 
 
 
+            //*********************DATA SEEDING***********************
 
+            //User
+            modelBuilder.Entity<User>().HasData(
+                new User { }
+            );
 
-
-
+            //Course
+            modelBuilder.Entity<Course>().HasData(
+                new Course { }
+            );
 
 
 
