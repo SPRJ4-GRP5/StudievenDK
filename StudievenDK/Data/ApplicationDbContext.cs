@@ -67,14 +67,20 @@ namespace StudievenDK.Data
             //*********************DATA SEEDING***********************
 
             //User
-            //modelBuilder.Entity<User>().HasData(
-            //    new User { }
-            //);
+            modelBuilder.Entity<User>().HasData(
+                new User { Email = "Alexander@Studieven.dk", Password = "admin"},
+                new User { Email = "Thanh@Studieven.dk", Password = "admin" },
+                new User { Email = "Mads@Studieven.dk", Password = "admin" },
+                new User { Email = "Trang@Studieven.dk", Password = "admin" },
+                new User { Email = "Nikolaj@Studieven.dk", Password = "admin" },
+                new User { Email = "Randi@Studieven.dk", Password = "admin" },
+                new User { Email = "Jonas@Studieven.dk", Password = "admin" }
+            );
 
-            ////Course
-            //modelBuilder.Entity<Course>().HasData(
-            //    new Course { }
-            //);
+            //Course
+            modelBuilder.Entity<Course>().HasData(
+                new Course {CourseName = "GUI", }
+            );
 
 
 
