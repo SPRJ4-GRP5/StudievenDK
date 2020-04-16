@@ -59,6 +59,34 @@ namespace StudievenDK.Data
                 .HasOne(cp => cp.Programme)
                 .WithMany(c => c.CourseProgrammes)
                 .HasForeignKey(p => p.ProgrammeName);
+
+
+            //*********************DATA SEEDING***********************
+
+            //User
+            modelBuilder.Entity<User>().HasData(
+                new User { }
+            );
+
+            //Course
+            modelBuilder.Entity<Course>().HasData(
+                new Course { }
+            );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
