@@ -41,7 +41,7 @@ namespace StudievenDK.Data
                 .WithMany(course => course.Cases)
                 .HasForeignKey(c => c.CourseName_fk);
 
-            // 1-N relation - Course/Faculty
+            // 1-N relation - Course/FacultyName
             modelBuilder.Entity<Course>()
                 .HasOne<Faculty>(course => course.Faculties)
                 .WithMany(f => f.Courses);
@@ -54,15 +54,15 @@ namespace StudievenDK.Data
 
             // N-N relation Course/Programme -Using shadow table
             modelBuilder.Entity<CourseProgramme>()
-                .HasKey(cp => new { cp.CourseName, cp.ProgrammeName });
+                .HasKey(cp => new { CourseName = cp.CourseName_fk, ProgrammeName = cp.ProgrammeName_fk });
             modelBuilder.Entity<CourseProgramme>()
                 .HasOne(cp => cp.Course)
                 .WithMany(c => c.CourseProgrammes)
-                .HasForeignKey(cp => cp.CourseName);
+                .HasForeignKey(cp => cp.CourseName_fk);
             modelBuilder.Entity<CourseProgramme>()
                 .HasOne(cp => cp.Programme)
                 .WithMany(p => p.CourseProgrammes)
-                .HasForeignKey(p => p.ProgrammeName);
+                .HasForeignKey(p => p.ProgrammeName_fk);
 
 
             //*********************DATA SEEDING***********************
@@ -90,24 +90,33 @@ namespace StudievenDK.Data
 
             //Course
             modelBuilder.Entity<Course>().HasData(
-                new Course { CourseName = "GUI", TermYear = 4 },
-                new Course { CourseName = "DAB", TermYear = 4 },
-                new Course { CourseName = "ISU", TermYear = 3 },
-                new Course { CourseName = "DOA", TermYear = 3 }
+                new Course { CourseName = "GUI", TermYear_fk = 4, FacultyName_fk = "Technical Sciences" },
+                new Course { CourseName = "DAB", TermYear_fk = 4, FacultyName_fk = "Technical Sciences" },
+                new Course { CourseName = "ISU", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" },
+                new Course { CourseName = "DOA", TermYear_fk = 3, FacultyName_fk = "Technical Sciences" }
             );
 
-            //Course
-            modelBuilder.Entity<Case>().HasData(
-                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh", UserHelper_fk = "Alexander", CourseName_fk = "GUI"}
+            //Programme
+            modelBuilder.Entity<Programme>().HasData(
+                new Programme { ProgrammeName = "IKT"}
             );
 
+            //CourseProgramme Shaddowtable
+            modelBuilder.Entity<CourseProgramme>().HasData(
+                new CourseProgramme {CourseName_fk = "GUI", ProgrammeName_fk = "IKT"}
+            );
             
             //Course
             modelBuilder.Entity<Course>().HasData(
                 new Course {CourseName = "GUI", }
             );
 
+            //Case
+            modelBuilder.Entity<Case>().HasData(
+                new Case {Text = "Jeg har brug for hjælp", Subject = "Hjælp?", UserSeeker_fk = "Thanh@Studieven.dk", UserHelper_fk = "Alexander@Studieven.dk", CourseName_fk = "GUI"}
+            );
 
+            //FacultyName
             modelBuilder.Entity<Faculty>().HasData(
             new Faculty { FacultyId = 1, FacultyName = "Natural Sciences"},
             new Faculty { FacultyId = 2, FacultyName = "Technical Sciences"},
@@ -115,6 +124,8 @@ namespace StudievenDK.Data
             new Faculty { FacultyId = 4, FacultyName = "Aarhus BSS" },
             new Faculty { FacultyId = 5, FacultyName = "Arts" }
             );
+
+            
 
 
 

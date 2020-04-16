@@ -228,7 +228,7 @@ namespace StudievenDK.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseName")
+                    b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PictureName")
@@ -248,7 +248,7 @@ namespace StudievenDK.Data.Migrations
 
                     b.HasKey("CaseId");
 
-                    b.HasIndex("CourseName");
+                    b.HasIndex("CourseName_fk");
 
                     b.HasIndex("UserHelper_fk");
 
@@ -259,43 +259,43 @@ namespace StudievenDK.Data.Migrations
 
             modelBuilder.Entity("StudievenDK.Models.Course", b =>
                 {
-                    b.Property<string>("CourseName")
+                    b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FacultiesFacultyId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Faculty")
+                    b.Property<string>("FacultyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TermYear")
+                    b.Property<string>("TermYear_fk")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CourseName");
+                    b.HasKey("CourseName_fk");
 
                     b.HasIndex("FacultiesFacultyId");
 
-                    b.HasIndex("TermYear");
+                    b.HasIndex("TermYear_fk");
 
                     b.ToTable("Course");
                 });
 
             modelBuilder.Entity("StudievenDK.Models.CourseProgramme", b =>
                 {
-                    b.Property<string>("CourseName")
+                    b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProgrammeName")
+                    b.Property<string>("ProgrammeName_fk")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CourseName", "ProgrammeName");
+                    b.HasKey("CourseName_fk", "ProgrammeName_fk");
 
-                    b.HasIndex("ProgrammeName");
+                    b.HasIndex("ProgrammeName_fk");
 
                     b.ToTable("CourseProgramme");
                 });
 
-            modelBuilder.Entity("StudievenDK.Models.Faculty", b =>
+            modelBuilder.Entity("StudievenDK.Models.FacultyName", b =>
                 {
                     b.Property<string>("FacultyId")
                         .HasColumnType("nvarchar(450)");
@@ -307,20 +307,20 @@ namespace StudievenDK.Data.Migrations
 
             modelBuilder.Entity("StudievenDK.Models.Programme", b =>
                 {
-                    b.Property<string>("ProgrammeName")
+                    b.Property<string>("ProgrammeName_fk")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ProgrammeName");
+                    b.HasKey("ProgrammeName_fk");
 
                     b.ToTable("Programmes");
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Term", b =>
                 {
-                    b.Property<string>("TermYear")
+                    b.Property<string>("TermYear_fk")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("TermYear");
+                    b.HasKey("TermYear_fk");
 
                     b.ToTable("Terms");
                 });
@@ -396,7 +396,7 @@ namespace StudievenDK.Data.Migrations
                 {
                     b.HasOne("StudievenDK.Models.Course", "Course")
                         .WithMany("Cases")
-                        .HasForeignKey("CourseName");
+                        .HasForeignKey("CourseName_fk");
 
                     b.HasOne("StudievenDK.Models.User", "UserHelper")
                         .WithMany("Cases")
@@ -409,26 +409,26 @@ namespace StudievenDK.Data.Migrations
 
             modelBuilder.Entity("StudievenDK.Models.Course", b =>
                 {
-                    b.HasOne("StudievenDK.Models.Faculty", "Faculties")
+                    b.HasOne("StudievenDK.Models.FacultyName", "Faculties")
                         .WithMany("Courses")
                         .HasForeignKey("FacultiesFacultyId");
 
                     b.HasOne("StudievenDK.Models.Term", "Term")
                         .WithMany("Courses")
-                        .HasForeignKey("TermYear");
+                        .HasForeignKey("TermYear_fk");
                 });
 
             modelBuilder.Entity("StudievenDK.Models.CourseProgramme", b =>
                 {
                     b.HasOne("StudievenDK.Models.Course", "Course")
                         .WithMany("CourseProgrammes")
-                        .HasForeignKey("CourseName")
+                        .HasForeignKey("CourseName_fk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("StudievenDK.Models.Programme", "Programme")
                         .WithMany("CourseProgrammes")
-                        .HasForeignKey("ProgrammeName")
+                        .HasForeignKey("ProgrammeName_fk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

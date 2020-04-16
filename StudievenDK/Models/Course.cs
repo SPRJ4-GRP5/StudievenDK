@@ -10,8 +10,8 @@ namespace StudievenDK.Models
     public class Course
     {
         [Key] public string CourseName { get; set; }
-        [ForeignKey("Faculty")] public string Faculty { get; set; }
-        [ForeignKey("Term")] public int TermYear { get; set; }
+        [ForeignKey("FacultyName")] public string FacultyName_fk { get; set; }
+        [ForeignKey("Term")] public int TermYear_fk { get; set; }
         public Term Term { get; set; }
         public Faculty Faculties { get; set; }
 
