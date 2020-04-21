@@ -9,7 +9,7 @@ namespace StudievenDK.Models
     public class Term
     {
         [Key]
-        public string TermYear { get; set; }
+        public int TermYear { get; set; }
         public List<Course> Courses { get; set; }
     }
 }
