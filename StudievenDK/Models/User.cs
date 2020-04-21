@@ -12,10 +12,13 @@ namespace StudievenDK.Models
     public class User
     {
         [Key] 
-        public MailAddress Email { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; } //Snak med Nikolaj og Jonas om hvordan denne bliver seedet
-        public IFormFile Image { get; set; }
+        //public IFormFile Image { get; set; }
         public string ImageName { get; set; }
+
+        public List<Case> Cases { get; set; }
+        public List<Case> CasesSeeker { get; set; }
     }
 }
