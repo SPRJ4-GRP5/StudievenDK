@@ -16,7 +16,7 @@ namespace StudievenDK.Data
 
         public DbSet<Case> Cases { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Course>Course { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Term> Terms { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
