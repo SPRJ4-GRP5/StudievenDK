@@ -20,36 +20,9 @@ namespace StudievenDK.Controllers
         }
 
         // GET: Mainlist
-        public async Task<IActionResult> Index(string searchString, string Text, string Subject)
+        public async Task<IActionResult> Index()
         {
-            var vm = new MainlistViewModel();
-
-            var Case = from s in _context.Case
-                select s;
-
-            var fagQuery = from s in _context.Case
-                select s.Subject;
-
-            vm.Subject = await fagQuery.ToListAsync();
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                Case = Case.Where(s => s.Subject.Contains(searchString)
-                                         || s.Text.Contains(searchString));
-            }
-
-            if (Text != null)
-            {
-                Case = Case.Where(s => s.Text.Equals(Text));
-            }
-
-            if (Subject != null)
-            {
-                Case = Case.Where(s=>s.Subject.Equals(Subject));
-            }
-
-            vm.Cases = await Case.ToListAsync();
-            return View(vm);
+            return View(await _context.Case.ToListAsync());
         }
 
         // GET: Mainlist/Details/5

@@ -62,7 +62,7 @@ namespace StudievenDK
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=XX}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
