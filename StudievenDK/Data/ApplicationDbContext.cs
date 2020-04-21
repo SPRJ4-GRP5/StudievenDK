@@ -71,23 +71,10 @@ namespace StudievenDK.Data
             //    new User { }
             //);
 
-            ////Course
-            //modelBuilder.Entity<Course>().HasData(
-            //    new Course { }
-            //);
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //Course
+            modelBuilder.Entity<Course>().HasData(
+                new Course {CourseName="SWD" }
+            );
 
 
         }

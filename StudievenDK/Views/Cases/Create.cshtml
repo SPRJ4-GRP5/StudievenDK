@@ -4,6 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
+    <head>
+        <link href="~/css/CaseStyle.css" rel="stylesheet" />
+    </head>
+
 <h1>Create</h1>
 
 <h4>Case</h4>
@@ -23,12 +27,8 @@
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserHelper_fk" class="control-label"></label>
-                <select asp-for="UserHelper_fk" class ="form-control" asp-items="ViewBag.UserHelper_fk"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserSeeker_fk" class="control-label"></label>
-                <select asp-for="UserSeeker_fk" class ="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
+                <label asp-for="Course" class="control-label"></label>
+                <select asp-for="Course" class="form-control" asp-items="ViewBag.Course"/>
             </div>
             <div class="form-group">
                 <label asp-for="PictureName" class="control-label"></label>
@@ -36,7 +36,7 @@
                 <span asp-validation-for="PictureName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="CaseBtn" />
             </div>
         </form>
     </div>
