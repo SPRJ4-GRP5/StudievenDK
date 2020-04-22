@@ -1,2 +1,19 @@
 ﻿body {
 }
+
+.CaseBtn {
+    background-color: #278CCA; /*Blue*/
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 12px;
+}
+    .CaseBtn:hover {
+        background-color: #64BDA1; /* Green */
+        color: white;
+    }
