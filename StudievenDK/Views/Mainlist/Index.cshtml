@@ -7,10 +7,8 @@
 
 <div class="navbar">
     <form asp-controller="Mainlist" asp-action="Index">
-        &nbsp;&nbsp
-        <input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;
-        &nbsp;&nbsp
-        <input type="submit" value="Filter" />
+        <input id="searchInput" type="text" placeholder="Search.." name="SearchString">
+        <input id="filter" type="submit" value="Filtrér" />
         <div>
             <select name="semester">
                 <option value="0">Vælg Semester</option>
