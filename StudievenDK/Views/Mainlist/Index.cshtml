@@ -6,25 +6,39 @@
 <h1>Hovedliste</h1>
 
 <div class="navbar">
+    <button onclick="myFunction()">trekant</button>
     <form asp-controller="Mainlist" asp-action="Index">
-        &nbsp;&nbsp
-        <div><input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;</div>
-        &nbsp;&nbsp
-        <div> <input type="submit" value="Filter" /></div>
-
+        <input type="text" placeholder="Search.." name="SearchString">
+        <input type="submit" value="Filter" />
         <div id="myDIV" class="container">
             &nbsp;&nbsp;
             <div class="row">
-                <p>Kategorier: </p>
+                <p class="fancyKategorier">Kategorier: </p>
             </div>
             <div class="row">
-                <p>Fakultet:</p>
+                <select class="filter" name="fakultet">
+                    <option value="0">Vælg Fakultet</option>
+                    @foreach (var item in Model.Faculty)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
             </div>
             <div class="row">
-                <p>Studieretning:</p>
+                <select class="filter" name="studieretning">
+                    <option value="0">Vælg Studieretning</option>
+                    @foreach (var item in Model.Programme)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
             </div>
             <div class="row">
-                <select name="semester">
+                <select class="filter" name="semester">
                     <option value="0">Vælg Semester</option>
                     <option value="1">1. Semester</option>
                     <option value="2">2. Semester</option>
@@ -36,7 +50,7 @@
                 </select>
             </div>
             <div class="row">
-                <select name="Fag">
+                <select class="filter" name="Fag">
                     <option value="0">Vælg Fag</option>
                     @foreach (var item in Model.Subject)
                     {
@@ -48,7 +62,7 @@
             </div>
         </div>
     </form>
-    <button onclick="myFunction()">trekant</button>
+
 </div>
 
 
