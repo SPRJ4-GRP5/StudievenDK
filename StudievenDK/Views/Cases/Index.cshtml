@@ -7,11 +7,6 @@
     <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Egne Sager</h1>
 
-<p>
-    <a asp-action="Create">
-        <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
-    </a>
-</p>
 <div class="col-3 master">
     @foreach (var item in Model)
     {
@@ -21,15 +16,28 @@
     }
 </div>
 
-<div class="col-9 detail">
-    <h1 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h1>
+<div class="col-7 detail">
+    <div>
+        <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
+        <p>
+            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
+            @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br/><br/>
+            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
+            @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br/><br/>
+            @Html.DisplayNameFor(model => model.Subject)
+            @Html.DisplayFor(model => model.GetEnumerator().Current.Subject)<br/><br/>
+        </p>
+    </div>
+</div>
+<div class="col-2 detail flex-column">
     <p>
-        @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
-        @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br /><br/>
-        @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
-        @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br /><br />
-        @Html.DisplayNameFor(model => model.Subject)
-        @Html.DisplayFor(model => model.GetEnumerator().Current.Subject)<br /><br />
+        <a asp-action="Edit">
+            <button class="CaseBtn">Rediger sag</button>
+        </a>
+        <br/> <br/>
+        <a asp-action="Delete">
+            <button class="CaseBtn">Slet sag</button>
+        </a>
     </p>
 </div>
 
