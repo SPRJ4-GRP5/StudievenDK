@@ -25,7 +25,7 @@ namespace StudievenDK.Models
         public Course Course { get; set; }
 
         [NotMapped]
-        [DisplayName("Upload file")]
+        [DisplayName("Upload billede")]
         public IFormFile Picture { get; set; }
         public string PictureName { get; set; }
     }

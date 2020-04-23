@@ -54,6 +54,7 @@ namespace StudievenDK.Controllers
             ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName");
             ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email");
             ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email");
+
             return View();
         }
 

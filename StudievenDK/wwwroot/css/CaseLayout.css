@@ -15,7 +15,25 @@
     border-radius: 12px;
 }
 
-.CaseBtn:hover {
-    background-color: #64BDA1; /* Green */
-    color: white;
+    .CaseBtn:hover {
+        background-color: #64BDA1; /* Green */
+        color: white;
+    }
+
+.textboxTextCase{
+    height: 100px;
+}
+
+    /*Kig på dette igen!!! med knapperne ved siden af*/
+[class*="col-"] {
+    width: 100%;
+    float: left;
+}
+
+.col-4 {
+    width: 25%;
+}
+
+.col-10 {
+    width: 70%;
 }
