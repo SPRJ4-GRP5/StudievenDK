@@ -82,14 +82,14 @@ namespace StudievenDK.Controllers
                     await @case.Picture.CopyToAsync(fileStream);
                 }
 
-
+                
                 _context.Add(@case);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", @case.CourseName_fk);
-            //ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserHelper_fk);
-            //ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserSeeker_fk);
+            ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", @case.CourseName_fk);
+            ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserHelper_fk);
+            ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserSeeker_fk);
             return View(@case);
         }
 
