@@ -37,3 +37,12 @@
 .col-10 {
     width: 70%;
 }
+.CaseBtn:hover {
+    background-color: #64BDA1; /* Green */
+    color: white;
+}
+
+.btns {
+    background-color: #278cca;
+    color: white;
+}

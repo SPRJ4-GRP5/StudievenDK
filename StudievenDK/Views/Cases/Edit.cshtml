@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+    <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Edit</h1>
 
 <h4>Case</h4>
@@ -51,7 +51,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button label="back to own cases" class="btns">Tilbage til Egne sager</button>
+    </a>
 </div>
 
 @section Scripts {
