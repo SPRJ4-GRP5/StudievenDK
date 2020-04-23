@@ -7,26 +7,22 @@
     <link href="~/css/CaseLayout.css" rel="stylesheet" />
 </head>
 
-<h1>Opret sag</h1>
-<hr />
+<h1 class="col-12">Opret sag</h1>
+
 <div class="row">
-    <div >
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div >
+    <div class="col-12">
+        <form asp-action="Create">
+            <div class="col-10">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label class="control-label">Emne</label>
-                    <input asp-for="Subject" class="form-control" maxlength="150" required />
+                    <input asp-for="Subject" class="form-control inputBoxes" maxlength="150" />
                     <span asp-validation-for="Subject" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Beskrivelse</label>
-                    <input asp-for="Text" class="form-control textboxTextCase" required />
+                    <textarea asp-for="Text" class="form-control textboxTextCase inputBoxes"></textarea>
                     <span asp-validation-for="Text" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Fag</label>
-                    <select asp-for="CourseName_fk" class="form-control" asp-items="ViewBag.CourseName_fk"></select>
                 </div>
                 @*<div class="form-group">
             <label asp-for="UserHelper_fk" class="control-label"></label>
@@ -38,21 +34,31 @@
         </div>*@
                 <div class="form-group">
                     <label asp-for="Picture" class="control-label"></label>
+                    <br />
                     <input asp-for="Picture" accept="Image/*" />
                     <span asp-validation-for="Picture" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Fag</label>
+                    <br />
+                    <select asp-for="CourseName_fk" class="form-control inputBoxes" asp-items="ViewBag.CourseName_fk"></select>
+                </div>
+                <div>
+                    Vælg deadline
+                </div>
+                <br />
                 @*<div class="form-group">
             <label asp-for="PictureName" class="control-label"></label>
             <input asp-for="PictureName" class="form-control" />
             <span asp-validation-for="PictureName" class="text-danger"></span>
         </div>*@
             </div>
-            <div >
+            <div class="col-2">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="CaseBtn" />
+                    <input type="submit" value="Opret" class="CaseBtn" />
                 </div>
                 <div>
-                    <button class="CaseBtn"><a asp-action="Index">Afbryd</a></button>
+                    <a class="CaseBtn" asp-action="Index">Fortryd</a>
                 </div>
             </div>
         </form>
