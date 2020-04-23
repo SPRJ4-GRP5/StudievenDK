@@ -77,6 +77,7 @@ body {
     background-color: #D3E9F4;
     font-family: Arial;
     border-radius: 10px;
+    display: block;
 }
 
 /* Links inside the navbar */
@@ -164,6 +165,16 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+#searchInput {
+    width: 83%;
+}
+
+#filter {
+    width: 8%;
+    min-width: fit-content;
+    float: right;
 }
 
 
