@@ -8,8 +8,7 @@ namespace StudievenDK.Models
 {
     public class Faculty
     {
-        [Key]
-        public string FacultyId { get; set; }
+        [Key] public string FacultyName { get; set; }
 
         public List<Course> Courses { get; set; }
     }
