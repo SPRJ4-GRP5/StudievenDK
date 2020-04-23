@@ -23,7 +23,7 @@
                 <input asp-for="Subject" class="form-control" />
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="UserHelper_fk" class="control-label"></label>
                 <select asp-for="UserHelper_fk" class="form-control" asp-items="ViewBag.UserHelper_fk"></select>
                 <span asp-validation-for="UserHelper_fk" class="text-danger"></span>
@@ -32,7 +32,7 @@
                 <label asp-for="UserSeeker_fk" class="control-label"></label>
                 <select asp-for="UserSeeker_fk" class="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
                 <span asp-validation-for="UserSeeker_fk" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="CourseName_fk" class="control-label"></label>
                 <select asp-for="CourseName_fk" class="form-control" asp-items="ViewBag.CourseName_fk"></select>
@@ -52,7 +52,7 @@
 
 <div>
     <a asp-action="Index">
-        <button label="back to own cases" class="btns">Tilbage til Egne sager</button>
+        <button label="back to own cases" class="CaseBtn">Tilbage til Egne sager</button>
     </a>
 </div>
 
