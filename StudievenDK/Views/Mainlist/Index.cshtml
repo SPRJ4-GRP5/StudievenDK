@@ -1,48 +1,51 @@
 ﻿@model StudievenDK.Controllers.MainlistViewModel
-    <div class="navbar">
-        <form asp-controller="Mainlist" asp-action="Index">
-            <input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;
-            <div class="dropdown">
-                @*<button class="dropbtn">Dropdown
-                <i class="fa fa-caret-down"></i>
-            </button>*@
-                <div class="dropdown-content">
-                    <div class="header">
-                        <h2>Mega Menu</h2>
-                    </div>
-                    <div class="row">
-                        <div class="column">
-                            <h3>Category 1</h3>
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
-                        </div>
-                        <div class="column">
-                            <h3>Category 2</h3>
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
-                        </div>
-                        <div class="column">
-                            <h3>Category 3</h3>
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            &nbsp;&nbsp<input type="submit" value="Filter" />&nbsp;&nbsp;
-        </form>
-    </div>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Hovedliste</h1>
+
+<div class="navbar">
+    <form asp-controller="Mainlist" asp-action="Index">
+        &nbsp;&nbsp
+        <input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;
+        &nbsp;&nbsp
+        <input type="submit" value="Filter" />
+        <div>
+            <select name="semester">
+                <option value="0">Vælg Semester</option>
+                <option value="1">1. Semester</option>
+                <option value="2">2. Semester</option>
+                <option value="3">3. Semester</option>
+                <option value="4">4. Semester</option>
+                <option value="5">5. Semester</option>
+                <option value="6">6. Semester</option>
+                <option value="7">7. Semester</option>
+            </select>
+            &nbsp;&nbsp
+            <select name="Fag">
+                <option value="0">Vælg Fag</option>
+                @foreach (var item in Model.Subject)
+                {
+                    <option>
+                        @item
+                    </option>
+                }
+            </select>
+        </div>
+    </form>
+</div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Alle sager
+                Subject
             </th>
-
+            <th>
+                Text
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,14 +53,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Subject)
                 </td>
                 <td>
-                    <a>1</a>
-                    <a>2</a>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
                 </td>
             </tr>
         }
