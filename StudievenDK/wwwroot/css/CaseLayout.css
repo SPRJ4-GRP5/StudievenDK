@@ -12,30 +12,62 @@
     display: inline-block;
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
     .CaseBtn:hover {
         background-color: #64BDA1; /* Green */
-        color: white;
+        color: white!important;
+        text-decoration: none!important;
     }
 
-.textboxTextCase{
-    height: 100px;
+a.CaseBtn {
+    background-color: #278CCA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-    /*Kig på dette igen!!! med knapperne ved siden af*/
+    a.CaseBtn:hover {
+        background-color: #64BDA1; /* Green */
+        color: white !important;
+        text-decoration: none !important;
+    }
+
+/*.PicBtn {
+    background-color: #278CCA; /* Blue */
+    /*border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 12px;
+    -webkit-user-select: none;
+}*/
+.textboxTextCase {
+    min-height: 150px !important;
+    max-height: 500px !important;
+    overflow-y: auto;
+}
+
+.inputBoxes {
+    width: 70%!important;
+}
+
 [class*="col-"] {
     width: 100%;
     float: left;
-}
-
-.col-4 {
-    width: 25%;
-}
-
-.col-10 {
-    width: 70%;
 }
 
 .btns {
