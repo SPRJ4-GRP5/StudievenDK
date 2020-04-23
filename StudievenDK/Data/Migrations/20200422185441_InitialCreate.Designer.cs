@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200416130138_Alex")]
-    partial class Alex
+    [Migration("20200422185441_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,7 @@ namespace StudievenDK.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseName_fk")
+                    b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PictureName")
@@ -248,60 +248,13 @@ namespace StudievenDK.Data.Migrations
 
                     b.HasKey("CaseId");
 
-                    b.HasIndex("CourseName_fk");
+                    b.HasIndex("CourseName");
 
                     b.HasIndex("UserHelper_fk");
 
                     b.HasIndex("UserSeeker_fk");
 
                     b.ToTable("Cases");
-
-                    b.HasData(
-                        new
-                        {
-                            CaseId = 1,
-                            CourseName_fk = "GUI",
-                            Subject = "Hjaelp?",
-                            Text = "Jeg har brug for hjaelp",
-                            UserHelper_fk = "Alexander@Studieven.dk",
-                            UserSeeker_fk = "Thanh@Studieven.dk"
-                        },
-                        new
-                        {
-                            CaseId = 2,
-                            CourseName_fk = "DAB",
-                            Subject = "EF core",
-                            Text = "Jeg skal bruge hjaelp til DAB",
-                            UserHelper_fk = "Thanh@Studieven.dk",
-                            UserSeeker_fk = "Alexander@Studieven.dk"
-                        },
-                        new
-                        {
-                            CaseId = 3,
-                            CourseName_fk = "ISU",
-                            Subject = "threads",
-                            Text = "hvordan opretter man en traad?",
-                            UserHelper_fk = "Trang@Studieven.dk",
-                            UserSeeker_fk = "Jonas@Studieven.dk"
-                        },
-                        new
-                        {
-                            CaseId = 4,
-                            CourseName_fk = "GUI",
-                            Subject = "user interface",
-                            Text = "observer pattern - forklar lige det paa en knap",
-                            UserHelper_fk = "Randi@Studieven.dk",
-                            UserSeeker_fk = "Nikolaj@Studieven.dk"
-                        },
-                        new
-                        {
-                            CaseId = 5,
-                            CourseName_fk = "GUI",
-                            Subject = "fare paa knap",
-                            Text = "hvordan laver jeg farven gul paa en knap",
-                            UserHelper_fk = "Nikolaj@Studieven.dk",
-                            UserSeeker_fk = "Mads@Studieven.dk"
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Course", b =>
@@ -309,144 +262,47 @@ namespace StudievenDK.Data.Migrations
                     b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FacultiesFacultyName")
+                    b.Property<string>("FacultiesFacultyId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FacultyName_fk")
+                    b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TermYear_fk")
-                        .HasColumnType("int");
+                    b.Property<string>("TermYear")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CourseName");
 
-                    b.HasIndex("FacultiesFacultyName");
+                    b.HasIndex("FacultiesFacultyId");
 
-                    b.HasIndex("TermYear_fk");
+                    b.HasIndex("TermYear");
 
                     b.ToTable("Course");
-
-                    b.HasData(
-                        new
-                        {
-                            CourseName = "GUI",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 4
-                        },
-                        new
-                        {
-                            CourseName = "DAB",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 4
-                        },
-                        new
-                        {
-                            CourseName = "ISU",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 3
-                        },
-                        new
-                        {
-                            CourseName = "DOA",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 3
-                        },
-                        new
-                        {
-                            CourseName = "SWT",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 3
-                        },
-                        new
-                        {
-                            CourseName = "DSB",
-                            FacultyName_fk = "Technical Sciences",
-                            TermYear_fk = 3
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.CourseProgramme", b =>
                 {
-                    b.Property<string>("CourseName_fk")
+                    b.Property<string>("CourseName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProgrammeName_fk")
+                    b.Property<string>("ProgrammeName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CourseName_fk", "ProgrammeName_fk");
+                    b.HasKey("CourseName", "ProgrammeName");
 
-                    b.HasIndex("ProgrammeName_fk");
+                    b.HasIndex("ProgrammeName");
 
                     b.ToTable("CourseProgramme");
-
-                    b.HasData(
-                        new
-                        {
-                            CourseName_fk = "GUI",
-                            ProgrammeName_fk = "IKT"
-                        },
-                        new
-                        {
-                            CourseName_fk = "DAB",
-                            ProgrammeName_fk = "IKT"
-                        },
-                        new
-                        {
-                            CourseName_fk = "ISU",
-                            ProgrammeName_fk = "IKT"
-                        },
-                        new
-                        {
-                            CourseName_fk = "DSB",
-                            ProgrammeName_fk = "E"
-                        },
-                        new
-                        {
-                            CourseName_fk = "DSB",
-                            ProgrammeName_fk = "IKT"
-                        },
-                        new
-                        {
-                            CourseName_fk = "SWT",
-                            ProgrammeName_fk = "ST"
-                        },
-                        new
-                        {
-                            CourseName_fk = "SWT",
-                            ProgrammeName_fk = "IKT"
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Faculty", b =>
                 {
-                    b.Property<string>("FacultyName")
+                    b.Property<string>("FacultyId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("FacultyName");
+                    b.HasKey("FacultyId");
 
                     b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            FacultyName = "Natural Sciences"
-                        },
-                        new
-                        {
-                            FacultyName = "Technical Sciences"
-                        },
-                        new
-                        {
-                            FacultyName = "Health"
-                        },
-                        new
-                        {
-                            FacultyName = "Aarhus BSS"
-                        },
-                        new
-                        {
-                            FacultyName = "Arts"
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Programme", b =>
@@ -457,74 +313,16 @@ namespace StudievenDK.Data.Migrations
                     b.HasKey("ProgrammeName");
 
                     b.ToTable("Programmes");
-
-                    b.HasData(
-                        new
-                        {
-                            ProgrammeName = "IKT"
-                        },
-                        new
-                        {
-                            ProgrammeName = "E"
-                        },
-                        new
-                        {
-                            ProgrammeName = "ST"
-                        },
-                        new
-                        {
-                            ProgrammeName = "EE"
-                        },
-                        new
-                        {
-                            ProgrammeName = "Datalogi"
-                        },
-                        new
-                        {
-                            ProgrammeName = "Medievidenskab"
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Term", b =>
                 {
-                    b.Property<int>("TermYear")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("TermYear")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TermYear");
 
                     b.ToTable("Terms");
-
-                    b.HasData(
-                        new
-                        {
-                            TermYear = 1
-                        },
-                        new
-                        {
-                            TermYear = 2
-                        },
-                        new
-                        {
-                            TermYear = 3
-                        },
-                        new
-                        {
-                            TermYear = 4
-                        },
-                        new
-                        {
-                            TermYear = 5
-                        },
-                        new
-                        {
-                            TermYear = 6
-                        },
-                        new
-                        {
-                            TermYear = 7
-                        });
                 });
 
             modelBuilder.Entity("StudievenDK.Models.User", b =>
@@ -541,43 +339,6 @@ namespace StudievenDK.Data.Migrations
                     b.HasKey("Email");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Email = "Alexander@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Thanh@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Mads@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Trang@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Nikolaj@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Randi@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Jonas@Studieven.dk",
-                            Password = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -635,7 +396,7 @@ namespace StudievenDK.Data.Migrations
                 {
                     b.HasOne("StudievenDK.Models.Course", "Course")
                         .WithMany("Cases")
-                        .HasForeignKey("CourseName_fk");
+                        .HasForeignKey("CourseName");
 
                     b.HasOne("StudievenDK.Models.User", "UserHelper")
                         .WithMany("Cases")
@@ -650,26 +411,24 @@ namespace StudievenDK.Data.Migrations
                 {
                     b.HasOne("StudievenDK.Models.Faculty", "Faculties")
                         .WithMany("Courses")
-                        .HasForeignKey("FacultiesFacultyName");
+                        .HasForeignKey("FacultiesFacultyId");
 
                     b.HasOne("StudievenDK.Models.Term", "Term")
                         .WithMany("Courses")
-                        .HasForeignKey("TermYear_fk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TermYear");
                 });
 
             modelBuilder.Entity("StudievenDK.Models.CourseProgramme", b =>
                 {
                     b.HasOne("StudievenDK.Models.Course", "Course")
                         .WithMany("CourseProgrammes")
-                        .HasForeignKey("CourseName_fk")
+                        .HasForeignKey("CourseName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("StudievenDK.Models.Programme", "Programme")
                         .WithMany("CourseProgrammes")
-                        .HasForeignKey("ProgrammeName_fk")
+                        .HasForeignKey("ProgrammeName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
