@@ -162,3 +162,8 @@ body {
 footer a {
     color: #ffffff;
 }
+
+.aboutTxt {
+    padding: 5% 5% 5% 0;
+    border-bottom: solid #278cca;
+}
