@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+    <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Details</h1>
 
 <div>
@@ -49,6 +49,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CaseId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.CaseId">
+        <button label="Edit case" class="btns">Rediger</button>
+    </a> |
+    <a asp-action="Index">
+        <button label="back to own cases" class="btns">Tilbage til Egne sager</button>
+    </a>
 </div>
