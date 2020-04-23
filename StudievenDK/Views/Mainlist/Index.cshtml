@@ -1,0 +1,89 @@
+﻿@model StudievenDK.Controllers.MainlistViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Hovedliste</h1>
+
+<div class="navbar">
+    <form asp-controller="Mainlist" asp-action="Index">
+        &nbsp;&nbsp
+        <div><input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;</div>
+        &nbsp;&nbsp
+        <div> <input type="submit" value="Filter" /></div>
+
+        <div id="myDIV" class="container">
+            &nbsp;&nbsp;
+            <div class="row">
+                <p>Kategorier: </p>
+            </div>
+            <div class="row">
+                <p>Fakultet:</p>
+            </div>
+            <div class="row">
+                <p>Studieretning:</p>
+            </div>
+            <div class="row">
+                <select name="semester">
+                    <option value="0">Vælg Semester</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                </select>
+            </div>
+            <div class="row">
+                <select name="Fag">
+                    <option value="0">Vælg Fag</option>
+                    @foreach (var item in Model.Subject)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+    <button onclick="myFunction()">trekant</button>
+</div>
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Subject
+            </th>
+            <th>
+                Text
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cases)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
