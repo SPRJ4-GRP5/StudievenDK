@@ -185,6 +185,19 @@ body {
     margin-top:10px;
 }
 
-.fancyKategorier{
 
+.fancyKategorier {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    width: 100px;
+}
+
+.KStyle {
+    font-size: initial;
+    font-weight: bolder;
+}
+
+.Trekant {
+    position: absolute;
+    margin: 4.3px;
 }

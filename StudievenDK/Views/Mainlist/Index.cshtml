@@ -12,9 +12,10 @@
         <div id="myDIV" class="container">
             &nbsp;&nbsp;
             <div class="row">
-                <p class="fancyKategorier">Kategorier: </p>
+                <p class="KStyle" >Kategorier: </p>
             </div>
             <div class="row">
+                <p class="fancyKategorier">Fakultet:</p>
                 <select class="filter" name="fakultet">
                     <option value="0">Vælg Fakultet</option>
                     @foreach (var item in Model.Faculty)
@@ -26,6 +27,7 @@
                 </select>
             </div>
             <div class="row">
+                <p class="fancyKategorier">Studieretning:</p>
                 <select class="filter" name="studieretning">
                     <option value="0">Vælg Studieretning</option>
                     @foreach (var item in Model.Programme)
@@ -37,6 +39,7 @@
                 </select>
             </div>
             <div class="row">
+                <p class="fancyKategorier">Semester:</p> 
                 <select class="filter" name="semester">
                     <option value="0">Vælg Semester</option>
                     <option value="1">1. Semester</option>
@@ -49,9 +52,10 @@
                 </select>
             </div>
             <div class="row">
+                <p class="fancyKategorier">Fag:</p>
                 <select class="filter" name="Fag">
                     <option value="0">Vælg Fag</option>
-                    @foreach (var item in Model.Subject)
+                    @foreach (var item in Model.Courses)
                     {
                         <option>
                             @item
@@ -61,8 +65,12 @@
             </div>
         </div>
     </form>
-    <button onclick="myFunction()">trekant</button>
+    @*<button class="Trekant" onclick="myFunction()"></button>*@
+    <img class="Trekant" id="triangle" src="~/Pictures/Image-Source-PlusPNG.com.png" width="20" onclick="myFunction(),rotateTriangle()"/>
 </div>
+
+
+<hr style="background-color:#278CCA">
 
 <table class="table">
     <thead>

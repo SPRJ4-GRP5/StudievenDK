@@ -12,3 +12,15 @@ function myFunction() {
         x.style.display = 'none';
     }
 }
+
+function rotateTriangle() {
+    var img = document.getElementById('triangle');
+    if (img.style.transform === 'rotate(0deg)') {
+        img.style.transform = 'rotate(180deg)';
+    }
+    else {
+        img.style.transform = 'rotate(0deg)'
+    }
+
+   
+}
