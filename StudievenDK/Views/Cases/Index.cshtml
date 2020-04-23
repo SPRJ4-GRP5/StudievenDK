@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+    <link href="~/css/CaseLayout.css" rel="stylesheet" />
+<h1>Egne Sager</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">
+        <button label="Create new case" class="btns"> Opret ny sag</button>
+    </a>
 </p>
 <table class="table">
     <thead>
@@ -55,9 +57,15 @@
                 @Html.DisplayFor(modelItem => item.PictureName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CaseId">
+                    <button label="Edit case" class="btns">Rediger</button>
+                </a> |
+                <a asp-action="Details" asp-route-id="@item.CaseId">
+                    <button label="Details case" class="btns">Detaljer</button>
+                </a> |
+                <a asp-action="Delete" asp-route-id="@item.CaseId">
+                    <button label="Delete case" class="btns">Slet</button>
+                </a>
             </td>
         </tr>
 }
