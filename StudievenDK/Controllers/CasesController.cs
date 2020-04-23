@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using StudievenDK.Data;
 using StudievenDK.Models;
 
+//Randi tester
+
 namespace StudievenDK.Controllers
 {
     public class CasesController : Controller
