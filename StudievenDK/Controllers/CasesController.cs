@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using StudievenDK.Data;
 using StudievenDK.Models;
 
-//Randi tester
+//Randi testerbjwadhbfwak
 
 namespace StudievenDK.Controllers
 {
