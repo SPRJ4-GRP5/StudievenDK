@@ -78,6 +78,7 @@ body {
     font-family: Arial;
     border-radius: 10px;
     display: block;
+
 }
 
 /* Links inside the navbar */
@@ -169,6 +170,7 @@ body {
 
 #searchInput {
     width: 83%;
+
 }
 
 #filter {

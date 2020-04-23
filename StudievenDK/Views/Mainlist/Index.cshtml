@@ -6,8 +6,7 @@
 <h1>Hovedliste</h1>
 
 <div class="navbar">
-    <button onclick="myFunction()">trekant</button>
-    <form asp-controller="Mainlist" asp-action="Index">
+    <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
         <input type="text" placeholder="Search.." name="SearchString">
         <input type="submit" value="Filter" />
         <div id="myDIV" class="container">
@@ -62,7 +61,7 @@
             </div>
         </div>
     </form>
-
+    <button onclick="myFunction()">trekant</button>
 </div>
 
 <table class="table">
