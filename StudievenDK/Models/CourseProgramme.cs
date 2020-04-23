@@ -7,9 +7,9 @@ namespace StudievenDK.Models
 {
     public class CourseProgramme
     {
-        public string CourseName { get; set; }
+        public string CourseName_fk { get; set; }
         public Course Course { get; set; }
-        public string ProgrammeName { get; set; }
+        public string ProgrammeName_fk { get; set; }
         public Programme Programme { get; set; }
     }
 }
