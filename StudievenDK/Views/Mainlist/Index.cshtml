@@ -8,33 +8,52 @@
 <div class="navbar">
     <form asp-controller="Mainlist" asp-action="Index">
         &nbsp;&nbsp
-        <input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;
+        <div><input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;</div>
         &nbsp;&nbsp
-        <input type="submit" value="Filter" />
-        <div>
-            <select name="semester">
-                <option value="0">Vælg Semester</option>
-                <option value="1">1. Semester</option>
-                <option value="2">2. Semester</option>
-                <option value="3">3. Semester</option>
-                <option value="4">4. Semester</option>
-                <option value="5">5. Semester</option>
-                <option value="6">6. Semester</option>
-                <option value="7">7. Semester</option>
-            </select>
-            &nbsp;&nbsp
-            <select name="Fag">
-                <option value="0">Vælg Fag</option>
-                @foreach (var item in Model.Subject)
-                {
-                    <option>
-                        @item
-                    </option>
-                }
-            </select>
+        <div> <input type="submit" value="Filter" /></div>
+
+        <div id="myDIV" class="container">
+            &nbsp;&nbsp;
+            <div class="row">
+                <p>Kategorier: </p>
+            </div>
+            <div class="row">
+                <p>Fakultet:</p>
+            </div>
+            <div class="row">
+                <p>Studieretning:</p>
+            </div>
+            <div class="row">
+                <select name="semester">
+                    <option value="0">Vælg Semester</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                </select>
+            </div>
+            <div class="row">
+                <select name="Fag">
+                    <option value="0">Vælg Fag</option>
+                    @foreach (var item in Model.Subject)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
+            </div>
         </div>
     </form>
+    <button onclick="myFunction()">trekant</button>
 </div>
+
+
+
+
 
 <table class="table">
     <thead>
