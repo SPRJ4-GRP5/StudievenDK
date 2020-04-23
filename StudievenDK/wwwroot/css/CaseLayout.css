@@ -1,6 +1,58 @@
 ﻿body {
 }
 
+.master {
+    padding: 25px;
+    border: none;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+
+}
+
+/* scrollerbar design  overflow laver scrollable*/
+    .master::-webkit-scrollbar {
+        background-color: #ffffff;
+    }
+    /*.master::-webkit-scrollbar-button {
+        background-color: #278cca;
+    }*/
+
+    .master::-webkit-scrollbar-thumb {
+        background-color: #278cca;
+    }
+
+    .master::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    
+
+
+.master-item {
+    font-size: 24px;
+    border-bottom: 2px solid #000000;
+    padding: 15px;
+    /*background: white;
+    color: #32cd32;*/
+}
+
+.master-item:hover,
+.active-item {
+    background: #2d9b72;
+    cursor: pointer;
+}
+
+
+.detail {
+    float: right;
+    padding: 25px;
+    box-sizing: border-box;
+    position: static;
+    /*color: #4cd4b0;*/
+    height: 100vh;
+    background-color: white;
+}
+
 
 .CaseBtn {
     background-color: #278CCA; /* Blue */
@@ -74,3 +126,4 @@ a.CaseBtn {
     background-color: #278cca;
     color: white;
 }
+
