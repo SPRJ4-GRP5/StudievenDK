@@ -1,4 +1,5 @@
-﻿@model IEnumerable<StudievenDK.Models.Case>
+﻿@using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View
+@model IEnumerable<StudievenDK.Models.Case>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,9 +9,30 @@
 
 <p>
     <a asp-action="Create">
-        <button label="Create new case" class="btns"> Opret ny sag</button>
+        <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
     </a>
 </p>
+<div class="col-3 master">
+    @foreach (var item in Model)
+    {
+        <div class="master-item" onclick="select(this)">
+            @Html.DisplayFor(modelItem => item.Subject)
+        </div>
+    }
+</div>
+
+<div class="col-9 detail">
+    <h1 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h1>
+    <p>
+        @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
+        @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br /><br/>
+        @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
+        @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br /><br />
+        @Html.DisplayNameFor(model => model.Subject)
+        @Html.DisplayFor(model => model.GetEnumerator().Current.Subject)<br /><br />
+    </p>
+</div>
+
 <table class="table">
     <thead>
         <tr>
