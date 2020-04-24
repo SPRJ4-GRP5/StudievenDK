@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudievenDK.Data.Migrations
 {
-    public partial class Alex : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,6 +88,7 @@ namespace StudievenDK.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
+                    DateTime = table.Column<DateTime>(nullable: false),
                     UserHelper_fk = table.Column<string>(nullable: true),
                     UserSeeker_fk = table.Column<string>(nullable: true),
                     CourseName_fk = table.Column<string>(nullable: true),
@@ -207,14 +209,14 @@ namespace StudievenDK.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cases",
-                columns: new[] { "CaseId", "CourseName_fk", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
+                columns: new[] { "CaseId", "CourseName_fk", "DateTime", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
                 values: new object[,]
                 {
-                    { 3, "ISU", null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
-                    { 1, "GUI", null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
-                    { 4, "GUI", null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
-                    { 5, "GUI", null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
-                    { 2, "DAB", null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                    { 3, "ISU", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", new DateTime(2020, 4, 24, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
                 });
 
             migrationBuilder.InsertData(

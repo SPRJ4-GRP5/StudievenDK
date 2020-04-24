@@ -15,18 +15,25 @@ namespace StudievenDK.Models
         public int CaseId { get; set; }
         public string Text { get; set; }
         public string Subject { get; set; }
+        public DateTime DateTime { get; set; }
 
         public string UserHelper_fk { get; set; }
         public string UserSeeker_fk { get; set; }
         public string CourseName_fk { get; set; }
 
+
+        //navigational properties
         public User UserHelper { get; set; }
         public User UserSeeker { get; set; }
         public Course Course { get; set; }
+        public List<ImageModel> Images { get; set; }
 
-        [NotMapped]
-        [DisplayName("Upload file")]
-        public IFormFile Picture { get; set; }
-        public string PictureName { get; set; }
+
+
+
+        //[NotMapped]
+        //[DisplayName("Upload file")]
+        //public IFormFile Picture { get; set; }
+        //public string PictureName { get; set; }
     }
 }
