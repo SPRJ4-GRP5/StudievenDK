@@ -89,6 +89,7 @@ namespace StudievenDK.Data.Migrations
                     Text = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
                     DateTime = table.Column<DateTime>(nullable: false),
+                    PhotoPath = table.Column<string>(nullable: true),
                     UserHelper_fk = table.Column<string>(nullable: true),
                     UserSeeker_fk = table.Column<string>(nullable: true),
                     CourseName_fk = table.Column<string>(nullable: true),
@@ -138,6 +139,26 @@ namespace StudievenDK.Data.Migrations
                         column: x => x.ProgrammeName_fk,
                         principalTable: "Programmes",
                         principalColumn: "ProgrammeName",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    ImageId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PictureName = table.Column<string>(nullable: true),
+                    CaseFk = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.ImageId);
+                    table.ForeignKey(
+                        name: "FK_Images_Cases_CaseFk",
+                        column: x => x.CaseFk,
+                        principalTable: "Cases",
+                        principalColumn: "CaseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -209,14 +230,14 @@ namespace StudievenDK.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cases",
-                columns: new[] { "CaseId", "CourseName_fk", "DateTime", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
+                columns: new[] { "CaseId", "CourseName_fk", "DateTime", "PhotoPath", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
                 values: new object[,]
                 {
-                    { 3, "ISU", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
-                    { 1, "GUI", new DateTime(2020, 4, 24, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
-                    { 4, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
-                    { 5, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
-                    { 2, "DAB", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                    { 3, "ISU", new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local), null, null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local), null, null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local), null, null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local), null, null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", new DateTime(2020, 4, 25, 19, 54, 20, 946, DateTimeKind.Local).AddTicks(221), null, null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,24 +283,32 @@ namespace StudievenDK.Data.Migrations
                 name: "IX_CourseProgramme_ProgrammeName_fk",
                 table: "CourseProgramme",
                 column: "ProgrammeName_fk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_CaseFk",
+                table: "Images",
+                column: "CaseFk");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cases");
-
-            migrationBuilder.DropTable(
                 name: "CourseProgramme");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Programmes");
+
+            migrationBuilder.DropTable(
+                name: "Cases");
 
             migrationBuilder.DropTable(
                 name: "Course");
 
             migrationBuilder.DropTable(
-                name: "Programmes");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Faculties");

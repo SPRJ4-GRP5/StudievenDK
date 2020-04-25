@@ -16,7 +16,6 @@ namespace StudievenDK.Data
 
         public DbSet<Case> Cases { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ImageModel> Images { get; set; }
         public DbSet<Course>Course { get; set; }
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Term> Terms { get; set; }
@@ -40,11 +39,6 @@ namespace StudievenDK.Data
                 .HasOne<Course>(c => c.Course)
                 .WithMany(course => course.Cases)
                 .HasForeignKey(c => c.CourseName_fk);
-
-            // 1-N relation - Images/case
-            modelBuilder.Entity<ImageModel>()
-                .HasOne<Case>(i => i.Case)
-                .WithMany(c => c.Images);
 
             // 1-N relation - Course/FacultyName
             modelBuilder.Entity<Course>()

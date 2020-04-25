@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-12">
-        <form asp-action="Create" enctype = "multipart/form-data">
+        <form asp-controller="Cases" asp-action="Create" enctype="multipart/form-data" method="post" class="mt-3">
             <div class="col-10">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -25,33 +25,53 @@
                     <span asp-validation-for="Text" class="text-danger"></span>
                 </div>
                 @*<div class="form-group">
-            <label asp-for="UserHelper_fk" class="control-label"></label>
-            <select asp-for="UserHelper_fk" class="form-control" asp-items="ViewBag.UserHelper_fk"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserSeeker_fk" class="control-label"></label>
-            <select asp-for="UserSeeker_fk" class="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
-        </div>*@
+                        <label asp-for="UserHelper_fk" class="control-label"></label>
+                        <select asp-for="UserHelper_fk" class="form-control" asp-items="ViewBag.UserHelper_fk"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserSeeker_fk" class="control-label"></label>
+                        <select asp-for="UserSeeker_fk" class="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
+                    </div>*@
+                @*<div class="form-group row">
+                    <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <span asp-validation-for="Pictures" class="text-danger"></span>
+                    </div>
+                </div>*@
                 <div class="form-group">
-                    <label asp-for="Picture" class="control-label"></label>
-                    <br />
-                    <input asp-for="Picture" accept="Image/*" />
-                    <span asp-validation-for="Picture" class="text-danger"></span>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <input asp-for="Pictures" multiple class="form-control custom-file-input">
+                            <label class="custom-file-label">Klik for at vælge billeder...</label>
+                        </div>
+                    </div>
                 </div>
+                <br/><br />
+                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
                 <div class="form-group">
                     <label class="control-label">Fag</label>
                     <br />
                     <select asp-for="CourseName_fk" class="form-control inputBoxes" asp-items="ViewBag.CourseName_fk"></select>
                 </div>
                 <div>
-                    Vælg deadline
+                    <div class="form-group">
+                        <label asp-for="DateTime" class="control-label"></label>
+                        <input asp-for="DateTime" class="form-control" />
+                        <span asp-validation-for="DateTime" class="text-danger"></span>
+                    </div>
+                    @*<form asp-controller="Cases" asp-action="Create">
+                        <label for="SearchDate">Deadline </label><br />
+                        <input type="date" id="SearchDate" name="SearchDate"/>
+                        <input type="submit" value="Vælg" class="CaseBtn"/>
+                    </form>*@
                 </div>
                 <br />
                 @*<div class="form-group">
-            <label asp-for="PictureName" class="control-label"></label>
-            <input asp-for="PictureName" class="form-control" />
-            <span asp-validation-for="PictureName" class="text-danger"></span>
-        </div>*@
+                        <label asp-for="PictureName" class="control-label"></label>
+                        <input asp-for="PictureName" class="form-control" />
+                        <span asp-validation-for="PictureName" class="text-danger"></span>
+                    </div>*@
             </div>
             <div class="col-2">
                 <div class="form-group">
@@ -61,10 +81,25 @@
                     <a class="CaseBtn" asp-action="Index">Fortryd</a>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' filer valgt');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

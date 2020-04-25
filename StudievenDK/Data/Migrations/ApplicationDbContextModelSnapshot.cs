@@ -232,6 +232,9 @@ namespace StudievenDK.Data.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
@@ -262,7 +265,7 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 1,
                             CourseName_fk = "GUI",
-                            DateTime = new DateTime(2020, 4, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateTime = new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "Hjaelp?",
                             Text = "Jeg har brug for hjaelp",
                             UserHelper_fk = "Alexander@Studieven.dk",
@@ -272,7 +275,7 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 2,
                             CourseName_fk = "DAB",
-                            DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTime = new DateTime(2020, 4, 25, 19, 54, 20, 946, DateTimeKind.Local).AddTicks(221),
                             Subject = "EF core",
                             Text = "Jeg skal bruge hjaelp til DAB",
                             UserHelper_fk = "Thanh@Studieven.dk",
@@ -282,7 +285,7 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 3,
                             CourseName_fk = "ISU",
-                            DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTime = new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "threads",
                             Text = "hvordan opretter man en traad?",
                             UserHelper_fk = "Trang@Studieven.dk",
@@ -292,7 +295,7 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 4,
                             CourseName_fk = "GUI",
-                            DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTime = new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "user interface",
                             Text = "observer pattern - forklar lige det paa en knap",
                             UserHelper_fk = "Randi@Studieven.dk",
@@ -302,7 +305,7 @@ namespace StudievenDK.Data.Migrations
                         {
                             CaseId = 5,
                             CourseName_fk = "GUI",
-                            DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateTime = new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "fare paa knap",
                             Text = "hvordan laver jeg farven gul paa en knap",
                             UserHelper_fk = "Nikolaj@Studieven.dk",
@@ -453,6 +456,26 @@ namespace StudievenDK.Data.Migrations
                         {
                             FacultyName = "Arts"
                         });
+                });
+
+            modelBuilder.Entity("StudievenDK.Models.ImageModel", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CaseFk")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PictureName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("CaseFk");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("StudievenDK.Models.Programme", b =>
@@ -676,6 +699,15 @@ namespace StudievenDK.Data.Migrations
                     b.HasOne("StudievenDK.Models.Programme", "Programme")
                         .WithMany("CourseProgrammes")
                         .HasForeignKey("ProgrammeName_fk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudievenDK.Models.ImageModel", b =>
+                {
+                    b.HasOne("StudievenDK.Models.Case", "Case")
+                        .WithMany("Images")
+                        .HasForeignKey("CaseFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

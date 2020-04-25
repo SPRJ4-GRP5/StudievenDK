@@ -20,8 +20,8 @@
     <div>
         <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
         <p>
-            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
-            @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br/><br/>
+            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Pictures)
+            @Html.DisplayFor(model => model.GetEnumerator().Current.Pictures)<br/><br/>
             @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
             @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br/><br/>
             @Html.DisplayNameFor(model => model.Subject)
@@ -37,7 +37,6 @@
         <a asp-action="Delete">
             <button class="CaseBtn">Slet sag</button>
         </a>
-    </p>
 </div>
 
 <table class="table">

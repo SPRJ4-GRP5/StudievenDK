@@ -16,6 +16,7 @@ namespace StudievenDK.Models
         public string Text { get; set; }
         public string Subject { get; set; }
         public DateTime DateTime { get; set; }
+        public string PhotoPath { get; set; }
 
         public string UserHelper_fk { get; set; }
         public string UserSeeker_fk { get; set; }
@@ -26,22 +27,13 @@ namespace StudievenDK.Models
         public User UserHelper { get; set; }
         public User UserSeeker { get; set; }
         public Course Course { get; set; }
-        public List<ImageModel> Images { get; set; }
 
-        [DisplayName("Filnavn")]
+        [DisplayName("Billed(er)")]
         public string PictureName { get; set; }
 
         [NotMapped]
-        [DisplayName("Upload billede")]
-        public IFormFile Picture { get; set; }
+        [DisplayName("")]
+        public List<IFormFile> Pictures { get; set; }
 
-        
-
-
-
-        //[NotMapped]
-        //[DisplayName("Upload file")]
-        //public IFormFile Picture { get; set; }
-        //public string PictureName { get; set; }
     }
 }

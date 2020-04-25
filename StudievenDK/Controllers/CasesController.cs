@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -71,21 +72,61 @@ namespace StudievenDK.Controllers
         {
             if (ModelState.IsValid)
             {
-                // save image to folder image
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(@case.Picture.FileName);
-                string extension = Path.GetExtension(@case.Picture.FileName);
-                @case.PictureName = fileName += extension;
-                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                string uniqueFileName = null;
+
+                // If the Photos property on the incoming model object is not null and if count > 0,
+                // then the user has selected at least one file to upload
+
+                if (@case.Pictures != null && @case.Pictures.Count > 0)
                 {
-                    await @case.Picture.CopyToAsync(fileStream);
+                    // Loop thru each selected file
+                    foreach (IFormFile photo in @case.Pictures)
+                    {
+                        // The file must be uploaded to the images folder in wwwroot
+                        // To get the path of the wwwroot folder we are using the injected
+                        // IHostingEnvironment service provided by ASP.NET Core
+                        string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images");
+                        // To make sure the file name is unique we are appending a new
+                        // GUID value and and an underscore to the file name
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        // Use CopyTo() method provided by IFormFile interface to
+                        // copy the file to wwwroot/images folder
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
                 }
 
-                
-                _context.Add(@case);
+                Case newCase = new Case
+                {
+                    Text = @case.Text,
+                    Subject = @case.Subject,
+                    DateTime = @case.DateTime,
+                    PhotoPath = uniqueFileName,
+                    UserSeeker = @case.UserSeeker,
+                    UserHelper = @case.UserHelper,
+                    Course = @case.Course
+                };
+
+                _context.Add(newCase);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("details", new { id = newCase.CaseId });
+
+
+                // save image to folder image
+                //string wwwRootPath = _hostEnvironment.WebRootPath;
+                //string fileName = Path.GetFileNameWithoutExtension(@case.Pictures.FileName);
+                //string extension = Path.GetExtension(@case.Pictures.FileName);
+                //@case.PictureName = fileName += extension;
+                //string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                //using (var fileStream = new FileStream(path, FileMode.Create))
+                //{
+                //    await @case.Pictures.CopyToAsync(fileStream);
+                //}
+
+
+                //_context.Add(@case);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", @case.CourseName_fk);
             ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserHelper_fk);
