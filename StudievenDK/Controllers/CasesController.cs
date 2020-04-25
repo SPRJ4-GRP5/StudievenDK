@@ -85,7 +85,7 @@ namespace StudievenDK.Controllers
                         // The file must be uploaded to the images folder in wwwroot
                         // To get the path of the wwwroot folder we are using the injected
                         // IHostingEnvironment service provided by ASP.NET Core
-                        string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images");
+                        string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "Image");
                         // To make sure the file name is unique we are appending a new
                         // GUID value and and an underscore to the file name
                         uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
@@ -96,20 +96,9 @@ namespace StudievenDK.Controllers
                     }
                 }
 
-                Case newCase = new Case
-                {
-                    Text = @case.Text,
-                    Subject = @case.Subject,
-                    DateTime = @case.DateTime,
-                    PhotoPath = uniqueFileName,
-                    UserSeeker = @case.UserSeeker,
-                    UserHelper = @case.UserHelper,
-                    Course = @case.Course
-                };
-
-                _context.Add(newCase);
+                _context.Add(@case);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("details", new { id = newCase.CaseId });
+                return RedirectToAction(nameof(Index));
 
 
                 // save image to folder image
