@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200423103333_test1.cs" />
-    <Compile Remove="Data\Migrations\20200423103333_test1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200424193444_InitialCreate.cs" />
+    <Compile Remove="Data\Migrations\20200424193444_InitialCreate.Designer.cs" />
   </ItemGroup>
 
 
