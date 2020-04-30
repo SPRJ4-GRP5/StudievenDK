@@ -52,7 +52,7 @@
     </form>
 </div>
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -61,18 +61,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.UserHelper)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserSeeker)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.PictureName)
-            </th>*@
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -85,18 +85,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.UserHelper.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserSeeker.Email)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Course.CourseName)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.PictureName)
-            </td>*@
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CaseId">
                     <button label="Edit case" class="btns">Rediger</button>
@@ -111,4 +111,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
