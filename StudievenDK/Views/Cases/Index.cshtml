@@ -7,6 +7,11 @@
     <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Egne Sager</h1>
 
+<p>
+    <a asp-action="Create">
+        <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
+    </a>
+</p>
 <div class="col-3 master">
     @foreach (var item in Model)
     {
@@ -37,7 +42,6 @@
         <a asp-action="Delete">
             <button class="CaseBtn">Slet sag</button>
         </a>
-    </p>
 </div>
 
 <table class="table">
