@@ -67,30 +67,35 @@ namespace StudievenDK.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CaseId,Text,Subject,UserHelper_fk,UserSeeker_fk,CourseName_fk,Picture")] Case _case)
+        public async Task<IActionResult> Create([Bind("CaseId,Text,Subject,UserHelper_fk,UserSeeker_fk,CourseName_fk,Picture, Deadline")] Case @case)
         {
             if (ModelState.IsValid)
             {
                 // save image to folder image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(_case.Picture.FileName);
-                string extension = Path.GetExtension(_case.Picture.FileName);
-                _case.PictureName = fileName += extension;
-                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                
+                if (@case.Picture != null)
                 {
-                    await _case.Picture.CopyToAsync(fileStream);
+                    string fileName = Path.GetFileNameWithoutExtension(@case.Picture.FileName);
+                    string extension = Path.GetExtension(@case.Picture.FileName);
+                    @case.PictureName = fileName += extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await @case.Picture.CopyToAsync(fileStream);
+                    }
                 }
+                
 
                 
-                _context.Add(_case);
+                _context.Add(@case);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", _case.CourseName_fk);
-            ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", _case.UserHelper_fk);
-            ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email", _case.UserSeeker_fk);
-            return View(_case);
+            ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", @case.CourseName_fk);
+            ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserHelper_fk);
+            ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email", @case.UserSeeker_fk);
+            return View(@case);
         }
 
         // GET: Cases/Edit/5

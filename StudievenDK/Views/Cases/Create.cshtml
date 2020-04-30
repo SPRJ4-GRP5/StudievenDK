@@ -44,7 +44,13 @@
                     <select asp-for="CourseName_fk" class="form-control inputBoxes" asp-items="ViewBag.CourseName_fk"></select>
                 </div>
                 <div>
-                    Vælg deadline
+                    <div class="form-group">
+                        
+                        <label asp-for="Deadline" class="control-label">Vælg deadline</label>
+                        <input asp-for="Deadline" class="form-control"/>
+                        @*<span asp-validation-for="DateTime" class="text-danger"></span>*@
+                        
+                    </div>
                 </div>
                 <br />
                 @*<div class="form-group">
