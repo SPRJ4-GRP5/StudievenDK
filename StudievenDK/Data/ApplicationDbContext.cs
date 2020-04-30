@@ -42,7 +42,7 @@ namespace StudievenDK.Data
 
             // 1-N relation - Course/FacultyName
             modelBuilder.Entity<Course>()
-                .HasOne<Faculty>(course => course.Faculties)
+                .HasOne<Faculty>(course => course.Faculty)
                 .WithMany(f => f.Courses);
 
             // 1-N relation - Course/Term
