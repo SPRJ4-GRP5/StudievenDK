@@ -73,14 +73,19 @@ namespace StudievenDK.Controllers
             {
                 // save image to folder image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(@case.Picture.FileName);
-                string extension = Path.GetExtension(@case.Picture.FileName);
-                @case.PictureName = fileName += extension;
-                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                
+                if (@case.Picture != null)
                 {
-                    await @case.Picture.CopyToAsync(fileStream);
+                    string fileName = Path.GetFileNameWithoutExtension(@case.Picture.FileName);
+                    string extension = Path.GetExtension(@case.Picture.FileName);
+                    @case.PictureName = fileName += extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await @case.Picture.CopyToAsync(fileStream);
+                    }
                 }
+                
 
                 
                 _context.Add(@case);

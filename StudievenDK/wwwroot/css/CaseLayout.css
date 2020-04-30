@@ -67,6 +67,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 8px;
     cursor: pointer;
+    width: inherit;
 }
 
     .CaseBtn:hover {
@@ -87,6 +88,7 @@ a.CaseBtn {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 8px;
     cursor: pointer;
+    width: inherit;
 }
 
     a.CaseBtn:hover {
