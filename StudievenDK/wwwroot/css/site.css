@@ -78,6 +78,7 @@ body {
     font-family: Arial;
     border-radius: 10px;
     display: block;
+
 }
 
 /* Links inside the navbar */
@@ -169,10 +170,34 @@ body {
 
 #searchInput {
     width: 83%;
+
 }
 
 #filter {
     width: 8%;
     min-width: fit-content;
     float: right;
+}
+
+
+.filter{
+    margin-bottom:10px;
+    margin-top:10px;
+}
+
+
+.fancyKategorier {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    width: 100px;
+}
+
+.KStyle {
+    font-size: initial;
+    font-weight: bolder;
+}
+
+.Trekant {
+    position: absolute;
+    margin: 4.3px;
 }

@@ -6,25 +6,41 @@
 <h1>Hovedliste</h1>
 
 <div class="navbar">
-    <form asp-controller="Mainlist" asp-action="Index">
-        &nbsp;&nbsp
-        <div><input type="text" placeholder="Search.." name="SearchString">&nbsp;&nbsp;</div>
-        &nbsp;&nbsp
-        <div> <input type="submit" value="Filter" /></div>
-
+    <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
+        <input type="text" placeholder="Search.." name="SearchString">
+        <input type="submit" value="Filter" />
         <div id="myDIV" class="container">
             &nbsp;&nbsp;
             <div class="row">
-                <p>Kategorier: </p>
+                <p class="KStyle" >Kategorier: </p>
             </div>
             <div class="row">
-                <p>Fakultet:</p>
+                <p class="fancyKategorier">Fakultet:</p>
+                <select class="filter" name="fakultet">
+                    <option value="0">Vælg Fakultet</option>
+                    @foreach (var item in Model.Faculty)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
             </div>
             <div class="row">
-                <p>Studieretning:</p>
+                <p class="fancyKategorier">Studieretning:</p>
+                <select class="filter" name="studieretning">
+                    <option value="0">Vælg Studieretning</option>
+                    @foreach (var item in Model.Programme)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
             </div>
             <div class="row">
-                <select name="semester">
+                <p class="fancyKategorier">Semester:</p> 
+                <select class="filter" name="semester">
                     <option value="0">Vælg Semester</option>
                     <option value="1">1. Semester</option>
                     <option value="2">2. Semester</option>
@@ -36,9 +52,10 @@
                 </select>
             </div>
             <div class="row">
-                <select name="Fag">
+                <p class="fancyKategorier">Fag:</p>
+                <select class="filter" name="Fag">
                     <option value="0">Vælg Fag</option>
-                    @foreach (var item in Model.Subject)
+                    @foreach (var item in Model.Courses)
                     {
                         <option>
                             @item
@@ -48,8 +65,12 @@
             </div>
         </div>
     </form>
-    <button onclick="myFunction()">trekant</button>
+    @*<button class="Trekant" onclick="myFunction()"></button>*@
+    <img class="Trekant" id="triangle" src="~/Pictures/Image-Source-PlusPNG.com.png" width="20" onclick="myFunction(),rotateTriangle()"/>
 </div>
+
+
+<hr style="background-color:#278CCA">
 
 <table class="table">
     <thead>

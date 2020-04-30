@@ -20,17 +20,29 @@ namespace StudievenDK.Controllers
         }
 
         // GET: Mainlist
-        public async Task<IActionResult> Index(string searchString, string Text, string Subject)
+        public async Task<IActionResult> Index(string searchString, string Subject, string Course, string Programme, string faculty)
         {
             var vm = new MainlistViewModel();
 
-            var Case = from s in _context.Case
-                select s;
+            var Case = from s in _context.Cases
+                       select s;
 
-            var fagQuery = from s in _context.Case
+            var subjectQuery= from s in _context.Cases
                 select s.Subject;
 
-            vm.Subject = await fagQuery.ToListAsync();
+            var fagQuery = from s in _context.Course
+                           select s.CourseName;
+
+            var programmeQuery = from s in _context.Programmes
+                                 select s.ProgrammeName;
+
+            var facultyQuery = from s in _context.Faculties
+                               select s.FacultyName;
+
+            vm.Subject = await subjectQuery.ToListAsync();
+            vm.Courses = await fagQuery.ToListAsync();
+            vm.Programme = await programmeQuery.ToListAsync();
+            vm.Faculty = await facultyQuery.ToListAsync();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -38,14 +50,29 @@ namespace StudievenDK.Controllers
                                          || s.Text.Contains(searchString));
             }
 
-            if (Text != null)
+            //if (Text != null)
+            //{
+            //    Case = Case.Where(s => s.Text.Equals(Text));
+            //}
+
+            if(faculty!=null)
             {
-                Case = Case.Where(s => s.Text.Equals(Text));
+                Case = Case.Where(s => s.Subject.Equals(faculty));
+            }
+
+            if(Programme!=null)
+            {
+                Case = Case.Where(s => s.Subject.Equals(Programme));
             }
 
             if (Subject != null)
             {
                 Case = Case.Where(s=>s.Subject.Equals(Subject));
+            }
+
+            if(Course!=null)
+            {
+                Case = Case.Where(s => s.Course.Equals(Course));
             }
 
             vm.Cases = await Case.ToListAsync();
@@ -60,7 +87,7 @@ namespace StudievenDK.Controllers
                 return NotFound();
             }
 
-            var @case = await _context.Case
+            var @case = await _context.Cases
                 .FirstOrDefaultAsync(m => m.CaseId == id);
             if (@case == null)
             {
@@ -100,7 +127,7 @@ namespace StudievenDK.Controllers
                 return NotFound();
             }
 
-            var @case = await _context.Case.FindAsync(id);
+            var @case = await _context.Cases.FindAsync(id);
             if (@case == null)
             {
                 return NotFound();
@@ -151,7 +178,7 @@ namespace StudievenDK.Controllers
                 return NotFound();
             }
 
-            var @case = await _context.Case
+            var @case = await _context.Cases
                 .FirstOrDefaultAsync(m => m.CaseId == id);
             if (@case == null)
             {
@@ -166,15 +193,15 @@ namespace StudievenDK.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @case = await _context.Case.FindAsync(id);
-            _context.Case.Remove(@case);
+            var @case = await _context.Cases.FindAsync(id);
+            _context.Cases.Remove(@case);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CaseExists(int id)
         {
-            return _context.Case.Any(e => e.CaseId == id);
+            return _context.Cases.Any(e => e.CaseId == id);
         }
     }
 }
