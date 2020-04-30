@@ -3,58 +3,61 @@
 @{
     ViewData["Title"] = "Edit";
 }
-    <link href="~/css/CaseLayout.css" rel="stylesheet" />
-<h1>Edit</h1>
+    <head>
+        <link href="~/css/CaseLayout.css" rel="stylesheet" />
+    </head>
 
-<h4>Case</h4>
-<hr />
+<h1 class="col-12">Rediger sag</h1>
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CaseId" />
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
+            <div class="col-10">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CaseId" />
+                <div class="form-group">
+                    <label class="control-label">Emne</label>
+                    <input asp-for="Subject" class="form-control inputBoxes" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Beskrivelse</label>
+                    <textarea asp-for="Text" class="form-control textboxTextCase inputBoxes"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Picture" class="control-label"></label>
+                    <br />
+                    <input asp-for="Picture" accept="Image/*" />
+                    <span asp-validation-for="Picture" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Fag</label>
+                    <br />
+                    <select asp-for="CourseName_fk" class="form-control inputBoxes" asp-items="ViewBag.CourseName_fk"></select>
+                </div>
+                <div>
+                    <div class="form-group">
+
+                        <label asp-for="Deadline" class="control-label">Vælg deadline</label>
+                        <input asp-for="Deadline" class="form-control" />
+                        @*<span asp-validation-for="DateTime" class="text-danger"></span>*@
+
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="UserHelper_fk" class="control-label"></label>
-                <select asp-for="UserHelper_fk" class="form-control" asp-items="ViewBag.UserHelper_fk"></select>
-                <span asp-validation-for="UserHelper_fk" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserSeeker_fk" class="control-label"></label>
-                <select asp-for="UserSeeker_fk" class="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
-                <span asp-validation-for="UserSeeker_fk" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="CourseName_fk" class="control-label"></label>
-                <select asp-for="CourseName_fk" class="form-control" asp-items="ViewBag.CourseName_fk"></select>
-                <span asp-validation-for="CourseName_fk" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PictureName" class="control-label"></label>
-                <input asp-for="PictureName" class="form-control" />
-                <span asp-validation-for="PictureName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="col-2">
+                <div class="form-group">
+                    <input type="submit" value="Gem" class="CaseBtn" />
+                </div>
+                <div>
+                    <a class="CaseBtn" asp-action="Index">Fortryd</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">
-        <button label="back to own cases" class="CaseBtn">Tilbage til Egne sager</button>
-    </a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
