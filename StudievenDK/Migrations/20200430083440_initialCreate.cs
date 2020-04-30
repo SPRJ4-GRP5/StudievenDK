@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudievenDK.Migrations
 {
-    public partial class initcreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,7 +234,6 @@ namespace StudievenDK.Migrations
                     Text = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
                     Deadline = table.Column<DateTime>(nullable: false),
-                    CaseIsDone = table.Column<bool>(nullable: false),
                     UserHelper_fk = table.Column<string>(nullable: true),
                     UserSeeker_fk = table.Column<string>(nullable: true),
                     CourseName_fk = table.Column<string>(nullable: true),
@@ -355,14 +354,14 @@ namespace StudievenDK.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cases",
-                columns: new[] { "CaseId", "CaseIsDone", "CourseName_fk", "Deadline", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
+                columns: new[] { "CaseId", "CourseName_fk", "Deadline", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
                 values: new object[,]
                 {
-                    { 3, false, "ISU", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
-                    { 1, false, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
-                    { 4, false, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
-                    { 5, false, "GUI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
-                    { 2, false, "DAB", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                    { 3, "ISU", new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
                 });
 
             migrationBuilder.InsertData(

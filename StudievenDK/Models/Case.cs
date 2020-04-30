@@ -26,7 +26,7 @@ namespace StudievenDK.Models
         public User UserSeeker { get; set; }
         public Course Course { get; set; }
 
-        [DisplayName("Filnavn")]
+        [DisplayName("Billede")]
         public string PictureName { get; set; }
 
         [NotMapped]
