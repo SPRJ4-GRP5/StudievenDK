@@ -9,7 +9,7 @@
 }
     <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Egne Sager</h1>
-<div class="col-3 master" select="@item.CaseId">
+<div class="col-3 master">
         @foreach (var item in Model)
         {
             <div class="master-item" onclick="select(this)" data-id="@item.CaseId">
