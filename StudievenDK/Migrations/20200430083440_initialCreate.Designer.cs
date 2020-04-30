@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200430082416_case")]
-    partial class @case
+    [Migration("20200430083440_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,9 +228,6 @@ namespace StudievenDK.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("CaseIsDone")
-                        .HasColumnType("bit");
-
                     b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
@@ -266,9 +263,8 @@ namespace StudievenDK.Migrations
                         new
                         {
                             CaseId = 1,
-                            CaseIsDone = false,
                             CourseName_fk = "GUI",
-                            Deadline = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Deadline = new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "Hjaelp?",
                             Text = "Jeg har brug for hjaelp",
                             UserHelper_fk = "Alexander@Studieven.dk",
@@ -277,9 +273,8 @@ namespace StudievenDK.Migrations
                         new
                         {
                             CaseId = 2,
-                            CaseIsDone = false,
                             CourseName_fk = "DAB",
-                            Deadline = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Deadline = new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "EF core",
                             Text = "Jeg skal bruge hjaelp til DAB",
                             UserHelper_fk = "Thanh@Studieven.dk",
@@ -288,9 +283,8 @@ namespace StudievenDK.Migrations
                         new
                         {
                             CaseId = 3,
-                            CaseIsDone = false,
                             CourseName_fk = "ISU",
-                            Deadline = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Deadline = new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "threads",
                             Text = "hvordan opretter man en traad?",
                             UserHelper_fk = "Trang@Studieven.dk",
@@ -299,9 +293,8 @@ namespace StudievenDK.Migrations
                         new
                         {
                             CaseId = 4,
-                            CaseIsDone = false,
                             CourseName_fk = "GUI",
-                            Deadline = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Deadline = new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "user interface",
                             Text = "observer pattern - forklar lige det paa en knap",
                             UserHelper_fk = "Randi@Studieven.dk",
@@ -310,9 +303,8 @@ namespace StudievenDK.Migrations
                         new
                         {
                             CaseId = 5,
-                            CaseIsDone = false,
                             CourseName_fk = "GUI",
-                            Deadline = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Deadline = new DateTime(2020, 4, 30, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "fare paa knap",
                             Text = "hvordan laver jeg farven gul paa en knap",
                             UserHelper_fk = "Nikolaj@Studieven.dk",
