@@ -13,7 +13,6 @@
     @foreach (var item in Model)
     {
         <div class="master-item" onclick="select(this)" data-id="@item.CaseId">
-            @*@Html.DisplayFor(modelItem => item.Subject)*@
             @item.Subject
 
         </div>
@@ -45,38 +44,13 @@
             <button label="Edit case" class="CaseBtn">Rediger sag</button>
         </a>
     </form>
-    <br /> <br />
-
+    <br />
     <form asp-action="Delete" asp-controller="Cases" method="get">
         <input type="hidden" name="id" id="Delete-Id"/>
         <a asp-action="Delete">
             <button label="Delete case" class="CaseBtn">Slet sag</button>
         </a>
     </form>
-
-
-    @*<div asp-action="Delete" asp-route-id="@Model.GetEnumerator().Current.CaseId">
-        <a label="Delete case" class="btns">Slet</a>
-    </div>*@
-
-    @*<div class="col-2">
-            <div class="form-group">
-                <input type="submit" value="Opret" class="CaseBtn" />
-            </div>
-            <div>
-                <a class="CaseBtn" asp-action="Index">Fortryd</a>
-            </div>
-        </div>*@
-
-    @*<div>
-            <a class="CaseBtn" asp-action="Delete">Slet sag</a>
-            <input type="hidden" asp-for="@Model.GetEnumerator().Current.CaseId" />
-            <input type="submit" value="Delete" class="btn btn-danger" />
-        </div>*@
-
-    @*<a asp-action="Delete">
-            <button class="CaseBtn">Slet sag</button>
-        </a>*@
 </div>
 
 <table class="table">
