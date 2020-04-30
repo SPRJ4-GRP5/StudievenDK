@@ -16,7 +16,7 @@ namespace StudievenDK.Models
         public string Text { get; set; }
         public string Subject { get; set; }
         public DateTime Deadline { get; set; }
-        public bool CaseIsDone { get; set; }
+        //public bool CaseIsDone { get; set; }
 
         public string UserHelper_fk { get; set; }
         public string UserSeeker_fk { get; set; }
