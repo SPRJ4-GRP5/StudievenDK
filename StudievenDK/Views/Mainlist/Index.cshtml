@@ -1,4 +1,5 @@
 ﻿@model StudievenDK.Controllers.MainlistViewModel
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -18,7 +19,7 @@
                 <p class="fancyKategorier">Fakultet:</p>
                 <select class="filter" name="fakultet">
                     <option value="0">Vælg Fakultet</option>
-                    @foreach (var item in Model.Faculty)
+                    @foreach (var item in Model.Faculties)
                     {
                         <option>
                             @item
@@ -30,7 +31,7 @@
                 <p class="fancyKategorier">Studieretning:</p>
                 <select class="filter" name="studieretning">
                     <option value="0">Vælg Studieretning</option>
-                    @foreach (var item in Model.Programme)
+                    @foreach (var item in Model.Programmes)
                     {
                         <option>
                             @item
@@ -72,35 +73,82 @@
 
 <hr style="background-color:#278CCA">
 
-<table class="table">
+<div id="CasePreviews">
+@foreach (var item in Model.Cases)
+{
+    <div id="CaseContent" style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px"> @* Virkede ikke i CSS, hjælp Poul *@
+        <div id="Caseheader">
+            @Html.DisplayFor(modelItem => item.Subject)
+        </div>
+        <div class="row">
+            <div class="collum">
+                Science & Technology
+            </div>
+            <div class="collum">
+                Softwareteknologi
+            </div>
+            <div class="collum">
+                4. Semester
+            </div>
+            <div class="collum">
+                @Html.DisplayFor(modelItem => item.CourseName_fk)
+            </div>
+        </div>
+        
+    </div>
+}
+</div>
+
+
+
+@*<table class="table">
     <thead>
-        <tr>
-            <th>
-                Subject
-            </th>
-            <th>
-                Text
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Subject
+        </th>
+        <th>
+            Faculty
+        </th>
+        <th>
+            Programe
+        </th>
+        <th>
+            Term
+        </th>
+        <th>
+            Course
+        </th>
+    </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model.Cases)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
-                </td>
-            </tr>
+        <tr style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px">  Virkede ikke i CSS, hjælp Poul 
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+
+            <td>
+                Science & Technology
+            </td>
+            <td>
+                Softwareteknologi
+            </td>
+            <td>
+                4. Semester
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName_fk)
+            </td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
+        </td>
+        </tr>
         }
     </tbody>
-</table>
+</table>*@
 

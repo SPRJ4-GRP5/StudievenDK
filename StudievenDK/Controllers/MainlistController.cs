@@ -22,6 +22,7 @@ namespace StudievenDK.Controllers
         // GET: Mainlist
         public async Task<IActionResult> Index(string searchString, string Subject, string Course, string Programme, string faculty)
         {
+            
             var vm = new MainlistViewModel();
 
             var Case = from s in _context.Cases
@@ -39,21 +40,16 @@ namespace StudievenDK.Controllers
             var facultyQuery = from s in _context.Faculties
                                select s.FacultyName;
 
-            vm.Subject = await subjectQuery.ToListAsync();
+            vm.Subjects = await subjectQuery.ToListAsync();
             vm.Courses = await fagQuery.ToListAsync();
-            vm.Programme = await programmeQuery.ToListAsync();
-            vm.Faculty = await facultyQuery.ToListAsync();
+            vm.Programmes = await programmeQuery.ToListAsync();
+            vm.Faculties = await facultyQuery.ToListAsync();
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 Case = Case.Where(s => s.Subject.Contains(searchString)
                                          || s.Text.Contains(searchString));
             }
-
-            //if (Text != null)
-            //{
-            //    Case = Case.Where(s => s.Text.Equals(Text));
-            //}
 
             if(faculty!=null)
             {
