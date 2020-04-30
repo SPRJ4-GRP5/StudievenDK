@@ -44,17 +44,16 @@
         <a asp-action="Edit">
             <button label="Edit case" class="CaseBtn">Rediger sag</button>
         </a>
-
-
     </form>
     <br /> <br />
 
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="@Model.GetEnumerator().Current.CaseId" />
-        <input type="submit" value="Delete" class="CaseBtn" /> |
-
+    <form asp-action="Delete" asp-controller="Cases" method="get">
+        <input type="hidden" name="id" id="Delete-Id"/>
+        <a asp-action="Delete">
+            <button label="Delete case" class="CaseBtn">Slet sag</button>
+        </a>
     </form>
+
 
     @*<div asp-action="Delete" asp-route-id="@Model.GetEnumerator().Current.CaseId">
         <a label="Delete case" class="btns">Slet</a>

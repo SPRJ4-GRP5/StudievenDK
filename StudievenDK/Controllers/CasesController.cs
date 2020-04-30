@@ -152,9 +152,9 @@ namespace StudievenDK.Controllers
         }
 
         // GET: Cases/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(EditDTO delete)
         {
-            if (id == null)
+            if (delete.id == null)
             {
                 return NotFound();
             }
@@ -163,7 +163,7 @@ namespace StudievenDK.Controllers
                 //.Include(@ => @.Course)
                 //.Include(@ => @.UserHelper)
                 //.Include(@ => @.UserSeeker)
-                .FirstOrDefaultAsync(m => m.CaseId == id);
+                .FirstOrDefaultAsync(m => m.CaseId == delete.id);
             if (_case == null)
             {
                 return NotFound();
@@ -175,12 +175,12 @@ namespace StudievenDK.Controllers
         // POST: Cases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Case _case)
         {
-            var _case = await _context.Cases.FindAsync(id);
-            _context.Cases.Remove(_case);
+            var temp_case = await _context.Cases.FindAsync(_case.CaseId);
+            _context.Cases.Remove(temp_case);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         private bool CaseExists(int id)

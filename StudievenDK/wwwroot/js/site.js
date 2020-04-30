@@ -17,5 +17,8 @@ function select(selected) {
 
     let id = selected.getAttribute('data-id');
     let el = document.getElementById('Edit-Id');
-    el.value = id; 
+    el.value = id;
+
+    let deleteID = document.getElementById('Delete-Id');
+    deleteID.value = id; 
 }
