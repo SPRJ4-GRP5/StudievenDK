@@ -27,7 +27,8 @@ namespace StudievenDK.Controllers
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.Cases.Include(@ => @.Course).Include(@ => @.UserHelper).Include(@ => @.UserSeeker);
-            return View(await _context.Cases.ToListAsync());
+            var CaseList = await _context.Cases.ToListAsync();
+            return View(CaseList);
             //applicationDbContext.ToListAsync()
         }
 
@@ -107,6 +108,17 @@ namespace StudievenDK.Controllers
             }
 
             var _case = await _context.Cases.FindAsync(edit.id);
+            //sætter default til den første i listen a cases
+            if (edit.id == 0)
+            {
+                edit = new EditDTO()
+                {
+                    id = 1
+                };
+            }
+            _case = await _context.Cases.FindAsync(edit.id);
+
+
             if (_case == null)
             {
                 return NotFound();
@@ -164,6 +176,14 @@ namespace StudievenDK.Controllers
                 //.Include(@ => @.UserHelper)
                 //.Include(@ => @.UserSeeker)
                 .FirstOrDefaultAsync(m => m.CaseId == delete.id);
+            if (delete.id == 0)
+            {
+                delete = new EditDTO()
+                {
+                    id = 1
+                };
+            }
+            _case = await _context.Cases.FindAsync(delete.id);
             if (_case == null)
             {
                 return NotFound();
