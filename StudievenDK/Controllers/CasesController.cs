@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -27,8 +28,8 @@ namespace StudievenDK.Controllers
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.Cases.Include(@ => @.Course).Include(@ => @.UserHelper).Include(@ => @.UserSeeker);
-            var CaseList = await _context.Cases.ToListAsync();
-            return View(CaseList);
+            var _caseList = await _context.Cases.ToListAsync();
+            return View(_caseList);
             //applicationDbContext.ToListAsync()
         }
 
