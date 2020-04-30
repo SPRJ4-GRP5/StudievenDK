@@ -1,4 +1,7 @@
-﻿@using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View
+﻿@using System.Linq
+@using Microsoft.EntityFrameworkCore.Internal
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View
 @model IEnumerable<StudievenDK.Models.Case>
 
 @{
@@ -6,7 +9,6 @@
 }
     <link href="~/css/CaseLayout.css" rel="stylesheet" />
 <h1>Egne Sager</h1>
-
 <div class="col-3 master">
     @foreach (var item in Model)
     {
@@ -29,15 +31,22 @@
         </p>
     </div>
 </div>
-<div class="col-2 detail">
-    <a asp-action="Edit">
-        <button label="Edit case" class="CaseBtn">Rediger sag</button>
-    </a>
-        <br/> <br/>
-        <a asp-action="Delete">
-            <button class="CaseBtn">Slet sag</button>
+<div class="col-2 detail" >
+    <p>
+        <a asp-action="Create">
+            <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
         </a>
     </p>
+    <form asp-action="Edit" asp-controller="Cases">
+        @*<select asp-for="" asp-items="Model"></select>*@
+        <a asp-action="Edit">
+            <button label="Edit case" class="CaseBtn">Rediger sag</button>
+        </a>
+    </form>
+    <br/> <br/>
+    <a asp-action="Delete">
+        <button class="CaseBtn">Slet sag</button>
+    </a>
 </div>
 
 <table class="table">
