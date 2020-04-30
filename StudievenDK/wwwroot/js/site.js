@@ -15,4 +15,7 @@ function select(selected) {
     //Set the content of the detail to the innerHTML of the selected item
     detailTitle.innerHTML = selected.innerHTML;
 
+    let id = selected.getAttribute('data-id');
+    let el = document.getElementById('Edit-Id');
+    el.value = id; 
 }

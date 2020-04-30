@@ -12,8 +12,10 @@
 <div class="col-3 master">
     @foreach (var item in Model)
     {
-        <div class="master-item" onclick="select(this)">
-            @Html.DisplayFor(modelItem => item.Subject)
+        <div class="master-item" onclick="select(this)" data-id="@item.CaseId">
+            @*@Html.DisplayFor(modelItem => item.Subject)*@
+            @item.Subject
+
         </div>
     }
 </div>
@@ -37,11 +39,13 @@
             <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
         </a>
     </p>
-    <form asp-action="Edit" asp-controller="Cases">
-        @*<select asp-for="" asp-items="Model"></select>*@
+    <form asp-action="Edit" asp-controller="Cases" method="get">
+        <input type="hidden" name="id" id="Edit-Id"/>
         <a asp-action="Edit">
             <button label="Edit case" class="CaseBtn">Rediger sag</button>
         </a>
+
+
     </form>
     <br/> <br/>
     <a asp-action="Delete">
