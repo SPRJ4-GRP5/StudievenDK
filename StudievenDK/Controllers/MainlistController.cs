@@ -24,7 +24,7 @@ namespace StudievenDK.Controllers
         {
             var vm = new MainlistViewModel();
 
-            var Case = from s in _context.Cases
+            var cases = from s in _context.Cases
                        select s;
 
             var subjectQuery= from s in _context.Cases
@@ -46,7 +46,7 @@ namespace StudievenDK.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                Case = Case.Where(s => s.Subject.Contains(searchString)
+                cases = cases.Where(s => s.Subject.Contains(searchString)
                                          || s.Text.Contains(searchString));
             }
 
@@ -57,25 +57,25 @@ namespace StudievenDK.Controllers
 
             if(faculty!=null)
             {
-                Case = Case.Where(s => s.Subject.Equals(faculty));
+                cases = cases.Where(s => s.Subject.Equals(faculty));
             }
 
             if(Programme!=null)
             {
-                Case = Case.Where(s => s.Subject.Equals(Programme));
+                cases = cases.Where(s => s.Subject.Equals(Programme));
             }
 
             if (Subject != null)
             {
-                Case = Case.Where(s=>s.Subject.Equals(Subject));
+                cases = cases.Where(s=>s.Subject.Equals(Subject));
             }
 
             if(Course!=null)
             {
-                Case = Case.Where(s => s.Course.Equals(Course));
+                cases = cases.Where(s => s.Course.Equals(Course));
             }
 
-            vm.Cases = await Case.ToListAsync();
+            vm.Cases = await cases.ToListAsync();
             return View(vm);
         }
 
