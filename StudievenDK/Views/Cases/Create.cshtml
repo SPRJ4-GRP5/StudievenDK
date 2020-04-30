@@ -24,14 +24,6 @@
                     <textarea asp-for="Text" class="form-control textboxTextCase inputBoxes"></textarea>
                     <span asp-validation-for="Text" class="text-danger"></span>
                 </div>
-                @*<div class="form-group">
-            <label asp-for="UserHelper_fk" class="control-label"></label>
-            <select asp-for="UserHelper_fk" class="form-control" asp-items="ViewBag.UserHelper_fk"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserSeeker_fk" class="control-label"></label>
-            <select asp-for="UserSeeker_fk" class="form-control" asp-items="ViewBag.UserSeeker_fk"></select>
-        </div>*@
                 <div class="form-group">
                     <label asp-for="Picture" class="control-label"></label>
                     <br />
@@ -47,17 +39,12 @@
                     <div class="form-group">
                         
                         <label asp-for="Deadline" class="control-label">Vælg deadline</label>
-                        <input asp-for="Deadline" class="form-control"/>
+                        <input asp-for="Deadline" class="form-control inputBoxes"/>
                         @*<span asp-validation-for="DateTime" class="text-danger"></span>*@
                         
                     </div>
                 </div>
                 <br />
-                @*<div class="form-group">
-            <label asp-for="PictureName" class="control-label"></label>
-            <input asp-for="PictureName" class="form-control" />
-            <span asp-validation-for="PictureName" class="text-danger"></span>
-        </div>*@
             </div>
             <div class="col-2">
                 <div class="form-group">
