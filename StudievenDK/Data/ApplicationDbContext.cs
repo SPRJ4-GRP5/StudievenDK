@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StudievenDK.Models.Login;
 
 namespace StudievenDK.Data
 {
@@ -13,32 +14,12 @@ namespace StudievenDK.Data
         {
         }
 
+        public DbSet<ApplicationUser> MApplicationUsers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            base.OnModelCreating(modelBuilder);
         }
+
     }
 }
