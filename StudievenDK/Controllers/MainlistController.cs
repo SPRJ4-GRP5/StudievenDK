@@ -25,8 +25,12 @@ namespace StudievenDK.Controllers
             
             var vm = new MainlistViewModel();
 
-            var cases = from s in _context.Cases
-                       select s;
+            //var cases = from s in _context.Cases
+            //           select s;
+
+            var cases2 = _context.Cases.Include(c => c.Course).ThenInclude(c => c.Faculty);
+            //2 led
+            //in-direkte reference 
 
             var subjectQuery= from s in _context.Cases
                 select s.Subject;
@@ -44,33 +48,58 @@ namespace StudievenDK.Controllers
             vm.Courses = await fagQuery.ToListAsync();
             vm.Programmes = await programmeQuery.ToListAsync();
             vm.Faculties = await facultyQuery.ToListAsync();
+            IQueryable<Case> cases=null;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                cases = cases.Where(s => s.Subject.Contains(searchString)
+                cases = cases2.Where(s => s.Subject.Contains(searchString)
                                          || s.Text.Contains(searchString));
             }
 
             if(faculty!=null)
             {
+                if(cases==null)
+                {
+                    cases = cases2.Where(s => s.Subject.Equals(faculty));
+                }
+                else
                 cases = cases.Where(s => s.Subject.Equals(faculty));
             }
 
             if(Programme!=null)
             {
+                if(cases==null)
+                {
+                    cases = cases2.Where(s => s.Subject.Equals(Programme));
+                }
+                else
                 cases = cases.Where(s => s.Subject.Equals(Programme));
             }
 
             if (Subject != null)
             {
+                if(cases==null)
+                {
+                    cases = cases2.Where(s => s.Subject.Equals(Subject));
+                }
+                else
                 cases = cases.Where(s=>s.Subject.Equals(Subject));
             }
 
             if(Course!=null)
             {
+                if(cases==null)
+                {
+                    cases = cases2.Where(s => s.Course.Equals(Course));
+                }
+                else
                 cases = cases.Where(s => s.Course.Equals(Course));
             }
 
+            if(cases==null)
+            {
+                cases = cases2;
+            }
             vm.Cases = await cases.ToListAsync();
             return View(vm);
         }

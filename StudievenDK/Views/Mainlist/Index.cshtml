@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Hovedliste</h1>
-
 <div class="navbar">
     <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
         <input type="text" placeholder="Search.." name="SearchString">
@@ -66,7 +64,6 @@
             </div>
         </div>
     </form>
-    @*<button class="Trekant" onclick="myFunction()"></button>*@
     <img class="Trekant" id="triangle" src="~/Pictures/Image-Source-PlusPNG.com.png" width="20" onclick="myFunction(),rotateTriangle()"/>
 </div>
 
@@ -76,22 +73,22 @@
 <div id="CasePreviews">
 @foreach (var item in Model.Cases)
 {
-    <div id="CaseContent" style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px"> @* Virkede ikke i CSS, hjælp Poul *@
+    <div id="CaseContent" style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px">
         <div id="Caseheader">
             @Html.DisplayFor(modelItem => item.Subject)
         </div>
         <div class="row">
             <div class="collum">
-                Science & Technology
+                @Html.DisplayFor(modelItem => item.Course.Faculty.FacultyName)
             </div>
             <div class="collum">
-                Softwareteknologi
+              @*@Html.DisplayFor(modelItem=>item.Course.CourseProgrammes.Where(m=>m.CourseName_fk == item.CourseName_fk).First().ProgrammeName_fk)*@
             </div>
             <div class="collum">
-                4. Semester
+               @Html.DisplayFor(modelItem => item.Course.TermYear_fk). Semester
             </div>
             <div class="collum">
-                @Html.DisplayFor(modelItem => item.CourseName_fk)
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
             </div>
         </div>
         
@@ -99,56 +96,4 @@
 }
 </div>
 
-
-
-@*<table class="table">
-    <thead>
-    <tr>
-        <th>
-            Subject
-        </th>
-        <th>
-            Faculty
-        </th>
-        <th>
-            Programe
-        </th>
-        <th>
-            Term
-        </th>
-        <th>
-            Course
-        </th>
-    </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var item in Model.Cases)
-        {
-        <tr style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px">  Virkede ikke i CSS, hjælp Poul 
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-
-            <td>
-                Science & Technology
-            </td>
-            <td>
-                Softwareteknologi
-            </td>
-            <td>
-                4. Semester
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseName_fk)
-            </td>
-            <td>
-            <a asp-action="Edit" asp-route-id="@item.CaseId">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.CaseId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.CaseId">Delete</a>
-        </td>
-        </tr>
-        }
-    </tbody>
-</table>*@
 
