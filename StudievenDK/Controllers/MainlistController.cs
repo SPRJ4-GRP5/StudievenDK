@@ -76,15 +76,15 @@ namespace StudievenDK.Controllers
                 cases = cases.Where(s => s.Subject.Equals(Programme));
             }
 
-            if (Subject != null)
-            {
-                if(cases==null)
-                {
-                    cases = cases2.Where(s => s.Subject.Equals(Subject));
-                }
-                else
-                cases = cases.Where(s=>s.Subject.Equals(Subject));
-            }
+            //if (Subject != null)
+            //{
+            //    if(cases==null)
+            //    {
+            //        cases = cases2.Where(s => s.Subject.Equals(Subject));
+            //    }
+            //    else
+            //    cases = cases.Where(s=>s.Subject.Equals(Subject));
+            //}
 
             if(Course!=null)
             {

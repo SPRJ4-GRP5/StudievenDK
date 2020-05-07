@@ -52,7 +52,7 @@
             </div>
             <div class="row">
                 <p class="fancyKategorier">Fag:</p>
-                <select class="filter" name="Fag">
+                <select class="filter" name="Course">
                     <option value="0">Vælg Fag</option>
                     @foreach (var item in Model.Courses)
                     {
@@ -81,9 +81,9 @@
             <div class="collum">
                 @Html.DisplayFor(modelItem => item.Course.Faculty.FacultyName)
             </div>
-            <div class="collum">
-              @*@Html.DisplayFor(modelItem=>item.Course.CourseProgrammes.Where(m=>m.CourseName_fk == item.CourseName_fk).First().ProgrammeName_fk)*@
-            </div>
+            @*<div class="collum">
+              @Html.DisplayFor(modelItem=>item.Course.CourseProgrammes.Where(m=>m.CourseName_fk == item.CourseName_fk).First().ProgrammeName_fk)
+            </div>*@
             <div class="collum">
                @Html.DisplayFor(modelItem => item.Course.TermYear_fk). Semester
             </div>
