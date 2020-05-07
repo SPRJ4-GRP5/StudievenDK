@@ -7,7 +7,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <link href="~/css/CaseLayout.css" rel="stylesheet" />
+
+    <head>
+        <link href="~/css/CaseLayout.css" rel="stylesheet" />
+        <script src="https://unpkg.com/vue"></script>
+        <script src="~/js/VueOwnCases.js" asp-append-version="true"></script>
+    </head>
+    
 <h1>Egne Sager</h1>
 <div class="col-3 master">
         @foreach (var item in Model)
@@ -19,6 +25,17 @@
 </div>
 
 <div class="col-7 detail">
+    <div id="app">
+        <p>HEj {{information}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                information: 'This is case information'
+            }
+        });
+    </script>
     <div>
         <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
         <p>
