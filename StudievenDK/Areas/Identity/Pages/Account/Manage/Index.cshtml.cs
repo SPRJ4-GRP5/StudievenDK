@@ -110,7 +110,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account.Manage
             user.ImageFile = Input.ImageFile;
             if (user.ImageFile != null)
             {
-                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", user.imageName);
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", user.ImageName);
                 if (System.IO.File.Exists(imagePath))
                     System.IO.File.Delete(imagePath);
 
@@ -118,7 +118,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account.Manage
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(user.ImageFile.FileName); //name of the file
                 string extension = Path.GetExtension(user.ImageFile.FileName); //example .jpg .png
-                user.imageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; //combine name and filetype and date
+                user.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; //combine name and filetype and date
                 string path = Path.Combine(wwwRootPath + "/login/profilepictures/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {

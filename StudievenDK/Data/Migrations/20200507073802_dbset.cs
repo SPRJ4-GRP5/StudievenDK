@@ -44,7 +44,7 @@ namespace StudievenDK.Data.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "imageName",
+                name: "ImageName",
                 table: "AspNetUsers",
                 type: "nvarchar(100)",
                 nullable: true);
@@ -81,7 +81,7 @@ namespace StudievenDK.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "imageName",
+                name: "ImageName",
                 table: "AspNetUsers");
         }
     }

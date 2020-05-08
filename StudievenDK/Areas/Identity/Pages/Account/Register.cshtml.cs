@@ -146,7 +146,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account
                     FieldOfStudy = Input.FieldOfStudy,
                     Term = Input.Term,
                     //NameOfUser = Input.NameOfUser
-                    //imageName = Input.imageName,
+                    //ImageName = Input.ImageName,
                     ImageFile = Input.ImageFile,
                     Description = "",
                     Faculty = Input.Faculty
@@ -159,7 +159,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account
                     string wwwRootPath = _hostEnvironment.WebRootPath;
                     string fileName = Path.GetFileNameWithoutExtension(user.ImageFile.FileName); //name of the file
                     string extension = Path.GetExtension(user.ImageFile.FileName); //example .jpg .png
-                    user.imageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; //combine name and filetype and date
+                    user.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; //combine name and filetype and date
                     string path = Path.Combine(wwwRootPath + "/login/profilepictures/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {

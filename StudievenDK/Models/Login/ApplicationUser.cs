@@ -42,7 +42,7 @@ namespace StudievenDK.Models.Login
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Image Name")]
-        public string imageName { get; set; }
+        public string ImageName { get; set; }
 
         [NotMapped]
         [DisplayName("Upload File")]

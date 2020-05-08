@@ -253,7 +253,7 @@ namespace StudievenDK.Data.Migrations
                     b.Property<int>("Term")
                         .HasColumnType("int");
 
-                    b.Property<string>("imageName")
+                    b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
