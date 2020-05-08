@@ -12,6 +12,11 @@ namespace StudievenDK.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        public UserController()
+        {
+            
+        }
+
         public UserController(ApplicationDbContext context)
         {
             _context = context;
