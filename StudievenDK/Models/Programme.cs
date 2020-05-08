@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudievenDK.Models
 {
-    public class Term
+    public class Programme
     {
-        [Key]
-        public int TermYear { get; set; }
-        public List<Course> Courses { get; set; }
+        [Key] public string ProgrammeName { get; set; }
+        public List<CourseProgramme> CourseProgrammes { get; set; }
     }
 }
