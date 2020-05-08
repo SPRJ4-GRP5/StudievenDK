@@ -6,7 +6,7 @@
 
 <div class="navbar">
     <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
-        <input type="text" placeholder="Search.." name="SearchString">
+        <input type="text" placeholder="Search.." name="searchString">
         <input type="submit" value="Filter" />
         <div id="myDIV" class="container">
             &nbsp;&nbsp;
@@ -15,7 +15,7 @@
             </div>
             <div class="row">
                 <p class="fancyKategorier">Fakultet:</p>
-                <select class="filter" name="fakultet">
+                <select class="filter" name="Faculty">
                     <option value="0">Vælg Fakultet</option>
                     @foreach (var item in Model.Faculties)
                     {
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <p class="fancyKategorier">Studieretning:</p>
-                <select class="filter" name="studieretning">
+                <select class="filter" name="Programme">
                     <option value="0">Vælg Studieretning</option>
                     @foreach (var item in Model.Programmes)
                     {
@@ -39,15 +39,15 @@
             </div>
             <div class="row">
                 <p class="fancyKategorier">Semester:</p> 
-                <select class="filter" name="semester">
-                    <option value="0">Vælg Semester</option>
-                    <option value="1">1. Semester</option>
-                    <option value="2">2. Semester</option>
-                    <option value="3">3. Semester</option>
-                    <option value="4">4. Semester</option>
-                    <option value="5">5. Semester</option>
-                    <option value="6">6. Semester</option>
-                    <option value="7">7. Semester</option>
+                <select class="filter" name="Term">
+                    <option value=0>Vælg Semester</option>
+                    <option value=1>1. Semester</option>
+                    <option value=2>2. Semester</option>
+                    <option value=3>3. Semester</option>
+                    <option value=4>4. Semester</option>
+                    <option value=5>5. Semester</option>
+                    <option value=6>6. Semester</option>
+                    <option value=7>7. Semester</option>
                 </select>
             </div>
             <div class="row">
@@ -81,9 +81,9 @@
             <div class="collum">
                 @Html.DisplayFor(modelItem => item.Course.Faculty.FacultyName)
             </div>
-            @*<div class="collum">
+            <div class="collum">
               @Html.DisplayFor(modelItem=>item.Course.CourseProgrammes.Where(m=>m.CourseName_fk == item.CourseName_fk).First().ProgrammeName_fk)
-            </div>*@
+            </div>
             <div class="collum">
                @Html.DisplayFor(modelItem => item.Course.TermYear_fk). Semester
             </div>

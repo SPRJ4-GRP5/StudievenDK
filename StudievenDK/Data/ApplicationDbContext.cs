@@ -20,6 +20,7 @@ namespace StudievenDK.Data
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Term> Terms { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<CourseProgramme> CourseProgrammes_ST { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

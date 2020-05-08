@@ -20,7 +20,7 @@ namespace StudievenDK.Controllers
         }
 
         // GET: Mainlist
-        public async Task<IActionResult> Index(string searchString, string Subject, string Course, string Programme, string faculty)
+        public async Task<IActionResult> Index(string searchString, string subject, string programme = "0", string faculty = "0", string course = "0", int term = 0)
         {
             
             var vm = new MainlistViewModel();
@@ -28,7 +28,9 @@ namespace StudievenDK.Controllers
             //var cases = from s in _context.Cases
             //           select s;
 
-            var cases2 = _context.Cases.Include(c => c.Course).ThenInclude(c => c.Faculty);
+            var cases2 = _context.Cases.Include(c => c.Course).ThenInclude(c => c.Faculty)
+                .Include(c => c.Course).ThenInclude(c => c.CourseProgrammes);
+
             //2 led
             //in-direkte reference 
 
@@ -56,51 +58,64 @@ namespace StudievenDK.Controllers
                                          || s.Text.Contains(searchString));
             }
 
-            if(faculty!=null)
+            if(faculty!="0")
             {
                 if(cases==null)
                 {
-                    cases = cases2.Where(s => s.Subject.Equals(faculty));
+                    cases = cases2.Where(c => c.Subject.Equals(faculty));
                 }
                 else
-                cases = cases.Where(s => s.Subject.Equals(faculty));
+                cases = cases.Where(c => c.Subject.Equals(faculty));
             }
 
-            if(Programme!=null)
+            if (term != 0)
+            {
+                if (cases == null)
+                {
+                    cases = cases2.Where(c => c.Course.Term.TermYear.Equals(term));
+                }
+                else
+                    cases = cases.Where(c => c.Course.Term.TermYear.Equals(term));
+            }
+
+            if (course!="0")
             {
                 if(cases==null)
                 {
-                    cases = cases2.Where(s => s.Subject.Equals(Programme));
+                    cases = cases2.Where(s => s.Course.CourseName.Equals(course));
                 }
                 else
-                cases = cases.Where(s => s.Subject.Equals(Programme));
+                cases = cases.Where(s => s.Course.CourseName.Equals(course));
             }
 
-            //if (Subject != null)
-            //{
-            //    if(cases==null)
-            //    {
-            //        cases = cases2.Where(s => s.Subject.Equals(Subject));
-            //    }
-            //    else
-            //    cases = cases.Where(s=>s.Subject.Equals(Subject));
-            //}
-
-            if(Course!=null)
+            if (programme != "0")
             {
-                if(cases==null)
+                List<Case> tempCases = new List<Case>();
+
+                var courseProgrammes = _context.CourseProgrammes_ST.Where(cp => cp.ProgrammeName_fk == programme).Select(cp => cp.CourseName_fk).ToList();
+                foreach (var c in courseProgrammes)
                 {
-                    cases = cases2.Where(s => s.Course.Equals(Course));
+                    tempCases.AddRange(cases.Include(c => c.Course).Where(s => s.Course.CourseName.Equals(c)).ToList());
                 }
-                else
-                cases = cases.Where(s => s.Course.Equals(Course));
-            }
 
-            if(cases==null)
-            {
-                cases = cases2;
+                vm.Cases = tempCases;
+                //if(cases==null)
+                //{
+
+                //    //cases = cases2.Where(c => c.Course.CourseProgrammes.Contains()));
+                //}
+                //else
+                //cases = cases.Where(s => s.Subject.Equals(programme));
             }
-            vm.Cases = await cases.ToListAsync();
+            else
+            {
+                if (cases == null)
+                {
+                    cases = cases2;
+                }
+                vm.Cases = await cases.ToListAsync();
+            }
+ 
             return View(vm);
         }
 
