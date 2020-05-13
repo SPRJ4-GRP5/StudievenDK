@@ -1,10 +1,10 @@
 ﻿
-var app = new Vue({
-    el: '#app',
-    data: {
-        information: 'This is case information'
-    }
-});
+//var app = new Vue({
+//    el: '#app',
+//    data: {
+//        information: 'This is case information'
+//    }
+//});
 
 //new Vue({
 //    el: '#Description',
@@ -15,3 +15,11 @@ var app = new Vue({
 
 //}
 //});
+
+
+new Vue({
+    el: '#app',
+    data: {
+        information: 'hej'
+    }
+});
