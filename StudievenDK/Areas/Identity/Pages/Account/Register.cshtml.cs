@@ -107,10 +107,6 @@ namespace StudievenDK.Areas.Identity.Pages.Account
 
 
             [PersonalData]
-            [Display(Name = "Image name")]
-            public string imageName { get; set; }
-
-            [PersonalData]
             [Display(Name = "Upload file")]
             public IFormFile ImageFile { get; set; }
 

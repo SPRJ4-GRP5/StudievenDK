@@ -8,6 +8,12 @@ using StudievenDK.Models.Login;
 
 namespace StudievenDK.Data
 {
+    public interface IApplicationDbContext
+    {
+        public ApplicationUser MApplicationUsers { get; set; }
+        public User Users { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

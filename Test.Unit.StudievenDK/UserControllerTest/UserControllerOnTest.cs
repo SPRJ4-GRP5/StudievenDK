@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using StudievenDK.Controllers;
 using StudievenDK.Data;
+using StudievenDK.Models;
 using StudievenDK.Models.Login;
 
 
@@ -13,10 +15,14 @@ namespace Test.Unit.StudievenDK.UserControllerTest
     [TestFixture]
     public class UserControllerOnTest
     {
-        public UserControllerOnTest()
-        {
+        protected DbContextOptions<User> ContextOptions { get; }
 
+        public UserControllerOnTest(DbContextOptions<User> contextOptions)
+        {
+            ContextOptions = contextOptions;
         }
+
+
 
         [Test]
         public void Test_Searching_For_A_User()
