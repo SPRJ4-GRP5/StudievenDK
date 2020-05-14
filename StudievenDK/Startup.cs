@@ -12,6 +12,7 @@ using StudievenDK.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudievenDK.Controllers;
 using StudievenDK.Models.Login;
 
 namespace StudievenDK
@@ -38,6 +39,7 @@ namespace StudievenDK
             services.AddRazorPages();
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

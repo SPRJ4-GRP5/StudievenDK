@@ -14,6 +14,7 @@ namespace StudievenDK.Controllers
     {
         private readonly IApplicationDbContext _context;
         private readonly IUserRepository _userRepository;
+        private string statusCode404 = "404";
 
         public UserController(IApplicationDbContext context, IUserRepository userRepository)
         {
@@ -24,11 +25,6 @@ namespace StudievenDK.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string userName)
         {
-            //if (userName == null)
-            //{
-            //    return NotFound();
-            //}
-
             var sUser = await _userRepository.getUser(userName);
 
             if (sUser == null)
@@ -38,8 +34,6 @@ namespace StudievenDK.Controllers
 
             return View(sUser);
         }
-
-
     }
 
     public interface IUserRepository
@@ -54,7 +48,6 @@ namespace StudievenDK.Controllers
         {
             _context = context;
         }
-
 
         public async Task<ApplicationUser> getUser(string userName)
         {

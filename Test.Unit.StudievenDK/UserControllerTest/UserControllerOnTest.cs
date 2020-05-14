@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Moq;
 using NSubstitute;
+using NuGet.Frameworks;
 using NUnit.Framework;
 using StudievenDK.Controllers;
 using StudievenDK.Data;
@@ -48,19 +51,24 @@ namespace Test.Unit.StudievenDK.UserControllerTest
             var test = (ViewResult) response;
 
             Assert.AreEqual(test.Model.ToString(), user.UserName);
-            //Assert.ThaThatt(resp);
-            //Assert.AreEqual(1,1);
-            //Assert.That(response, );
+        }
 
-            //var mockContext = Substitute.For<IApplicationDbContext>();
-            //mockContext.MApplicationUsers.Return
+        [Test]
+        public async Task Test_Searching_For_A_User_Who_Does_Not_Exist()
+        {
 
+            var user = new ApplicationUser()
+            {
+                UserName = "au555555@uni.au.dk"
+            };
 
+            _userRepository.getUser(user.UserName).Returns(user);
 
+            var response = await (_userController.Search("au200000@uni.au.dk"));
+            var test = (IStatusCodeActionResult)response;
 
-            //var controller = new UserController(db);
-            //var result = controller.Search("au555555@uni.au.dk") as ViewResult;
-            //Assert.AreEqual("Search", result.ViewName);
+            Assert.AreEqual(404, test.StatusCode);
+
         }
     }
 }
