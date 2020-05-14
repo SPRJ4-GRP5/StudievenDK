@@ -34,14 +34,13 @@
             <tbody id="list-cases">
                 <tr>
                     <td>
-                        Picture:
                         <img :src="buildUrl(item.pictureName)" asp-append-version="true" height="250px">
                     </td>
                 </tr>
                 <tr>
                     <td>Text: {{item.text}}</td>
                 </tr>
-                <tr>
+                <tr class="aboutTxt">
                     <td>
                         Deadline: {{item.deadline}}
                     </td>
