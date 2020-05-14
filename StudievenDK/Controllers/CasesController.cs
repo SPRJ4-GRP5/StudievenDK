@@ -54,6 +54,40 @@ namespace StudievenDK.Controllers
             return View(_case);
         }
 
+        // GET: Cases/
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Case>>> GetCases()
+        {
+            return await _context.Cases.ToListAsync();
+        }
+
+        // GET: Case/
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Case>> GetCase(EditDTO edit)
+        {
+            var _case = await _context.Cases.FindAsync(edit);
+
+            if (_case == null)
+            {
+                return NotFound();
+            }
+
+            return _case;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Case>> GetCaseInfo(int intId)
+        {
+            var _case = await _context.Cases.FindAsync(intId);
+
+            if (_case == null)
+            {
+                return NotFound();
+            }
+
+            return _case;
+        }
+
         // GET: Cases/Create
         public IActionResult Create()
         {

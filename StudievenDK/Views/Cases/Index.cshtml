@@ -12,40 +12,93 @@
         <link href="~/css/CaseLayout.css" rel="stylesheet" />
         <script src="https://unpkg.com/vue"></script>
         <script src="~/js/VueOwnCases.js" asp-append-version="true"></script>
+        <meta charset="utf-8"/>
+
     </head>
     
 <h1>Egne Sager</h1>
 <div class="col-3 master">
-        @foreach (var item in Model)
-        {
-            <div class="master-item" onclick="select(this)" data-id="@item.CaseId">
-                @item.Subject
-            </div>
-        }
+    @foreach (var item in Model)
+    {
+        <div class="master-item" onclick="select(this)" data-id="@item.CaseId" id="get-caseId">
+            @item.Subject
+        </div>
+    }
 </div>
+
+<script>
+    //var url = '/Cases';
+    document.getElementById('get-caseId').addEventListener('click', getCase);
+
+    async function getCase(CaseObject) {
+        //let caseId = CaseObject.currentTarget.getAttribute('data-id').value;
+        let caseId = this.dataset.id;
+        let container = document.getElementById('list-cases');
+        let cases = await get(`/Cases/GetCaseInfo/${caseId}`);
+        for (let info of cases) {
+            let row = document.createElement("tr");
+            let str = `<tr><td>${info.Subject}</td>`;
+            if (info.Text) {
+                str += `<td>${info.Text}</td>`;
+            }   
+                    
+            str += `<td>${info.picture}`;
+            str += `</tr>`;
+            row.innerHTML = str;
+            container.appendChild(row);
+                
+        }
+    }
+
+    // fetch call
+    async function get(urls) {
+        let response = await fetch(urls
+            //,{
+            //    method: 'GET',
+            //    headers: {
+            //        'Content-Type': 'application/json'
+            //    },
+            //    body: JSON.stringify({
+            //        Text: 'Text'
+            //    })
+            //    .then(res => {
+            //        return res.json()
+            //    })
+            //        .then(data => console.log(data))
+            //        .catch(error => console.log('ERROR'))}
+                );
+        return await response.text();
+
+    }
+
+    //new Vue({
+    //    el: '#app',
+    //    data: {
+    //        information: data
+    //    }
+    //});
+</script>
 
 <div class="col-7 detail">
     <div id="app">
-        <p>HEj {{information}}</p>
+        <table>
+            <thead>
+            </thead>
+            <tbody id="list-cases">
+            </tbody>
+        </table>
     </div>
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                information: 'This is case information'
-            }
-        });
-    </script>
+
     <div>
         <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
-        <p>
-            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
-            @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br/><br/>
-            @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
-            @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br/><br/>
-            @Html.DisplayNameFor(model => model.Subject)
-            @Html.DisplayFor(model => model.GetEnumerator().Current.Subject)<br/><br/>
-        </p>
+        @*<p>
+                @Html.DisplayNameFor(model => model.GetEnumerator().Current.Picture)
+                @Html.DisplayFor(model => model.GetEnumerator().Current.Picture)<br/><br/>
+                @Html.DisplayNameFor(model => model.GetEnumerator().Current.Text)
+                @Html.DisplayFor(model => model.GetEnumerator().Current.Text)<br/><br/>
+                @Html.DisplayNameFor(model => model.Subject)
+                @Html.DisplayFor(model => model.GetEnumerator().Current.Subject)<br/><br/>
+            </p>*@
     </div>
 </div>
 <div class="col-2 detail">
@@ -68,6 +121,11 @@
         </a>
     </form>
 </div>
+
+@section Scripts
+{
+    <script src="/"></script>
+}
 
 @*<table class="table">
     <thead>
