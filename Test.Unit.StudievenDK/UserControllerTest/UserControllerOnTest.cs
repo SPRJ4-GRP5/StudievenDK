@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using StudievenDK.Controllers;
 using StudievenDK.Data;
@@ -16,22 +19,41 @@ namespace Test.Unit.StudievenDK.UserControllerTest
     [TestFixture]
     public class UserControllerOnTest
     {
-        public UserControllerOnTest()
+        private IApplicationDbContext context;
+        private UserController _userController;
+        private IUserRepository _userRepository;
+
+        [SetUp]
+        public void setup()
         {
+            context = Substitute.For<IApplicationDbContext>();
+            _userRepository = Substitute.For<IUserRepository>();
+            _userController = new UserController(context, _userRepository);
+
         }
 
 
-
         [Test]
-        public void Test_Searching_For_A_User()
+        public async Task Test_Searching_For_A_User()
         {
+
             var user = new ApplicationUser()
             {
                 UserName = "au555555@uni.au.dk"
             };
 
-            var mockContext = new Mock<IApplicationDbContext>();
-            mockContext.Setup(mc => mc.MApplicationUsers).Returns(user);
+            _userRepository.getUser(user.UserName).Returns(user);
+
+            var response = await (_userController.Search("au555555@uni.au.dk"));
+            var test = (ViewResult) response;
+
+            Assert.AreEqual(test.Model.ToString(), user.UserName);
+            //Assert.ThaThatt(resp);
+            //Assert.AreEqual(1,1);
+            //Assert.That(response, );
+
+            //var mockContext = Substitute.For<IApplicationDbContext>();
+            //mockContext.MApplicationUsers.Return
 
 
 

@@ -10,10 +10,11 @@ namespace StudievenDK.Data
 {
     public interface IApplicationDbContext
     {
-        DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<ApplicationUser> MApplicationUsers { get; set; }
 
         int SaveChanges();
+
     }
 
     public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
