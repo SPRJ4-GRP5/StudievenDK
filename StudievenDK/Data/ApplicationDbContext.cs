@@ -10,7 +10,6 @@ namespace StudievenDK.Data
 {
     public interface IApplicationDbContext
     {
-        DbSet<User> Users { get; set; }
         public DbSet<ApplicationUser> MApplicationUsers { get; set; }
 
         int SaveChanges();
@@ -24,6 +23,7 @@ namespace StudievenDK.Data
         }
 
         public virtual DbSet<ApplicationUser> MApplicationUsers { get; set; }
+
         public DbSet<Case> Cases { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Course>Course { get; set; }
