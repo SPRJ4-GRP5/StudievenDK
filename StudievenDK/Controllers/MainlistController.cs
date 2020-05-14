@@ -62,10 +62,10 @@ namespace StudievenDK.Controllers
             {
                 if(cases==null)
                 {
-                    cases = cases2.Where(c => c.Subject.Equals(faculty));
+                    cases = cases2.Include(c => c.Course).Where(c => c.Course.FacultyName_fk.Equals(faculty));
                 }
                 else
-                cases = cases.Where(c => c.Subject.Equals(faculty));
+                cases = cases.Include(c => c.Course).Where(c => c.Course.FacultyName_fk.Equals(faculty));
             }
 
             if (term != 0)
