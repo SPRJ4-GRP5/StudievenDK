@@ -17,13 +17,11 @@
 <div class="col-3 master">
     @foreach(var item in Model)
     {
-        <div class="master-item" data-id="@item.CaseId" ref="get-caseId">
+        <div class="master-item" data-id="@item.CaseId">
             @item.Subject
         </div>
     }
 </div>
-
-
 
 <div class="col-7 detail">
     <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
@@ -34,14 +32,13 @@
             <tbody id="list-cases">
                 <tr>
                     <td>
-                        Picture: 
-                        <img :src="buildUrl(item.pictureName)" asp-append-version="true" height="250px">
+                        <img :src="buildUrl(item.pictureName)" height="340">
                     </td>
                 </tr>
             <tr>
-                <td>Text: {{item.text}}</td>
+                <td>Beskrivelse: {{item.text}}</td>
             </tr>
-            <tr>
+            <tr class="aboutTxt">
                 <td>
                     Deadline: {{item.deadline}}
                 </td>
