@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -18,6 +18,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="NunitXml.TestLogger" Version="2.1.62" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudievenDK\StudievenDK.csproj" />
   </ItemGroup>
 
 </Project>
