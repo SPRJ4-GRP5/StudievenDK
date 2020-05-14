@@ -13,6 +13,7 @@ using StudievenDK.Models;
 
 namespace StudievenDK.Controllers
 {
+    
     public class CasesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -75,10 +76,10 @@ namespace StudievenDK.Controllers
             return _case;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Case>> GetCaseInfo(int intId)
+        [HttpGet]
+        public async Task<ActionResult<Case>> GetCaseInfo(int id)
         {
-            var _case = await _context.Cases.FindAsync(intId);
+            var _case = await _context.Cases.FindAsync(id);
 
             if (_case == null)
             {
