@@ -54,8 +54,14 @@ var vm = new Vue({
 			text: '',
 			deadline: '',
 			courseName_fk: '',
-			picture: Image
+			pictureName: ''
 
 		}
-	}
+	},
+	methods: {
+		buildUrl(url) {
+			return '~/images/' + url;
+		}
+    }
+
 })
