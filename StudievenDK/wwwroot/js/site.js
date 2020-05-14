@@ -27,8 +27,7 @@ function select(selected) {
     let deleteID = document.getElementById('Delete-Id');
     deleteID.value = id;
 
-    get(`/Cases/GetCaseInfo/${id}`); 
-
+    get(`/Cases/GetCaseInfo/${id}`);
 
 }
 
@@ -42,10 +41,12 @@ async function get(urls) {
 		});
 	if (response.ok)
 		vm.item = await response.json();
+
 	else {
 		alert('ERROR' + response.statusText);
 	}
 };
+
 
 var vm = new Vue({
 	el: '#app',
@@ -54,8 +55,14 @@ var vm = new Vue({
 			text: '',
 			deadline: '',
 			courseName_fk: '',
-			picture: Image
+			pictureName: '',
+			picture: ''
 
+		}
+	},
+	methods: {
+		buildUrl(url) {
+			return '/image/' + url;
 		}
 	}
 })
