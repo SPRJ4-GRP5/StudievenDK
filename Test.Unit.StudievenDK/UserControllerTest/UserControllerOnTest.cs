@@ -68,7 +68,6 @@ namespace Test.Unit.StudievenDK.UserControllerTest
             var test = (IStatusCodeActionResult)response;
 
             Assert.AreEqual(404, test.StatusCode);
-
         }
     }
 }
