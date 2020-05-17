@@ -20,7 +20,7 @@ namespace StudievenDK.Controllers
         }
 
         // GET: Mainlist
-        public async Task<IActionResult> Index(string searchString = null, string subject = null, string programme = "0", string faculty = "0", string course = "0", int term = 0)
+        public async Task<IActionResult> Index(string searchString = null, string programme = "0", string faculty = "0", string course = "0", int term = 0)
         {
             var vm = new MainlistViewModel();
 

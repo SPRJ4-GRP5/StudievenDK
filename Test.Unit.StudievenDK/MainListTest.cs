@@ -9,37 +9,121 @@ using StudievenDK.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Assert = NUnit.Framework.Assert;
 using Microsoft.VisualBasic.CompilerServices;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
+using System.Linq;
+using NUnit.Framework.Constraints;
+using System.Threading.Tasks;
 namespace Test.Unit.StudievenDK
 {
-    [TestFixture]
-    public class MainListControllerTest
+    public class MainlistTest
     {
-        private readonly ApplicationDbContext _context;
-        private MainlistController uut;
-        [SetUp]
-        public void Setup()
+        private DbContextOptions<ApplicationDbContext> _options;
+        private SqliteConnection _connection;
+        private MainlistController _uut;
+
+        public MainlistTest()
         {
-            uut = new MainlistController(_context); // make a new instance of mainlistcontroller
+            _connection = new SqliteConnection("DataSource=:memory:");
+            _connection.Open();
+            _options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(_connection).Options;
         }
 
-        [TestMethod]
-        public void TestMainlistIndex()
+        [Test]
+        public void CourseDataIsSeeded()
         {
-               
-            var result = uut.Index() as ViewResult; //invoker controllerens action method
-            Assert.AreEqual("Index", result.);       //checks whether or not th view returns index() action in index view.
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                Assert.IsNotEmpty(context.Course.ToList());
+            }
+        }
+
+        [Test]
+        public async Task GetNoParametersAsync()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index() as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.That(model.Cases.Count().Equals(5));
+            }
+        }
+
+        [Test]
+        public async Task GetSearchString()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp") as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.That(model.Cases.Count().Equals(2));
+            }
+        }
+
+        [Test]
+        public async Task GetSearchStringPlusProgramme()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "IKT", "0", "0", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreEqual(2, model.Cases.Count());
+
+            }
 
         }
 
-        [TestMethod]
-        public void TestMainlistDetails()
+        [Test]
+        public async Task GetSearchStringPlusFaculty()
         {
-            var result = uut.Details(2) as ViewResult; //invoker controllerens action method
-            Assert.AreEqual("Details", result.ViewName);       //checks whether or not th view returns details() action in index view.
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "0", "Technical Sciences", "0", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreEqual(2, model.Cases.Count());
+
+            }
 
         }
 
+        [Test]
+        public async Task GetSearchStringPlusCourse()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "0", "0", "GUI", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreEqual(1, model.Cases.Count());
+
+            }
+
+        }
+
+        [Test]
+        public async Task GetSearchStringPlusTerm()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("Jeg", "0", "0", "0", 4) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreEqual(2, model.Cases.Count());
+
+            }
+
+        }
 
 
 
