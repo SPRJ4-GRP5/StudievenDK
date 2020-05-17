@@ -53,6 +53,19 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
+        public async Task GetNoParametersAsyncIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index() as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
+            }
+        }
+
+        [Test]
         public async Task GetSearchString()
         {
             using (var context = new ApplicationDbContext(_options))
@@ -62,6 +75,19 @@ namespace Test.Unit.StudievenDK
                 var result = await _uut.Index("hjaelp") as ViewResult;
                 var model = result.Model as MainlistViewModel;
                 Assert.That(model.Cases.Count().Equals(2));
+            }
+        }
+
+        [Test]
+        public async Task GetSearchStringIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp") as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
             }
         }
 
@@ -81,6 +107,20 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
+        public async Task GetSearchStringPlusProgrammeIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "IKT", "0", "0", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
+            }
+
+        }
+
+        [Test]
         public async Task GetSearchStringPlusFaculty()
         {
             using (var context = new ApplicationDbContext(_options))
@@ -90,6 +130,21 @@ namespace Test.Unit.StudievenDK
                 var result = await _uut.Index("hjaelp", "0", "Technical Sciences", "0", 0) as ViewResult;
                 var model = result.Model as MainlistViewModel;
                 Assert.AreEqual(2, model.Cases.Count());
+
+            }
+
+        }
+
+        [Test]
+        public async Task GetSearchStringPlusFacultyIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "0", "Technical Sciences", "0", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
 
             }
 
@@ -111,6 +166,21 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
+        public async Task GetSearchStringPlusCourseIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("hjaelp", "0", "0", "GUI", 0) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
+
+            }
+
+        }
+
+        [Test]
         public async Task GetSearchStringPlusTerm()
         {
             using (var context = new ApplicationDbContext(_options))
@@ -125,7 +195,64 @@ namespace Test.Unit.StudievenDK
 
         }
 
+        [Test]
+        public async Task GetSearchStringPlusTermIsNotCorrect()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("Jeg", "0", "0", "0", 4) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
 
+            }
+
+        }
+
+        [Test]
+        public async Task FilterForASpecificCase()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("Jeg har brug for hjaelp", "IKT", "Technical Sciences", "GUI", 4) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreEqual(1, model.Cases.Count());
+
+            }
+
+        }
+
+        [Test]
+        public async Task FilterForASpecificCaseIsNotCorrect()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("Jeg har brug for hjaelp", "IKT", "Technical Sciences", "GUI", 4) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(0, model.Cases.Count());
+
+            }
+
+        }
+
+        [Test]
+        public async Task GetSearchStringPlusTermIsWrong()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureCreated();
+                _uut = new MainlistController(context);
+                var result = await _uut.Index("Jeg", "0", "0", "0", 2) as ViewResult;
+                var model = result.Model as MainlistViewModel;
+                Assert.AreNotEqual(2, model.Cases.Count());
+            }
+
+        }
 
     }
 }
