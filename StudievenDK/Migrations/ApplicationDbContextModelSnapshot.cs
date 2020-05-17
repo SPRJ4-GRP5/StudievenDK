@@ -82,6 +82,10 @@ namespace StudievenDK.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -133,6 +137,8 @@ namespace StudievenDK.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -477,101 +483,6 @@ namespace StudievenDK.Migrations
                         new
                         {
                             ProgrammeName = "Medievidenskab"
-                        });
-                });
-
-            modelBuilder.Entity("StudievenDK.Models.Term", b =>
-                {
-                    b.Property<int>("TermYear")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("TermYear");
-
-                    b.ToTable("Terms");
-
-                    b.HasData(
-                        new
-                        {
-                            TermYear = 1
-                        },
-                        new
-                        {
-                            TermYear = 2
-                        },
-                        new
-                        {
-                            TermYear = 3
-                        },
-                        new
-                        {
-                            TermYear = 4
-                        },
-                        new
-                        {
-                            TermYear = 5
-                        },
-                        new
-                        {
-                            TermYear = 6
-                        },
-                        new
-                        {
-                            TermYear = 7
-                        });
-                });
-
-            modelBuilder.Entity("StudievenDK.Models.User", b =>
-                {
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Email");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Email = "Alexander@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Thanh@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Mads@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Trang@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Nikolaj@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Randi@Studieven.dk",
-                            Password = "admin"
-                        },
-                        new
-                        {
-                            Email = "Jonas@Studieven.dk",
-                            Password = "admin"
                         });
                 });
 
