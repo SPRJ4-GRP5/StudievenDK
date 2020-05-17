@@ -4,15 +4,26 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StudievenDK.Models;
+using StudievenDK.Models.Login;
 
 namespace StudievenDK.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public interface IApplicationDbContext
+    {
+        public DbSet<ApplicationUser> MApplicationUsers { get; set; }
+
+        int SaveChanges();
+
+    }
+
+    public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {   
         }
+
+        public virtual DbSet<ApplicationUser> MApplicationUsers { get; set; }
 
         public DbSet<Case> Cases { get; set; }
         public DbSet<User> Users { get; set; }
