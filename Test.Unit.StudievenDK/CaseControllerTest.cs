@@ -21,7 +21,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test.Unit.StudievenDK
 {
-    class CaseControllerTest
+    public class CaseControllerTest
     {
         private ApplicationDbContext _applicationDbContext;
         private SqliteConnection _connection;
@@ -33,12 +33,12 @@ namespace Test.Unit.StudievenDK
         [SetUp]
         public void Setup()
         {
-            //_applicationDbContext = Substitute.For<ApplicationDbContext>();
             _webHostEnvironment = Substitute.For<IWebHostEnvironment>();
             
             _connection = new SqliteConnection("DataSource=:memory");   // ...
             _connection.Open();
             _options = new DbContextOptions<ApplicationDbContext>().UseSqlite(_connection).Options;
+            _applicationDbContext = new ApplicationDbContext(_options);
 
             _uut = new CasesController(_applicationDbContext, _webHostEnvironment);
         }
@@ -46,9 +46,9 @@ namespace Test.Unit.StudievenDK
         [Test]
         public async Task IndexCase_GetView()
         {
-            using (var context = new ApplicationDbContext(_options))
+            using (var context = _applicationDbContext)
             {
-                var _result = (ViewResult)await _uut.Index();
+                var _result = await _uut.Index() as ViewResult;
 
                 Assert.That(_result.ViewName, Is.EqualTo("Index"));
             }
