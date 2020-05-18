@@ -22,24 +22,22 @@ namespace Test.Unit.StudievenDK.UserControllerTest
     [TestFixture]
     public class UserControllerOnTest
     {
-        private IApplicationDbContext context;
+        private IApplicationDbContext _context;
         private UserController _userController;
         private IUserRepository _userRepository;
 
         [SetUp]
-        public void setup()
+        public void SetUp()
         {
-            context = Substitute.For<IApplicationDbContext>();
+            _context = Substitute.For<IApplicationDbContext>();
             _userRepository = Substitute.For<IUserRepository>();
-            _userController = new UserController(context, _userRepository);
-
+            _userController = new UserController(_context, _userRepository);
         }
 
 
         [Test]
         public async Task Test_Searching_For_A_User()
         {
-
             var user = new ApplicationUser()
             {
                 UserName = "au555555@uni.au.dk"
@@ -56,7 +54,6 @@ namespace Test.Unit.StudievenDK.UserControllerTest
         [Test]
         public async Task Test_Searching_For_A_User_Who_Does_Not_Exist()
         {
-
             var user = new ApplicationUser()
             {
                 UserName = "au555555@uni.au.dk"
@@ -68,7 +65,6 @@ namespace Test.Unit.StudievenDK.UserControllerTest
             var test = (IStatusCodeActionResult)response;
 
             Assert.AreEqual(404, test.StatusCode);
-
         }
     }
 }

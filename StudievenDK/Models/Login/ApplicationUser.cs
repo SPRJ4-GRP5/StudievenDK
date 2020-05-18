@@ -37,7 +37,6 @@ namespace StudievenDK.Models.Login
         [DisplayName("Om mig")]
         public string Description { get; set; }
 
-
         //Image model 
         [Required]
         [Column(TypeName = "nvarchar(100)")]

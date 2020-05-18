@@ -141,8 +141,6 @@ namespace StudievenDK.Areas.Identity.Pages.Account
                     Birthday = Input.Birthday,
                     FieldOfStudy = Input.FieldOfStudy,
                     Term = Input.Term,
-                    //NameOfUser = Input.NameOfUser
-                    //ImageName = Input.ImageName,
                     ImageFile = Input.ImageFile,
                     Description = "",
                     Faculty = Input.Faculty
