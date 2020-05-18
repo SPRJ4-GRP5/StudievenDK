@@ -32,7 +32,36 @@ namespace Test.Unit.StudievenDK
         {
             var _result = await _uut.Index();
 
-            Assert.IsInstanceOf(typeof(CasesController), _uut);
+            var test = (ViewResult) _result;
+
+            Assert.AreEqual(test.Model.ToString(), );
+        }
+
+
+        private List<Case> dummydata()
+        {
+            var _case = new List<Case>();
+            var _course = new Course();
+
+            _case.Add(new Case()
+            {
+                CaseId = 1,
+                Text = "I need help for this button on my interface",
+                Subject = "GUI",
+                Deadline = new DateTime(2020, 5, 27),
+                Course = _course
+            });
+
+            _case.Add(new Case()
+            {
+                CaseId = 1,
+                Text = "What is this thread communication doing",
+                Subject = "ISU",
+                Deadline = new DateTime(2021, 5, 27),
+                Course = _course
+            });
+
+            return _case;
         }
     }
 }
