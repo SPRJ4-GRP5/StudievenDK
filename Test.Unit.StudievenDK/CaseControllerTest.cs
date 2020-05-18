@@ -57,7 +57,7 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
-        public async Task HttepGet_GetCases_AmountOfCases()
+        public async Task HttpGet_GetCases_AmountOfCases()
         {
             await using var context = _applicationDbContext;
             context.Database.EnsureCreated();
@@ -68,6 +68,19 @@ namespace Test.Unit.StudievenDK
             Assert.That(model.Count.Equals(5));
         }
 
+        [TestCase(10)]
+        public async Task HttpGet_GetCaseInfo(int id)
+        {
+            await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
+
+            var result = _uut.GetCaseInfo(id).Result;
+            var model = result.Value as Case;
+
+            Assert.That(model.CaseId, Is.EqualTo(10));
+
+
+        }
 
         //private List<Case> dummydata()
         //{
