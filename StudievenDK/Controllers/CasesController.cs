@@ -285,16 +285,5 @@ namespace StudievenDK.Controllers
 
             return View(_case);
         }
-
-        // POST: Cases/Delete/5
-        [HttpPost, ActionName("LeaveAssignedCase")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LeaveAssignedCaseConfirmed(Case _case)
-        {
-            var temp_case = await _context.Cases.FindAsync(_case.CaseId);
-            _context.Cases.Remove(temp_case);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("AssignedCases");
-        }
     }
 }
