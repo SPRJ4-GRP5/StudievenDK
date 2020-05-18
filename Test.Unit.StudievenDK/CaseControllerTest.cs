@@ -48,6 +48,7 @@ namespace Test.Unit.StudievenDK
         {
             using (var context = _applicationDbContext)
             {
+                context.Database.EnsureCreated();
                 var _result = await _uut.Index() as ViewResult;
 
                 Assert.That(_result.ViewName, Is.EqualTo("Index"));
