@@ -108,6 +108,13 @@ namespace Test.Unit.StudievenDK
 
         [Test]
         public async Task HttpPostEditCase(Case _case)
+        {
+	        
+        }
+
+
+
+
         [Test]
         public async Task AssignedCases_getAmountOfCases()
         {
@@ -126,6 +133,17 @@ namespace Test.Unit.StudievenDK
         {
 	        await using var context = _applicationDbContext;
 	        context.Database.EnsureCreated();
+
+            //var result = await _uut.GetCase(idDto).ConfigureAwait().GetAwaiter().GetResult();
+            //EditDTO tempIdDto = new EditDTO()
+            //{
+            // id = idDto
+            //};
+
+
+            var result = _uut.GetCase(idDto).Result;
+            var model = result.Value as Case;
+            Assert.That(model.CaseId,Is.EqualTo(idDto.id));
         }
 
         [Test]
@@ -140,16 +158,7 @@ namespace Test.Unit.StudievenDK
 
         }
 
-            //var result = await _uut.GetCase(idDto).ConfigureAwait().GetAwaiter().GetResult();
-            //EditDTO tempIdDto = new EditDTO()
-            //{
-	           // id = idDto
-            //};
-
-
-            var result = _uut.GetCase(idDto).Result;
-            var model = result.Value as Case;
-            Assert.That(model.CaseId, Is.EqualTo(idDto.id));
+          
 
         [Test]
         public async Task HttpGet_TestLeaveAssignedCase(EditDTO delete)
