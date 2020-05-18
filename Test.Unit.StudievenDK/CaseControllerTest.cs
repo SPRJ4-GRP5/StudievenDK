@@ -57,30 +57,63 @@ namespace Test.Unit.StudievenDK
         }
 
 
-        private List<Case> dummydata()
+        [Test]
+        public async Task AssignedCases_getAmountOfCases()
         {
-            var _case = new List<Case>();
-            var _course = new Course();
+	        await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
 
-            _case.Add(new Case()
-            {
-                CaseId = 1,
-                Text = "I need help for this button on my interface",
-                Subject = "GUI",
-                Deadline = new DateTime(2020, 5, 27),
-                Course = _course
-            });
+            var result = await _uut.AssignedCases() as ViewResult;
+            var model = result.Model as List<Case>;
 
-            _case.Add(new Case()
-            {
-                CaseId = 2,
-                Text = "What is this thread communication doing",
-                Subject = "ISU",
-                Deadline = new DateTime(2021, 5, 27),
-                Course = _course
-            });
-
-            return _case;
+            Assert.That(model.Count().Equals(5));
         }
+
+
+        [TestCase(2 )]
+        public async Task GetCase_ReturnSpecificCase(EditDTO idDto)
+        {
+	        await using var context = _applicationDbContext;
+	        context.Database.EnsureCreated();
+
+            //var result = await _uut.GetCase(idDto).ConfigureAwait().GetAwaiter().GetResult();
+            //EditDTO tempIdDto = new EditDTO()
+            //{
+	           // id = idDto
+            //};
+
+
+            var result = _uut.GetCase(idDto).Result;
+            var model = result.Value as Case;
+            Assert.That(model.CaseId, Is.EqualTo(idDto.id));
+
+        }
+
+
+        //private List<Case> dummydata()
+        //{
+        //    var _case = new List<Case>();
+        //    var _course = new Course();
+
+        //    _case.Add(new Case()
+        //    {
+        //        CaseId = 1,
+        //        Text = "I need help for this button on my interface",
+        //        Subject = "GUI",
+        //        Deadline = new DateTime(2020, 5, 27),
+        //        Course = _course
+        //    });
+
+        //    _case.Add(new Case()
+        //    {
+        //        CaseId = 2,
+        //        Text = "What is this thread communication doing",
+        //        Subject = "ISU",
+        //        Deadline = new DateTime(2021, 5, 27),
+        //        Course = _course
+        //    });
+
+        //    return _case;
+        //}
     }
 }
