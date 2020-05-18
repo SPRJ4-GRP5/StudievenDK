@@ -15,6 +15,7 @@ using StudievenDK.Models;
 using Assert = NUnit.Framework.Assert;
 using Microsoft.VisualBasic.CompilerServices;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using NUnit.Framework.Constraints;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -47,7 +48,7 @@ namespace Test.Unit.StudievenDK
         [Test]
         public async Task IndexCase_GetAmountOfCases()
         {
-            using var context = _applicationDbContext;
+            await using var context = _applicationDbContext;
             context.Database.EnsureCreated();
 
             var result = await _uut.Index() as ViewResult;
@@ -56,7 +57,57 @@ namespace Test.Unit.StudievenDK
             Assert.That(model.Count().Equals(5));
         }
 
+        [Test]
+        public async Task HttpGet_GetCases_AmountOfCases()
+        {
+            await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
 
+            var result = _uut.GetCases().GetAwaiter().GetResult();
+            var model = result.Value as List<Case>;
+
+            Assert.That(model.Count.Equals(5));
+        }
+
+        [TestCase(5)]
+        public async Task HttpGet_GetCaseInfo(int id)
+        {
+            await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
+
+            var result = _uut.GetCaseInfo(id).Result;
+            var model = result.Value as Case;
+
+            Assert.That(model.CaseId, Is.EqualTo(id));
+        }
+
+        [Test]
+        public void HttpGetCreateCaseView()
+        {
+            var result = _uut.Create();
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public async Task HttpPostCreateCase()
+        {
+
+        }
+
+        [TestCase(1)]
+        public async Task HttpGetEditCase(EditDTO edit)
+        {
+            await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
+
+            var result = _uut.Edit(edit).Result as ViewResult;
+            var test = (IStatusCodeActionResult) result;
+            
+            Assert.AreEqual(200, test.StatusCode);
+        }
+
+        [Test]
+        public async Task HttpPostEditCase(Case _case)
         [Test]
         public async Task AssignedCases_getAmountOfCases()
         {
@@ -75,6 +126,19 @@ namespace Test.Unit.StudievenDK
         {
 	        await using var context = _applicationDbContext;
 	        context.Database.EnsureCreated();
+        }
+
+        [Test]
+        public async Task HttpGetDeleteCase(EditDTO delete)
+        {
+
+        }
+
+        [Test]
+        public async Task HttpPostDeleteCaseConfirmed(Case _case)
+        {
+
+        }
 
             //var result = await _uut.GetCase(idDto).ConfigureAwait().GetAwaiter().GetResult();
             //EditDTO tempIdDto = new EditDTO()
@@ -87,33 +151,10 @@ namespace Test.Unit.StudievenDK
             var model = result.Value as Case;
             Assert.That(model.CaseId, Is.EqualTo(idDto.id));
 
+        [Test]
+        public async Task HttpGet_TestLeaveAssignedCase(EditDTO delete)
+        {
+            
         }
-
-
-        //private List<Case> dummydata()
-        //{
-        //    var _case = new List<Case>();
-        //    var _course = new Course();
-
-        //    _case.Add(new Case()
-        //    {
-        //        CaseId = 1,
-        //        Text = "I need help for this button on my interface",
-        //        Subject = "GUI",
-        //        Deadline = new DateTime(2020, 5, 27),
-        //        Course = _course
-        //    });
-
-        //    _case.Add(new Case()
-        //    {
-        //        CaseId = 2,
-        //        Text = "What is this thread communication doing",
-        //        Subject = "ISU",
-        //        Deadline = new DateTime(2021, 5, 27),
-        //        Course = _course
-        //    });
-
-        //    return _case;
-        //}
     }
 }
