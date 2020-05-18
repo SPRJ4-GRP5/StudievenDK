@@ -18,6 +18,7 @@ using System.Linq;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Routing.Template;
+using Microsoft.CodeAnalysis.Differencing;
 using NUnit.Framework.Constraints;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute.ReceivedExtensions;
@@ -98,16 +99,26 @@ namespace Test.Unit.StudievenDK
 
         }
 
-        [TestCase(1)]
-        public async Task HttpGetEditCase(EditDTO edit)
+        [Test]
+        public async Task HttpGetEditCase()
         {
+            
             await using var context = _applicationDbContext;
             context.Database.EnsureCreated();
 
-            var result = _uut.Edit(edit).Result as ViewResult;
-            var test = (IStatusCodeActionResult) result;
-            
-            Assert.AreEqual(200, test.StatusCode);
+
+            //var result = _uut.Edit(edit).Result as ViewResult;
+            //var test = (IStatusCodeActionResult) result;
+
+            //Assert.AreEqual(200, test.StatusCode);
+
+            EditDTO _edit = new EditDTO();
+
+            var result = _uut.Edit(_edit);
+            var ressss = result.Id;
+
+            Assert.IsTrue();
+
         }
 
         [Test]
