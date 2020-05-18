@@ -37,7 +37,7 @@ namespace Test.Unit.StudievenDK
             
             _connection = new SqliteConnection("DataSource=:memory");   // ...
             _connection.Open();
-            _options = new DbContextOptions<ApplicationDbContext>().UseSqlite(_connection).Options;
+            _options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(_connection).Options;
             _applicationDbContext = new ApplicationDbContext(_options);
 
             _uut = new CasesController(_applicationDbContext, _webHostEnvironment);
