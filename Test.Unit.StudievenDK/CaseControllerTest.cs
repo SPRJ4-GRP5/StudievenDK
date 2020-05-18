@@ -15,6 +15,7 @@ using StudievenDK.Models;
 using Assert = NUnit.Framework.Assert;
 using Microsoft.VisualBasic.CompilerServices;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using NUnit.Framework.Constraints;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -96,7 +97,13 @@ namespace Test.Unit.StudievenDK
         [TestCase(1)]
         public async Task HttpGetEditCase(EditDTO edit)
         {
+            await using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
 
+            var result = _uut.Edit(edit).Result as ViewResult;
+            var test = (IStatusCodeActionResult) result;
+            
+            Assert.AreEqual(200, test.StatusCode);
         }
 
         [Test]
