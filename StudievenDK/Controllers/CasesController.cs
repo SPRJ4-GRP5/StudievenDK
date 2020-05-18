@@ -34,6 +34,13 @@ namespace StudievenDK.Controllers
             //applicationDbContext.ToListAsync()
         }
 
+        //GET: Cases
+        public async Task<IActionResult> AssignedCases()
+        {
+            var _caseList = await _context.Cases.ToListAsync();
+            return View(_caseList);
+        }
+
         // GET: Cases/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -122,9 +129,7 @@ namespace StudievenDK.Controllers
                         await _case.Picture.CopyToAsync(fileStream);
                     }
                 }
-                
-
-                
+  
                 _context.Add(_case);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -202,7 +207,7 @@ namespace StudievenDK.Controllers
         // GET: Cases/Delete/5
         public async Task<IActionResult> Delete(EditDTO delete)
         {
-            if (delete.id == null)
+            if (delete.id == 0)
             {
                 return NotFound();
             }
@@ -228,6 +233,7 @@ namespace StudievenDK.Controllers
             return View(_case);
         }
 
+
         // POST: Cases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -236,12 +242,59 @@ namespace StudievenDK.Controllers
             var temp_case = await _context.Cases.FindAsync(_case.CaseId);
             _context.Cases.Remove(temp_case);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            string link = "https://localhost:44379/Cases/LeaveAssignedCase";
+            int length = link.Length;
+            var previous = Request.Headers["Referer"].ToString();
+            if (previous.Length < length)
+            {
+                return RedirectToAction("Index");             
+            }
+            else
+                return RedirectToAction("AssignedCases");
+
         }
 
         private bool CaseExists(int id)
         {
             return _context.Cases.Any(e => e.CaseId == id);
+        }
+
+        // GET: Cases/LeaveAssignedCase/5
+        public async Task<IActionResult> LeaveAssignedCase(EditDTO delete)
+        {
+            if (delete.id == 0)
+            {
+                return NotFound();
+            }
+
+            var _case = await _context.Cases
+                .FirstOrDefaultAsync(m => m.CaseId == delete.id);
+            if (delete.id == 0)
+            {
+                delete = new EditDTO()
+                {
+                    id = 1
+                };
+            }
+            _case = await _context.Cases.FindAsync(delete.id);
+            if (_case == null)
+            {
+                return NotFound();
+            }
+
+            return View(_case);
+        }
+
+        // POST: Cases/Delete/5
+        [HttpPost, ActionName("LeaveAssignedCase")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LeaveAssignedCaseConfirmed(Case _case)
+        {
+            var temp_case = await _context.Cases.FindAsync(_case.CaseId);
+            _context.Cases.Remove(temp_case);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("AssignedCases");
         }
     }
 }

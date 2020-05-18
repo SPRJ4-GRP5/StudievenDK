@@ -8,23 +8,18 @@
     ViewData["Title"] = "Index";
 }
 
-
-        <link href="~/css/CaseLayout.css" rel="stylesheet" />
-        <script src="https://unpkg.com/vue"></script>
-
+<link href="~/css/CaseLayout.css" rel="stylesheet" />
+<script src="https://unpkg.com/vue"></script>
 
 <h1>Egne Sager</h1>
 <div class="col-3 master">
     @foreach(var item in Model)
     {
-        <div class="master-item" data-id="@item.CaseId" ref="get-caseId">
+        <div class="master-item" data-id="@item.CaseId">
             @item.Subject
         </div>
     }
 </div>
-
-
-
 <div class="col-7 detail">
     <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
     <div id="app">
@@ -34,11 +29,11 @@
             <tbody id="list-cases">
                 <tr>
                     <td>
-                        
+                        <img :src="buildUrl(item.pictureName)" height="340">
                     </td>
                 </tr>
             <tr>
-                <td>Text: {{item.text}}</td>
+                <td>Beskrivelse: {{item.text}}</td>
             </tr>
             <tr class="aboutTxt">
                 <td>

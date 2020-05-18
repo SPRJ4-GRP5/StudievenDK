@@ -3,15 +3,15 @@
 @{
     ViewData["Title"] = "Delete";
 }
-    <link href="~/css/CaseLayout.css" rel="stylesheet" />
-    <h1 class="col-12">@Html.DisplayFor(model => model.Subject)</h1>
+<link href="~/css/CaseLayout.css" rel="stylesheet" />
+<h1 class="col-12">@Html.DisplayFor(model => model.Subject)</h1class="col-12">
 
-<h3 class="col-12">Er du sikker på at du vil slette denne sag?</h3>
+<h3 class="col-12">Er du sikker på at du vil forlade denne sag?</h3>
 <div class="row">
     <div class="col-12">
         <div class="col-10">
             <dd>
-                <img src="@("~/Image/" + Model.PictureName)" asp-append-version="true" width="250px" height="250px"/>
+                <img src="@("~/Image/" + Model.PictureName)" asp-append-version="true" width="250px" height="250px" />
             </dd>
             <dd>
                 @Html.DisplayFor(model => model.Text)
@@ -21,7 +21,7 @@
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Deadline)
-                <p class="aboutTxt"/>
+                <p class="aboutTxt" />
             </dd>
             <dt>
                 Kategorier:
@@ -33,11 +33,11 @@
         <div class="col-2">
             <form asp-action="Delete">
                 <input type="hidden" asp-for="CaseId" />
-                <input type="submit" value="Slet sag" class="CaseBtn" />
+                <input type="submit" value="Forlad sag" class="CaseBtn" />
             </form>
-            <br/>
-            <a asp-action="Index">
-                <button label="back to own cases" class="CaseBtn">Tilbage til Egne sager</button>
+            <br />
+            <a asp-action="AssignedCases">
+                <button label="back to assigned cases" class="CaseBtn">Tilbage til Tilknyttede sager</button>
             </a>
         </div>
     </div>
