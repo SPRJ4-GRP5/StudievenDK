@@ -30,12 +30,13 @@ namespace Test.Unit.StudievenDK
         private IWebHostEnvironment _webHostEnvironment;
         private CasesController _uut;
 
+        //arrange
         [SetUp]
         public void Setup()
         {
             _webHostEnvironment = Substitute.For<IWebHostEnvironment>();
             
-            _connection = new SqliteConnection("DataSource=:memory");   // ...
+            _connection = new SqliteConnection("DataSource=:memory:");
             _connection.Open();
             _options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(_connection).Options;
             _applicationDbContext = new ApplicationDbContext(_options);
@@ -44,16 +45,29 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
-        public async Task IndexCase_GetView()
+        public async Task IndexCase_GetView_isNotNull()
         {
-            using (var context = _applicationDbContext)
-            {
-                context.Database.EnsureCreated();
-                var _result = await _uut.Index() as ViewResult;
+            //act
+            using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
+            ViewResult result = await _uut.Index() as ViewResult;
 
-                Assert.That(_result.ViewName, Is.EqualTo("Index"));
-            }
-            
+            //Assert
+            //Assert.That(result.ViewName, Is.EqualTo("Index"));
+            Assert.IsNotNull(result);
+
+        }
+
+        [Test]
+        public async Task IndexCase_GetAmountOfCases()
+        {
+            using var context = _applicationDbContext;
+            context.Database.EnsureCreated();
+
+            var result = await _uut.Index() as ViewResult;
+            var model = result.Model as Case;
+
+            Assert.That(model.Cases.Count().Equals(5));
         }
 
 
