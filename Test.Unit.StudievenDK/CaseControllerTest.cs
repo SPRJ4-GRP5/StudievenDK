@@ -45,29 +45,15 @@ namespace Test.Unit.StudievenDK
         }
 
         [Test]
-        public async Task IndexCase_GetView_isNotNull()
-        {
-            //act
-            using var context = _applicationDbContext;
-            context.Database.EnsureCreated();
-            ViewResult result = await _uut.Index() as ViewResult;
-
-            //Assert
-            //Assert.That(result.ViewName, Is.EqualTo("Index"));
-            Assert.IsNotNull(result);
-
-        }
-
-        [Test]
         public async Task IndexCase_GetAmountOfCases()
         {
             using var context = _applicationDbContext;
             context.Database.EnsureCreated();
 
             var result = await _uut.Index() as ViewResult;
-            var model = result.Model as Case;
+            var model = result.Model as List<Case>;
 
-            Assert.That(model.Cases.Count().Equals(5));
+            Assert.That(model.Count().Equals(5));
         }
 
 
