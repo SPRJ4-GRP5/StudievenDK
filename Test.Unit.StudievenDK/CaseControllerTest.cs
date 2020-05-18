@@ -68,7 +68,7 @@ namespace Test.Unit.StudievenDK
             Assert.That(model.Count.Equals(5));
         }
 
-        [TestCase(10)]
+        [TestCase(5)]
         public async Task HttpGet_GetCaseInfo(int id)
         {
             await using var context = _applicationDbContext;
@@ -77,35 +77,50 @@ namespace Test.Unit.StudievenDK
             var result = _uut.GetCaseInfo(id).Result;
             var model = result.Value as Case;
 
-            Assert.That(model.CaseId, Is.EqualTo(10));
+            Assert.That(model.CaseId, Is.EqualTo(id));
+        }
 
+        [Test]
+        public void HttpGetCreateCaseView()
+        {
+            var result = _uut.Create();
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public async Task HttpPostCreateCase()
+        {
 
         }
 
-        //private List<Case> dummydata()
-        //{
-        //    var _case = new List<Case>();
-        //    var _course = new Course();
+        [TestCase(1)]
+        public async Task HttpGetEditCase(EditDTO edit)
+        {
 
-        //    _case.Add(new Case()
-        //    {
-        //        CaseId = 1,
-        //        Text = "I need help for this button on my interface",
-        //        Subject = "GUI",
-        //        Deadline = new DateTime(2020, 5, 27),
-        //        Course = _course
-        //    });
+        }
 
-        //    _case.Add(new Case()
-        //    {
-        //        CaseId = 2,
-        //        Text = "What is this thread communication doing",
-        //        Subject = "ISU",
-        //        Deadline = new DateTime(2021, 5, 27),
-        //        Course = _course
-        //    });
+        [Test]
+        public async Task HttpPostEditCase(Case _case)
+        {
 
-        //    return _case;
-        //}
+        }
+
+        [Test]
+        public async Task HttpGetDeleteCase(EditDTO delete)
+        {
+
+        }
+
+        [Test]
+        public async Task HttpPostDeleteCaseConfirmed(Case _case)
+        {
+
+        }
+
+        [Test]
+        public async Task HttpGet_TestLeaveAssignedCase(EditDTO delete)
+        {
+            
+        }
     }
 }
