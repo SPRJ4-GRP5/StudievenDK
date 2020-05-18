@@ -15,9 +15,12 @@ using StudievenDK.Models;
 using Assert = NUnit.Framework.Assert;
 using Microsoft.VisualBasic.CompilerServices;
 using System.Linq;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Routing.Template;
 using NUnit.Framework.Constraints;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute.ReceivedExtensions;
 
 
 namespace Test.Unit.StudievenDK
@@ -29,6 +32,7 @@ namespace Test.Unit.StudievenDK
         private DbContextOptions<ApplicationDbContext> _options;
 
         private IWebHostEnvironment _webHostEnvironment;
+        private EditDTO _editDto;
         private CasesController _uut;
 
         //arrange
@@ -36,7 +40,7 @@ namespace Test.Unit.StudievenDK
         public void Setup()
         {
             _webHostEnvironment = Substitute.For<IWebHostEnvironment>();
-            
+            _editDto = Substitute.For<EditDTO>(); // dette burde have været en interface
             _connection = new SqliteConnection("DataSource=:memory:");
             _connection.Open();
             _options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(_connection).Options;
@@ -128,22 +132,18 @@ namespace Test.Unit.StudievenDK
         }
 
 
-        [TestCase(2 )]
-        public async Task GetCase_ReturnSpecificCase(EditDTO idDto)
+        // test her ikke mulig da der ikke er lavet interface til EditDto Model, så designet er ikke lavet testbart
+        [Test]
+        public async Task GetCase_ReturnSpecificCase()
         {
 	        await using var context = _applicationDbContext;
 	        context.Database.EnsureCreated();
+	        _editDto.id.Returns(2);
+            
 
-            //var result = await _uut.GetCase(idDto).ConfigureAwait().GetAwaiter().GetResult();
-            //EditDTO tempIdDto = new EditDTO()
-            //{
-            // id = idDto
-            //};
-
-
-            var result = _uut.GetCase(idDto).Result;
+            var result = _uut.GetCase(_editDto).Result;
             var model = result.Value as Case;
-            Assert.That(model.CaseId,Is.EqualTo(idDto.id));
+            Assert.That(model.CaseId,Is.EqualTo(_editDto.id));
         }
 
         [Test]
