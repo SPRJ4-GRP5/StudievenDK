@@ -1,40 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using StudievenDK.Controllers;
 using StudievenDK.Data;
 using NSubstitute;
 using StudievenDK.Models;
+using Assert = NUnit.Framework.Assert;
+using Microsoft.VisualBasic.CompilerServices;
+using System.Linq;
+using NUnit.Framework.Constraints;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Test.Unit.StudievenDK
 {
     class CaseControllerTest
     {
         private ApplicationDbContext _applicationDbContext;
+        private SqliteConnection _connection;
+        private DbContextOptions<ApplicationDbContext> _options;
+
         private IWebHostEnvironment _webHostEnvironment;
         private CasesController _uut;
 
         [SetUp]
         public void Setup()
         {
-            _applicationDbContext = Substitute.For<ApplicationDbContext>();
+            //_applicationDbContext = Substitute.For<ApplicationDbContext>();
             _webHostEnvironment = Substitute.For<IWebHostEnvironment>();
+            
+            _connection = new SqliteConnection("DataSource=:memory");   // ...
+            _connection.Open();
+            _options = new DbContextOptions<ApplicationDbContext>().UseSqlite(_connection).Options;
 
             _uut = new CasesController(_applicationDbContext, _webHostEnvironment);
         }
 
         [Test]
-        public async void Index_Get_View()
+        public async Task IndexCase_GetView()
         {
-            var _result = await _uut.Index();
+            using (var context = new ApplicationDbContext(_options))
+            {
+                var _result = (ViewResult)await _uut.Index();
 
-            var test = (ViewResult) _result;
-
-            Assert.AreEqual(test.Model.ToString(), );
+                Assert.That(_result.ViewName, Is.EqualTo("Index"));
+            }
+            
         }
 
 
@@ -54,7 +72,7 @@ namespace Test.Unit.StudievenDK
 
             _case.Add(new Case()
             {
-                CaseId = 1,
+                CaseId = 2,
                 Text = "What is this thread communication doing",
                 Subject = "ISU",
                 Deadline = new DateTime(2021, 5, 27),
