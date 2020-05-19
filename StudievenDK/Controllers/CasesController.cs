@@ -140,11 +140,7 @@ namespace StudievenDK.Controllers
         // GET: Cases/Edit/5
         public async Task<IActionResult> Edit(EditDTO edit)
         {
-            if (edit.id == null)
-            {
-                return NotFound();
-            }
-
+            
             var _case = await _context.Cases.FindAsync(edit.id);
             //sætter default til den første i listen af cases
             if (edit.id == 0)
