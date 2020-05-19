@@ -100,6 +100,8 @@ namespace StudievenDK.Controllers
         public IActionResult Create()
         {
             ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName");
+            ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email");
+            ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email");
 
             return View();
         }
@@ -133,7 +135,8 @@ namespace StudievenDK.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseName_fk"] = new SelectList(_context.Course, "CourseName", "CourseName", _case.CourseName_fk);
-
+            ViewData["UserHelper_fk"] = new SelectList(_context.Users, "Email", "Email", _case.UserHelper_fk);
+            ViewData["UserSeeker_fk"] = new SelectList(_context.Users, "Email", "Email", _case.UserSeeker_fk);
             return View(_case);
         }
 
