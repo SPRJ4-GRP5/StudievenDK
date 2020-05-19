@@ -1,0 +1,76 @@
+﻿@using System.Linq
+@using Microsoft.EntityFrameworkCore.Internal
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View
+@model IEnumerable<StudievenDK.Models.Case>
+
+@{
+    ViewData["Title"] = "Egne Sager";
+}
+
+<link href="~/css/CaseLayout.css" rel="stylesheet" />
+<script src="https://unpkg.com/vue"></script>
+
+<h1>Egne Sager</h1>
+<div class="col-3 master">
+    @foreach(var item in Model)
+    {
+        <div class="master-item" data-id="@item.CaseId">
+            @item.Subject
+        </div>
+    }
+</div>
+<div class="col-7 detail">
+    <h2 class="detail-title">@Html.DisplayFor(model => model.GetEnumerator().Current.Subject)</h2>
+    <div id="app">
+        <table>
+            <thead>
+            </thead>
+            <tbody id="list-cases">
+                <tr>
+                    <td>
+                        <img :src="buildUrl(item.pictureName)" height="340">
+                    </td>
+                </tr>
+            <tr>
+                <td>Beskrivelse: {{item.text}}</td>
+            </tr>
+            <tr class="aboutTxt">
+                <td>
+                    Deadline: {{item.deadline}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Fag: {{item.courseName_fk}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-2 detail">
+    <p>
+        <a asp-action="Create">
+            <button label="Create new case" class="CaseBtn"> Opret ny sag</button>
+        </a>
+    </p>
+    <form asp-action="Edit" asp-controller="Cases" method="get">
+        <input type="hidden" name="id" id="Edit-Id" />
+        <a asp-action="Edit">
+            <button label="Edit case" class="CaseBtn">Rediger sag</button>
+        </a>
+    </form>
+    <br />
+    <form asp-action="Delete" asp-controller="Cases" method="get">
+        <input type="hidden" name="id" id="Delete-Id" />
+        <a asp-action="Delete">
+            <button label="Delete case" class="CaseBtn">Slet sag</button>
+        </a>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="/"></script>
+}
