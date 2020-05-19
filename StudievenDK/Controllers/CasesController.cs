@@ -206,9 +206,6 @@ namespace StudievenDK.Controllers
             }
 
             var _case = await _context.Cases
-                //.Include(@ => @.Course)
-                //.Include(@ => @.UserHelper)
-                //.Include(@ => @.UserSeeker)
                 .FirstOrDefaultAsync(m => m.CaseId == delete.id);
             if (delete.id == 0)
             {
