@@ -144,18 +144,18 @@ namespace Test.Unit.StudievenDK
 
 
         // test her ikke mulig da der ikke er lavet interface til EditDto Model, så designet er ikke lavet testbart
-        [Test]
-        public async Task GetCase_ReturnSpecificCase()
-        {
-	        await using var context = _applicationDbContext;
-	        context.Database.EnsureCreated();
-	        _editDto.id.Returns(2);
-            
+        //[Test]
+        //public async Task GetCase_ReturnSpecificCase()
+        //{
+        //    await using var context = _applicationDbContext;
+        //    context.Database.EnsureCreated();
+        //    _editDto.id.Returns(2);
 
-            var result = _uut.GetCase(_editDto).Result;
-            var model = result.Value as Case;
-            Assert.That(model.CaseId,Is.EqualTo(_editDto.id));
-        }
+
+        //    var result = _uut.GetCase(_editDto).Result;
+        //    var model = result.Value as Case;
+        //    Assert.That(model.CaseId, Is.EqualTo(_editDto.id));
+        //}
 
         [Test]
         public async Task HttpGetDeleteCase(EditDTO delete)
