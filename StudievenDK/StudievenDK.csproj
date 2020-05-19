@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\**" />
+    <Compile Remove="ViewModels\**" />
     <Content Remove="Data\Migrations\**" />
+    <Content Remove="ViewModels\**" />
     <EmbeddedResource Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
     <None Remove="Data\Migrations\**" />
+    <None Remove="ViewModels\**" />
   </ItemGroup>
 
 
@@ -22,11 +26,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="Vue.js.Developers.Version" Version="2.4.2" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
