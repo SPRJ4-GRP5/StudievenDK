@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/Mainlist.css" rel="stylesheet" />
 
-<div class="navbar">
+
+<div class="filterbar">
     <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
         <input type="text" placeholder="Search.." name="searchString">
         <input type="submit" value="Filter" />

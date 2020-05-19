@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a href="@Url.Action("Index", "Home")" >
+                <a href="@Url.Action("Index", "Mainlist")" >
                     <img src="~/Image/LOGO/Logo.png" alt="Studeven.dk logo" width="200"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -27,14 +27,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mainlist" asp-action="Index">Hovedliste</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Mainlist" asp-action="Index">Hovedliste</a>
                         </li>
                         <li class="subnav">
                             <button class="nav-link subnavbtn" asp-area="" asp-controller="Cases">Sager</button>

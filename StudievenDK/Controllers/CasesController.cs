@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ using StudievenDK.Models;
 
 namespace StudievenDK.Controllers
 {
-    
+    [Authorize]
     public class CasesController : Controller
     {
         private readonly ApplicationDbContext _context;
