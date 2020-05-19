@@ -203,11 +203,6 @@ namespace StudievenDK.Controllers
         // GET: Cases/Delete/5
         public async Task<IActionResult> Delete(EditDTO delete)
         {
-            if (delete.id == 0)
-            {
-                return NotFound();
-            }
-
             var _case = await _context.Cases
                 .FirstOrDefaultAsync(m => m.CaseId == delete.id);
             if (delete.id == 0)

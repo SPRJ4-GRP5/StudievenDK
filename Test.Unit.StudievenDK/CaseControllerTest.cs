@@ -99,27 +99,27 @@ namespace Test.Unit.StudievenDK
 
         }
 
-        [Test]
-        public async Task HttpGetEditCase()
-        {
+        //[Test]
+        //public async Task HttpGetEditCase()
+        //{
             
-            await using var context = _applicationDbContext;
-            context.Database.EnsureCreated();
+        //    await using var context = _applicationDbContext;
+        //    context.Database.EnsureCreated();
 
 
-            //var result = _uut.Edit(edit).Result as ViewResult;
-            //var test = (IStatusCodeActionResult) result;
+        //    //var result = _uut.Edit(edit).Result as ViewResult;
+        //    //var test = (IStatusCodeActionResult) result;
 
-            //Assert.AreEqual(200, test.StatusCode);
+        //    //Assert.AreEqual(200, test.StatusCode);
 
-            EditDTO _edit = new EditDTO();
+        //    EditDTO _edit = new EditDTO();
 
-            var result = _uut.Edit(_edit);
-            var ressss = result.Id;
+        //    var result = _uut.Edit(_edit);
+        //    var ressss = result.Id;
 
-            Assert.IsTrue();
+        //    Assert.IsTrue();
 
-        }
+        //}
 
         [Test]
         public async Task HttpPostEditCase(Case _case)
