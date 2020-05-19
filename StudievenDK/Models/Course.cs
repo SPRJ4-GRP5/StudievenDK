@@ -16,7 +16,7 @@ namespace StudievenDK.Models
 
         //Navigational properties
         public Term Term { get; set; }
-        public Faculty Faculties { get; set; }
+        public Faculty Faculty { get; set; }
         public List<Case> Cases { get; set; }
         public List<CourseProgramme> CourseProgrammes { get; set; }
     }

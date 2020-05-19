@@ -1,0 +1,99 @@
+﻿@model StudievenDK.Controllers.MainlistViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="navbar">
+    <form style="display: inline-block;" asp-controller="Mainlist" asp-action="Index">
+        <input type="text" placeholder="Search.." name="searchString">
+        <input type="submit" value="Filter" />
+        <div id="myDIV" class="container">
+            &nbsp;&nbsp;
+            <div class="row">
+                <p class="KStyle" >Kategorier: </p>
+            </div>
+            <div class="row">
+                <p class="fancyKategorier">Fakultet:</p>
+                <select class="filter" name="Faculty">
+                    <option value="0">Vælg Fakultet</option>
+                    @foreach (var item in Model.Faculties)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <p class="fancyKategorier">Studieretning:</p>
+                <select class="filter" name="Programme">
+                    <option value="0">Vælg Studieretning</option>
+                    @foreach (var item in Model.Programmes)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <p class="fancyKategorier">Semester:</p> 
+                <select class="filter" name="Term">
+                    <option value=0>Vælg Semester</option>
+                    <option value=1>1. Semester</option>
+                    <option value=2>2. Semester</option>
+                    <option value=3>3. Semester</option>
+                    <option value=4>4. Semester</option>
+                    <option value=5>5. Semester</option>
+                    <option value=6>6. Semester</option>
+                    <option value=7>7. Semester</option>
+                </select>
+            </div>
+            <div class="row">
+                <p class="fancyKategorier">Fag:</p>
+                <select class="filter" name="Course">
+                    <option value="0">Vælg Fag</option>
+                    @foreach (var item in Model.Courses)
+                    {
+                        <option>
+                            @item
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+    <img class="Trekant" id="triangle" src="~/Pictures/Image-Source-PlusPNG.com.png" width="20" onclick="myFunction(),rotateTriangle()"/>
+</div>
+
+
+<hr style="background-color:#278CCA">
+
+<div id="CasePreviews">
+@foreach (var item in Model.Cases)
+{
+    <div id="CaseContent" style="overflow: hidden; background-color: #D3E9F4; font-family: Arial; border-radius: 10px; display: block; margin-bottom:10px">
+        <div id="Caseheader">
+            @Html.DisplayFor(modelItem => item.Subject)
+        </div>
+        <div class="row">
+            <div class="collum">
+                @Html.DisplayFor(modelItem => item.Course.Faculty.FacultyName)
+            </div>
+            <div class="collum">
+              @Html.DisplayFor(modelItem=>item.Course.CourseProgrammes.Where(m=>m.CourseName_fk == item.CourseName_fk).First().ProgrammeName_fk)
+            </div>
+            <div class="collum">
+               @Html.DisplayFor(modelItem => item.Course.TermYear_fk). Semester
+            </div>
+            <div class="collum">
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </div>
+        </div>
+        
+    </div>
+}
+</div>
+
+

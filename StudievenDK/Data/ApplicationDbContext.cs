@@ -20,7 +20,7 @@ namespace StudievenDK.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
+        {   
         }
 
         public virtual DbSet<ApplicationUser> MApplicationUsers { get; set; }
@@ -31,7 +31,8 @@ namespace StudievenDK.Data
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Term> Terms { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
-        //
+        public DbSet<CourseProgramme> CourseProgrammes_ST { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -53,7 +54,7 @@ namespace StudievenDK.Data
 
             // 1-N relation - Course/FacultyName
             modelBuilder.Entity<Course>()
-                .HasOne<Faculty>(course => course.Faculties)
+                .HasOne<Faculty>(course => course.Faculty)
                 .WithMany(f => f.Courses);
 
             // 1-N relation - Course/Term
