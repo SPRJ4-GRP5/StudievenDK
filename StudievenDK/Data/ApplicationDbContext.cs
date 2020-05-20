@@ -20,13 +20,13 @@ namespace StudievenDK.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {   
+        { 
         }
 
         public virtual DbSet<ApplicationUser> MApplicationUsers { get; set; }
 
         public DbSet<Case> Cases { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Course>Course { get; set; }
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<Term> Terms { get; set; }

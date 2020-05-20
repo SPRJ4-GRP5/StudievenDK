@@ -47,5 +47,9 @@ namespace StudievenDK.Models.Login
         [NotMapped]
         [DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }
+
+        ////Nav props added by Alexa
+        //public List<Case> MyCases { get; set; }
+        //public List<Case> HelpinggCases { get; set; }
     }
 }
