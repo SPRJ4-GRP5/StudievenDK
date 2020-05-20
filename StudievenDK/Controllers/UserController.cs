@@ -14,7 +14,6 @@ namespace StudievenDK.Controllers
     {
         private readonly IApplicationDbContext _context;
         private readonly IUserRepository _userRepository;
-        private string statusCode404 = "404";
 
         public UserController(IApplicationDbContext context, IUserRepository userRepository)
         {
