@@ -1,0 +1,44 @@
+﻿@model StudievenDK.Models.Case
+
+@{
+    ViewData["Title"] = "Slet sag";
+}
+    <link href="~/css/CaseLayout.css" rel="stylesheet" />
+    <h1 class="col-12">@Html.DisplayFor(model => model.Subject)</h1>
+
+<h3 class="col-12">Er du sikker på at du vil slette denne sag?</h3>
+<div class="row">
+    <div class="col-12">
+        <div class="col-10">
+            <dd>
+                <img src="@("~/Image/" + Model.PictureName)" asp-append-version="true" width="250px" height="250px"/>
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Deadline)
+                <p class="aboutTxt"/>
+            </dd>
+            <dt>
+                Kategorier:
+            </dt>
+            <dd>
+                Fag: @Html.DisplayFor(model => model.CourseName_fk)
+            </dd>
+        </div>
+        <div class="col-2">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="CaseId" />
+                <input type="submit" value="Slet sag" class="CaseBtn" />
+            </form>
+            <br/>
+            <a asp-action="Index">
+                <button label="back to own cases" class="CaseBtn">Tilbage til Egne sager</button>
+            </a>
+        </div>
+    </div>
+</div>

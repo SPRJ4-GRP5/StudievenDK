@@ -15,6 +15,8 @@ namespace StudievenDK.Models
         public int CaseId { get; set; }
         public string Text { get; set; }
         public string Subject { get; set; }
+        public DateTime Deadline { get; set; }
+        //public bool CaseIsDone { get; set; }
 
         public string UserHelper_fk { get; set; }
         public string UserSeeker_fk { get; set; }
@@ -24,9 +26,13 @@ namespace StudievenDK.Models
         public User UserSeeker { get; set; }
         public Course Course { get; set; }
 
-        [NotMapped]
-        [DisplayName("Upload file")]
-        public IFormFile Picture { get; set; }
+        [DisplayName("Billede")]
         public string PictureName { get; set; }
+
+        [NotMapped]
+        [DisplayName("Upload billede")]
+        public IFormFile Picture { get; set; }
+
+        
     }
 }
