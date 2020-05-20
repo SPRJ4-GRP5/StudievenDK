@@ -29,10 +29,8 @@ namespace StudievenDK.Controllers
         // GET: Cases
         public async Task<IActionResult> Index()
         {
-            //var applicationDbContext = _context.Cases.Include(@ => @.Course).Include(@ => @.UserHelper).Include(@ => @.UserSeeker);
-            var _caseList = await _context.Cases.ToListAsync();
+            var _caseList = await _context.Cases.ToListAsync();     // can call GetCases() instead - for single responsibility
             return View(_caseList);
-            //applicationDbContext.ToListAsync()
         }
 
         //GET: Cases
@@ -51,9 +49,6 @@ namespace StudievenDK.Controllers
             }
 
             var _case = await _context.Cases
-                //.Include(@ => @.Course)
-                //.Include(@ => @.UserHelper)
-                //.Include(@ => @.UserSeeker)
                 .FirstOrDefaultAsync(m => m.CaseId == id);
             if (_case == null)
             {
@@ -74,7 +69,7 @@ namespace StudievenDK.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Case>> GetCase(EditDTO edit)
         {
-            var _case = await _context.Cases.FindAsync(edit);
+            var _case = await _context.Cases.FindAsync(edit);   // this can be made to a function to be called for single responsibility
 
             if (_case == null)
             {
@@ -87,7 +82,7 @@ namespace StudievenDK.Controllers
         [HttpGet]
         public async Task<ActionResult<Case>> GetCaseInfo(int id)
         {
-            var _case = await _context.Cases.FindAsync(id);
+            var _case = await _context.Cases.FindAsync(id);     // this can be made to a function to be called for single responsibility
 
             if (_case == null)
             {
