@@ -17,7 +17,6 @@ namespace StudievenDK.Data.DataLogin
             FosList.Add(new SelectListItem() { Text = "Softwareteknologi", Value = "Softwareteknologi" });
             FosList.Add(new SelectListItem() { Text = "Sundhedsteknologi", Value = "Sundhedsteknologi" });
             FosList.Add(new SelectListItem() { Text = "Elektronikteknologi", Value = "Elektronikteknologi" });
-            FosList.Add(new SelectListItem() { Text = "NikolajSlikkerNumse", Value = "NikolajSlikkerNumse" });
         }
     }
 }

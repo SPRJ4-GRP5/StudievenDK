@@ -16,6 +16,30 @@ using StudievenDK.Models.Login;
 
 namespace Test.Unit.StudievenDK.RegisterControllerTest
 {
+
+    public class RegisterControllerOntest
+    {
+        private IApplicationDbContext _context;
+        private IUserRepository _userRepository;
+
+        [SetUp]
+        public void setup()
+        {
+            _context = Substitute.For<IApplicationDbContext>();
+            _userRepository = Substitute.For<IUserRepository>();
+
+
+            var mockStore = Mock.Of<IUserStore<ApplicationUser>>();
+            var mockUserManger = new Mock<UserManager<ApplicationUser>>(mockStore, null, null, null, null, null, null, null, null);
+
+
+        }
+
+
+
+    }
+
+
     //public class FakeUserManager : UserManager<ApplicationUser>
     //{
     //    public FakeUserManager()

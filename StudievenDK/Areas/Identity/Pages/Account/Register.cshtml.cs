@@ -26,7 +26,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -40,7 +40,7 @@ namespace StudievenDK.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment hostEnvironment,
-            ApplicationDbContext context
+            IApplicationDbContext context
         )
         {
             _userManager = userManager;
