@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200520093340_0")]
-    partial class _0
+    [Migration("20200520102032_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -237,6 +237,9 @@ namespace StudievenDK.Migrations
                     b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
@@ -267,6 +270,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 1,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "Hjaelp?",
                             Text = "Jeg har brug for hjaelp",
                             UserHelper_fk = "Alexander@Studieven.dk",
@@ -276,6 +280,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 2,
                             CourseName_fk = "DAB",
+                            Deadline = new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "EF core",
                             Text = "Jeg skal bruge hjaelp til DAB",
                             UserHelper_fk = "Thanh@Studieven.dk",
@@ -285,6 +290,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 3,
                             CourseName_fk = "ISU",
+                            Deadline = new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "threads",
                             Text = "hvordan opretter man en traad?",
                             UserHelper_fk = "Trang@Studieven.dk",
@@ -294,6 +300,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 4,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "user interface",
                             Text = "observer pattern - forklar lige det paa en knap",
                             UserHelper_fk = "Randi@Studieven.dk",
@@ -303,6 +310,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 5,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "fare paa knap",
                             Text = "hvordan laver jeg farven gul paa en knap",
                             UserHelper_fk = "Nikolaj@Studieven.dk",

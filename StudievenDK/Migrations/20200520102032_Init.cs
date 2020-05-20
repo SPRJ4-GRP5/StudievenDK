@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudievenDK.Migrations
 {
-    public partial class allMerged : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,7 +89,7 @@ namespace StudievenDK.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Email = table.Column<string>(nullable: false),
@@ -98,7 +98,7 @@ namespace StudievenDK.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Email);
+                    table.PrimaryKey("PK_User", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,15 +256,15 @@ namespace StudievenDK.Migrations
                         principalColumn: "CourseName",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Cases_Users_UserHelper_fk",
+                        name: "FK_Cases_User_UserHelper_fk",
                         column: x => x.UserHelper_fk,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Email",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Cases_Users_UserSeeker_fk",
+                        name: "FK_Cases_User_UserSeeker_fk",
                         column: x => x.UserSeeker_fk,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Email",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -333,7 +333,7 @@ namespace StudievenDK.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
+                table: "User",
                 columns: new[] { "Email", "ImageName", "Password" },
                 values: new object[,]
                 {
@@ -364,11 +364,11 @@ namespace StudievenDK.Migrations
                 columns: new[] { "CaseId", "CourseName_fk", "Deadline", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
                 values: new object[,]
                 {
-                    { 3, "ISU", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
-                    { 1, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
-                    { 4, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
-                    { 5, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
-                    { 2, "DAB", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                    { 3, "ISU", new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", new DateTime(2020, 5, 20, 0, 0, 0, 0, DateTimeKind.Local), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
                 });
 
             migrationBuilder.InsertData(
@@ -485,7 +485,7 @@ namespace StudievenDK.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Course");
