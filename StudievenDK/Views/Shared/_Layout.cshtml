@@ -3,15 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StudievenDK</title>
+    <title>@ViewData["Title"] - Studieven.dk</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/SharedLayout.css" />
+    <link href="~/css/login.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StudievenDK</a>
+                <a href="@Url.Action("Index", "Mainlist")" >
+                    <img src="~/Image/LOGO/Logo.png" alt="Studeven.dk logo" width="200"/>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,13 +27,15 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mainlist" asp-action="Index">Hovedliste</a>
+                            <a class="nav-link" asp-area="" asp-controller="Mainlist" asp-action="Index">Hovedliste</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="subnav">
+                            <button class="nav-link subnavbtn" asp-area="" asp-controller="Cases">Sager</button>
+                            <sub class="subnav-content">
+                                <a asp-controller="Cases" asp-action="Index">Egne sager</a>
+                                <a asp-controller="Cases" asp-action="AssignedCases">Tilknyttede sager</a>
+                                <a asp-controller="Cases" asp-action="Create">Opret sag</a>
+                            </sub>
                         </li>
 
                     </ul>
@@ -40,9 +49,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer">
         <div class="container">
-            &copy; 2020 - StudievenDK - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - StudievenDK &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp;
+            <a href="Tel:+4542342288">Tlf: 42 34 22 88</a> &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp;
+            Mail: Support&#64;Studieven.dk &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp;
+            <a asp-controller="Home" asp-action="AboutStudieven">Om Studieven.dk</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

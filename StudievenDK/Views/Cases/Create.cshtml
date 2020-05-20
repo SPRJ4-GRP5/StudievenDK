@@ -1,0 +1,62 @@
+﻿@model StudievenDK.Models.Case
+
+@{
+    ViewData["Title"] = "Opret sag";
+}
+<head>
+    <link href="~/css/CaseLayout.css" rel="stylesheet" />
+</head>
+
+<h1 class="col-12">Opret sag</h1>
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Create" enctype = "multipart/form-data">
+            <div class="col-10">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Emne</label>
+                    <input asp-for="Subject" class="form-control inputBoxes" maxlength="150" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Beskrivelse</label>
+                    <textarea asp-for="Text" class="form-control textboxTextCase inputBoxes"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Picture" class="control-label"></label>
+                    <br />
+                    <input asp-for="Picture" accept="Image/*"/>
+                    <span asp-validation-for="Picture" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Fag</label>
+                    <br />
+                    <select asp-for="CourseName_fk" class="form-control inputBoxes" asp-items="ViewBag.CourseName_fk"></select>
+                </div>
+                <div>
+                    <div class="form-group">
+                        
+                        <label asp-for="Deadline" class="control-label">Vælg deadline</label>
+                        <input asp-for="Deadline" class="form-control inputBoxes"/>
+
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <input type="submit" value="Opret" class="CaseBtn" />
+                </div>
+                <div>
+                    <a class="CaseBtn" asp-action="Index">Fortryd</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

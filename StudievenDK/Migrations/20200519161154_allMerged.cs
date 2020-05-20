@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudievenDK.Migrations
 {
-    public partial class added_shaddowTable : Migration
+    public partial class allMerged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,15 @@ namespace StudievenDK.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Birthday = table.Column<string>(nullable: true),
+                    FieldOfStudy = table.Column<string>(nullable: true),
+                    Faculty = table.Column<string>(nullable: true),
+                    Term = table.Column<int>(nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    ImageName = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,6 +240,7 @@ namespace StudievenDK.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
+                    Deadline = table.Column<DateTime>(nullable: false),
                     UserHelper_fk = table.Column<string>(nullable: true),
                     UserSeeker_fk = table.Column<string>(nullable: true),
                     CourseName_fk = table.Column<string>(nullable: true),
@@ -352,14 +361,14 @@ namespace StudievenDK.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cases",
-                columns: new[] { "CaseId", "CourseName_fk", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
+                columns: new[] { "CaseId", "CourseName_fk", "Deadline", "PictureName", "Subject", "Text", "UserHelper_fk", "UserSeeker_fk" },
                 values: new object[,]
                 {
-                    { 3, "ISU", null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
-                    { 1, "GUI", null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
-                    { 4, "GUI", null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
-                    { 5, "GUI", null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
-                    { 2, "DAB", null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
+                    { 3, "ISU", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "threads", "hvordan opretter man en traad?", "Trang@Studieven.dk", "Jonas@Studieven.dk" },
+                    { 1, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "Hjaelp?", "Jeg har brug for hjaelp", "Alexander@Studieven.dk", "Thanh@Studieven.dk" },
+                    { 4, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "user interface", "observer pattern - forklar lige det paa en knap", "Randi@Studieven.dk", "Nikolaj@Studieven.dk" },
+                    { 5, "GUI", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "fare paa knap", "hvordan laver jeg farven gul paa en knap", "Nikolaj@Studieven.dk", "Mads@Studieven.dk" },
+                    { 2, "DAB", new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local), null, "EF core", "Jeg skal bruge hjaelp til DAB", "Thanh@Studieven.dk", "Alexander@Studieven.dk" }
                 });
 
             migrationBuilder.InsertData(

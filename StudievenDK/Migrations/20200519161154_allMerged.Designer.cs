@@ -10,8 +10,8 @@ using StudievenDK.Data;
 namespace StudievenDK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200507134431_added_shaddowTable")]
-    partial class added_shaddowTable
+    [Migration("20200519161154_allMerged")]
+    partial class allMerged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,10 @@ namespace StudievenDK.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -135,6 +139,8 @@ namespace StudievenDK.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -231,6 +237,9 @@ namespace StudievenDK.Migrations
                     b.Property<string>("CourseName_fk")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
@@ -261,6 +270,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 1,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "Hjaelp?",
                             Text = "Jeg har brug for hjaelp",
                             UserHelper_fk = "Alexander@Studieven.dk",
@@ -270,6 +280,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 2,
                             CourseName_fk = "DAB",
+                            Deadline = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "EF core",
                             Text = "Jeg skal bruge hjaelp til DAB",
                             UserHelper_fk = "Thanh@Studieven.dk",
@@ -279,6 +290,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 3,
                             CourseName_fk = "ISU",
+                            Deadline = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "threads",
                             Text = "hvordan opretter man en traad?",
                             UserHelper_fk = "Trang@Studieven.dk",
@@ -288,6 +300,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 4,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "user interface",
                             Text = "observer pattern - forklar lige det paa en knap",
                             UserHelper_fk = "Randi@Studieven.dk",
@@ -297,6 +310,7 @@ namespace StudievenDK.Migrations
                         {
                             CaseId = 5,
                             CourseName_fk = "GUI",
+                            Deadline = new DateTime(2020, 5, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             Subject = "fare paa knap",
                             Text = "hvordan laver jeg farven gul paa en knap",
                             UserHelper_fk = "Nikolaj@Studieven.dk",
@@ -575,6 +589,39 @@ namespace StudievenDK.Migrations
                             Email = "Jonas@Studieven.dk",
                             Password = "admin"
                         });
+                });
+
+            modelBuilder.Entity("StudievenDK.Models.Login.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Birthday")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Faculty")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldOfStudy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
