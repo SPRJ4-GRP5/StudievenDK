@@ -50,7 +50,6 @@ namespace Test.Unit.StudievenDK.UserControllerTest
 
             Assert.AreEqual(test.Model.ToString(), user.UserName);
         }
-
         [Test]
         public async Task Test_Searching_For_A_User_Who_Does_Not_Exist()
         {
@@ -66,5 +65,6 @@ namespace Test.Unit.StudievenDK.UserControllerTest
 
             Assert.AreEqual(404, test.StatusCode);
         }
+
     }
 }
