@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Unit.StudievenDK", "Te
 		{9E3835D0-FD1F-41B6-9F54-17544C3B6141} = {9E3835D0-FD1F-41B6-9F54-17544C3B6141}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Integration.StudievenDK", "Test.Integration.StudievenDK\Test.Integration.StudievenDK.csproj", "{599E8E38-CF35-4516-88BB-F561DF2E511C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{FAE808E7-2D34-4DF2-B11C-133D6E3FC740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAE808E7-2D34-4DF2-B11C-133D6E3FC740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAE808E7-2D34-4DF2-B11C-133D6E3FC740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599E8E38-CF35-4516-88BB-F561DF2E511C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599E8E38-CF35-4516-88BB-F561DF2E511C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599E8E38-CF35-4516-88BB-F561DF2E511C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599E8E38-CF35-4516-88BB-F561DF2E511C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
